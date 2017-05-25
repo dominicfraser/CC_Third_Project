@@ -1,0 +1,28 @@
+{
+  "name": "cc_third_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "seeds.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dominicfraser/CC_Third_Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dominicfraser/CC_Third_Project/issues"
+  },
+  "homepage": "https://github.com/dominicfraser/CC_Third_Project#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.27"
+  },
+  "devDependencies": {
+    "mocha": "^3.4.2"
+  }
+}
