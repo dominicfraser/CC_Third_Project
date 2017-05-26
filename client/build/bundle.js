@@ -88,6 +88,8 @@ var Map = function () {
   var canvas = document.getElementById("main-canvas");
   console.log(canvas);
   var context = canvas.getContext("2d");
+  
+  window.addEventListener('keydown', movePlayer);
 };
 
 
