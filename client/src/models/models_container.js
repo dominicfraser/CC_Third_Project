@@ -13,6 +13,25 @@ ModelsContainer.prototype = {
       console.log(results);
       var playerItems = this.populatePlayerItems(results);
       callback(playerItems);
-    }.bind(this))
+    }.bind(this));
   },
-}
+  populatePlayerItems: function(results){
+    var playerItems = results.map(function(resultObject){
+      return new ItemModel(resultObject);
+    });
+    return playerItems;
+  },
+  allBarItems: function(callback){
+    this.requestHelper.makeGetRequest("http://localhost:3000/api/bar_inventory", function(results){
+      console.log(results);
+      var barItems = this.populateBarItems(results);
+      callback(barItems);
+    }.bind(this));
+  },
+  populateBarItems: function(results){
+    var barItems = results.map(function(resultObject){
+      return new ItemModel(resultObject);
+    });
+    return barItems;
+  };
+};
