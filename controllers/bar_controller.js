@@ -2,7 +2,7 @@ var express = require('express');
 
 var barRouter = express.Router();
 
-var BarInventory = require('../client/src/models/barInventory.js');
+// var BarInventory = require('../client/src/models/barInventory.js');
 
 var DbQueryHelper = require('../db/dbQueryHelper.js');
 var query = new DbQueryHelper();
