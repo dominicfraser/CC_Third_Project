@@ -33,5 +33,5 @@ ModelsContainer.prototype = {
       return new ItemModel(resultObject);
     });
     return barItems;
-  };
+  }
 };
