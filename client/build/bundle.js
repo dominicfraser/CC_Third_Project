@@ -92,7 +92,7 @@ var Map = function () {
   var drawRectangle = function(x, y, size){
       context.fillRect(x, y, size, size)
     }
-  context.fillStyle = "Salmon"
+  context.fillStyle = "Salmon";
 
   drawRectangle(180, 180, 180)
   context.beginPath();
@@ -113,7 +113,19 @@ var movePlayer = function(e){
   var positionY = currentPosition[1];
 
   if (e.key === "ArrowRight"){
-    if (positionX + 5 <= 710){
+    // positionX += 5
+
+    var hitRightBorder = positionX + 5 >= 710
+
+    var hitLeftEdgeOfSquare = (positionX + 5 >= 180) && (positionY <= 180) || (positionX + 5 >= 180) && (positionY <= 360) 
+
+    if (hitRightBorder){
+      console.log('can\'t move')
+    }
+    else if(hitLeftEdgeOfSquare){
+      console.log('can\'t move')
+    }
+    else {
       context.lineTo((positionX+5), positionY)
       context.stroke()
       currentPosition[0] = positionX+5
