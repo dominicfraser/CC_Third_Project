@@ -1,13 +1,10 @@
-var ModelsContainer = require('../models/models_container.js');
-
 var Game = function (player, bar) {
-  this.player = new Player();
-  this.bar = new Bar();
+  this.player = player;
+  this.bar = bar;
 };
 
 Game.prototype = {
 
 };
-
 
 module.exports = Game;
