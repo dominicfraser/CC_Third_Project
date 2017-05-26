@@ -103,7 +103,7 @@ var app = function () {
   new Map();
 };
 
-window.onload = app();
+window.onload = app;
 
 /***/ }),
 /* 2 */,
