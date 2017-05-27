@@ -202,18 +202,129 @@ module.exports = Player;
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+var ModelsContainer = __webpack_require__(7)
 
 var Game = function (player, bar) {
   this.player = player;
   this.bar = bar;
+
+  var modelsContainer = new ModelsContainer;
+
+  modelsContainer.allPlayerItems(function(playerItems){
+    this.renderPlayerItems(playerItems);
+  }.bind(this));
+
 };
 
 Game.prototype = {
+  renderPlayerItems: function(playerItems){
+    var select = document.getElementById("player-inventory");
+    select.innerHTML = "";
 
+    for (var item of playerItems){
+      var option = document.createElement('option');
+      option.innerText = item.name;
+    }
+
+    select.appendChild(option);
+  },
 };
 
 module.exports = Game;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+var RequestHelper = function() {
+
+}
+
+RequestHelper.prototype = {
+  makeGetRequest: function (url, callback) {
+    var request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.addEventListener('load', function () {
+      if (request.status !== 200) return;
+      var jsonString = request.responseText;
+      var resultsObject = JSON.parse(jsonString);
+      callback(resultsObject);
+    });
+    request.send();
+  },
+  makePostRequest: function (url, callback, payload) {
+    var request = new XMLHttpRequest();
+    request.open('POST', url);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.addEventListener('load', function () {
+      if (request.status !== 200) return;
+      var jsonString = request.responseText;
+      var resultsObject = JSON.parse(jsonString);
+      callback(resultsObject);
+    })
+    request.send(payload);
+  }
+}
+
+module.exports = RequestHelper;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+var Item = function(options){
+  this.name = options.name;
+  this.value = options.value;
+}
+
+
+module.exports = Item;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var PlayerModel = __webpack_require__(3);
+var BarModel = __webpack_require__(2);
+var ItemModel = __webpack_require__(6);
+var RequestHelper = __webpack_require__(5);
+
+var ModelsContainer = function(){
+  this.requestHelper = new RequestHelper;
+}
+
+ModelsContainer.prototype = {
+  allPlayerItems: function(callback){
+    this.requestHelper.makeGetRequest("http://localhost:3000/api/player_inventory", function(results){
+      console.log(results);
+      var playerItems = this.populatePlayerItems(results);
+      callback(playerItems);
+    }.bind(this));
+  },
+  populatePlayerItems: function(results){
+    var playerItems = results.map(function(resultObject){
+      return new ItemModel(resultObject);
+    });
+    return playerItems;
+  },
+  allBarItems: function(callback){
+    this.requestHelper.makeGetRequest("http://localhost:3000/api/bar_inventory", function(results){
+      console.log(results);
+      var barItems = this.populateBarItems(results);
+      callback(barItems);
+    }.bind(this));
+  },
+  populateBarItems: function(results){
+    var barItems = results.map(function(resultObject){
+      return new ItemModel(resultObject);
+    });
+    return barItems;
+  }
+};
+
+module.exports = ModelsContainer;
 
 /***/ })
 /******/ ]);
