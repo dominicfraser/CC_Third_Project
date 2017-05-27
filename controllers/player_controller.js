@@ -10,9 +10,16 @@ var query = new DbQueryHelper();
 //player inventory index
 playerRouter.get('/', function(req,res){
   query.allPlayerItems(function(playerItems){
-    res.json(playerItems)
+    res.json(playerItems);
   })
 });
+
+//delete item
+playerRouter.delete("/:id", function(req, res){
+  query.removePlayerItems(function(itemObject){
+    res.json(itemObject);
+  })
+})
 
 
 
