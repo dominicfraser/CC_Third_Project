@@ -49,46 +49,45 @@ var loadCanvas = function() {
   var mainGirl = document.createElement('img');
   mainGirl.src = "/public/img/edited_images/f1girl.png";
 
+  var guy = document.createElement('img');
+  guy.src = "/public/img/edited_images/f1guy.png";
+
   context = getCanvasContext();
 
-  // backdrop.onload = function() {
-  //   context.drawImage(this, 0, 0, 700, 500); 
-  //   // drawMap();
-  // };
+  backdrop.onload = function() {
+    context.drawImage(this, 0, 0, 700, 500); 
+  };
 
   tableSet.onload = function() {
     context.drawImage(this, -200, 110, 700, 500);
-    // drawMap();
   };
 
   sofaSetTop.onload = function() {
     context.drawImage(this, 200, -30, 700, 500);
-    // drawMap();
   };
 
   sofaSetBottom.onload = function() {
     context.drawImage(this, 200, 140, 700, 500);
-    // drawMap();
   };
 
   bartender.onload = function() {
     context.drawImage(this, -190, -40, 700, 500);
-    // drawMap();
   };
 
   stage.onload = function() {
     context.drawImage(this, 254, -140, 700, 500);
-    // drawMap();
   };
 
   piano.onload = function() {
     context.drawImage(this, 50, -160, 700, 500);
-    // drawMap();
   };
 
   mainGirl.onload = function() {
     context.drawImage(this, 20, 180, 700, 500);
-    // drawMap();
+  };
+
+  guy.onload = function() {
+    context.drawImage(this, 100, -30, 700, 500);
   };
 
   // backdrop.onload = function() {
