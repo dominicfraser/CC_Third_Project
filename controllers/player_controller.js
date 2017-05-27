@@ -16,7 +16,7 @@ playerRouter.get('/', function(req,res){
 
 //delete item
 playerRouter.delete("/:id", function(req, res){
-  query.removePlayerItems(function(itemObject){
+  query.removePlayerItem(function(itemObject){
     res.json(itemObject);
   })
 })
