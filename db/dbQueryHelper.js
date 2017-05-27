@@ -28,6 +28,15 @@ DbQueryHelper.prototype = {
     })
   },
 
+  removePlayerItem: function(item, onQueryFinishedCallback){
+    MongoClient.connect(this.url, function(err, db){
+      if (db){
+        var collection = db.collection(‘player_inventory’);
+        collection.remove({item}, {JustOne: true});
+      }
+    })
+  },
+
   addToBar: function(barItemToAdd, onQueryFinishedCallback){
     MongoClient.connect(this.url, function(err, db){
       if (db){
