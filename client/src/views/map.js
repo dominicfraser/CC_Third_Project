@@ -13,22 +13,34 @@ var Map = function () {
   });
   this.game = new Game(this.player, this.bar);
 
-  var canvas = document.getElementById("main-canvas");
-  console.log(canvas);
-  var context = canvas.getContext("2d");
+  context = getCanvasContext();
 
-  var drawRectangle = function(x, y, size){
-      context.fillRect(x, y, size, size)
-    }
-  context.fillStyle = "Salmon";
-
-  drawRectangle(180, 180, 180)
   context.beginPath();
   context.moveTo(90,90);
   currentPosition = [90,90];
   window.addEventListener('keydown', movePlayer);
 
+  loadCanvas();
+
+
 };
+
+var loadCanvas = function() {
+  var backdrop = document.createElement('img');
+  backdrop.src = "/public/img/bar_full_img.png";
+
+  context = getCanvasContext();
+
+  backdrop.onload = function() {
+    context.drawImage(this, 0, 0, 700, 500);
+    // drawMap();
+  }; 
+};
+
+  // drawMap = function() {
+  //   context.drawImage(backdrop, 0, 0, 700, 500);
+  // };
+
 var getCanvasContext = function(){
   var canvas = document.getElementById("main-canvas");
   var context = canvas.getContext("2d");
@@ -85,8 +97,10 @@ var movePlayer = function(e){
   }
 } else {
   return;
-  }
-}
+  };
+
+
+};
 
 
 

@@ -70,9 +70,9 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Game = __webpack_require__(4);
-var Player = __webpack_require__(3);
-var Bar = __webpack_require__(2);
+var Game = __webpack_require__(7);
+var Player = __webpack_require__(6);
+var Bar = __webpack_require__(3);
 
 var Map = function () {
   this.player = new Player({
@@ -85,22 +85,34 @@ var Map = function () {
   });
   this.game = new Game(this.player, this.bar);
 
-  var canvas = document.getElementById("main-canvas");
-  console.log(canvas);
-  var context = canvas.getContext("2d");
+  context = getCanvasContext();
 
-  var drawRectangle = function(x, y, size){
-      context.fillRect(x, y, size, size)
-    }
-  context.fillStyle = "Salmon";
-
-  drawRectangle(180, 180, 180)
   context.beginPath();
   context.moveTo(90,90);
   currentPosition = [90,90];
   window.addEventListener('keydown', movePlayer);
 
+  loadCanvas();
+
+
 };
+
+var loadCanvas = function() {
+  var backdrop = document.createElement('img');
+  backdrop.src = "/public/img/bar_full_img.png";
+
+  context = getCanvasContext();
+
+  backdrop.onload = function() {
+    context.drawImage(this, 0, 0, 700, 500);
+    // drawMap();
+  }; 
+};
+
+  // drawMap = function() {
+  //   context.drawImage(backdrop, 0, 0, 700, 500);
+  // };
+
 var getCanvasContext = function(){
   var canvas = document.getElementById("main-canvas");
   var context = canvas.getContext("2d");
@@ -157,8 +169,10 @@ var movePlayer = function(e){
   }
 } else {
   return;
-  }
-}
+  };
+
+
+};
 
 
 
@@ -177,7 +191,8 @@ var app = function () {
 window.onload = app;
 
 /***/ }),
-/* 2 */
+/* 2 */,
+/* 3 */
 /***/ (function(module, exports) {
 
 var Bar = function(options){
@@ -189,7 +204,9 @@ var Bar = function(options){
 module.exports = Bar;
 
 /***/ }),
-/* 3 */
+/* 4 */,
+/* 5 */,
+/* 6 */
 /***/ (function(module, exports) {
 
 var Player = function(options){
@@ -201,7 +218,7 @@ var Player = function(options){
 module.exports = Player;
 
 /***/ }),
-/* 4 */
+/* 7 */
 /***/ (function(module, exports) {
 
 var Game = function (player, bar) {
