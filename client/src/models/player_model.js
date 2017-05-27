@@ -3,5 +3,11 @@ var Player = function(options){
   this.wallet = options.wallet;
 }
 
+Player.prototype = {
+  subtractItemValue: function(item){
+    this.wallet -= item.value;
+  },
+}
+
 
 module.exports = Player;
