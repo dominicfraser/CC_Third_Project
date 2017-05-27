@@ -70,9 +70,9 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Game = __webpack_require__(4);
-var Player = __webpack_require__(3);
-var Bar = __webpack_require__(2);
+var Game = __webpack_require__(7);
+var Player = __webpack_require__(6);
+var Bar = __webpack_require__(3);
 
 var Map = function () {
   this.player = new Player({
@@ -180,64 +180,6 @@ window.onload = app;
 /* 2 */
 /***/ (function(module, exports) {
 
-var Bar = function(options){
-  this.name = options.name;
-  this.cashDrawer = options.cashDrawer;
-}
-
-
-module.exports = Bar;
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-var Player = function(options){
-  this.name = options.name;
-  this.wallet = options.wallet;
-}
-
-
-module.exports = Player;
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var ModelsContainer = __webpack_require__(7)
-
-var Game = function (player, bar) {
-  this.player = player;
-  this.bar = bar;
-
-  var modelsContainer = new ModelsContainer;
-
-  modelsContainer.allPlayerItems(function(playerItems){
-    this.renderPlayerItems(playerItems);
-  }.bind(this));
-
-};
-
-Game.prototype = {
-  renderPlayerItems: function(playerItems){
-    var select = document.getElementById("player-inventory");
-    select.innerHTML = "";
-
-    for (var item of playerItems){
-      var option = document.createElement('option');
-      option.innerText = item.name;
-    }
-
-    select.appendChild(option);
-  },
-};
-
-module.exports = Game;
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
 var RequestHelper = function() {
 
 }
@@ -271,7 +213,19 @@ RequestHelper.prototype = {
 module.exports = RequestHelper;
 
 /***/ }),
-/* 6 */
+/* 3 */
+/***/ (function(module, exports) {
+
+var Bar = function(options){
+  this.name = options.name;
+  this.cashDrawer = options.cashDrawer;
+}
+
+
+module.exports = Bar;
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports) {
 
 var Item = function(options){
@@ -283,13 +237,13 @@ var Item = function(options){
 module.exports = Item;
 
 /***/ }),
-/* 7 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var PlayerModel = __webpack_require__(3);
-var BarModel = __webpack_require__(2);
-var ItemModel = __webpack_require__(6);
-var RequestHelper = __webpack_require__(5);
+var PlayerModel = __webpack_require__(6);
+var BarModel = __webpack_require__(3);
+var ItemModel = __webpack_require__(4);
+var RequestHelper = __webpack_require__(2);
 
 var ModelsContainer = function(){
   this.requestHelper = new RequestHelper;
@@ -325,6 +279,67 @@ ModelsContainer.prototype = {
 };
 
 module.exports = ModelsContainer;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+var Player = function(options){
+  this.name = options.name;
+  this.wallet = options.wallet;
+}
+
+
+module.exports = Player;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var ModelsContainer = __webpack_require__(5)
+
+var Game = function (player, bar) {
+  this.player = player;
+  this.bar = bar;
+
+  var modelsContainer = new ModelsContainer;
+
+  modelsContainer.allPlayerItems(function(playerItems){
+    this.renderPlayerItems(playerItems);
+  }.bind(this));
+
+  modelsContainer.allBarItems(function(barItems){
+    this.renderBarItems(barItems);
+  }.bind(this));
+
+};
+
+Game.prototype = {
+  renderPlayerItems: function(playerItems){
+    var select = document.getElementById("player-inventory");
+    select.innerHTML = "";
+
+    for (var item of playerItems){
+      var option = document.createElement('option');
+      option.innerText = item.name;
+      select.appendChild(option);
+    }
+  },
+
+  renderBarItems: function(barItems){
+    var select = document.getElementById("bar-inventory");
+    select.innerHTML = "";
+
+    for (var item of barItems){
+      var option = document.createElement("option");
+      option.innerText = item.name;
+      select.appendChild(option);
+    }
+  }
+};
+
+module.exports = Game;
+
 
 /***/ })
 /******/ ]);

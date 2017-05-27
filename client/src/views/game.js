@@ -10,6 +10,10 @@ var Game = function (player, bar) {
     this.renderPlayerItems(playerItems);
   }.bind(this));
 
+  modelsContainer.allBarItems(function(barItems){
+    this.renderBarItems(barItems);
+  }.bind(this));
+
 };
 
 Game.prototype = {
@@ -20,10 +24,20 @@ Game.prototype = {
     for (var item of playerItems){
       var option = document.createElement('option');
       option.innerText = item.name;
+      select.appendChild(option);
     }
-
-    select.appendChild(option);
   },
+
+  renderBarItems: function(barItems){
+    var select = document.getElementById("bar-inventory");
+    select.innerHTML = "";
+
+    for (var item of barItems){
+      var option = document.createElement("option");
+      option.innerText = item.name;
+      select.appendChild(option);
+    }
+  }
 };
 
 module.exports = Game;
