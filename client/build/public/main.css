@@ -2,6 +2,27 @@ body {
   margin: 0;
 }
 
+#left {
+  border: 1px solid black;
+  display: inline-block;
+  width: 12%;
+  height: 100%;
+}
+
+#middle {
+  border: 1px solid black;
+  display: inline-block;
+  width: 70%;
+  height: 100%;
+}
+
+#right {
+  border: 1px solid black;
+  display: inline-block;
+  width: 12%;
+  height: 100%;
+}
+
 canvas {
   border: 1px solid black;
 }
