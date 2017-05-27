@@ -4,7 +4,7 @@ var ItemModel = require("./item_model.js");
 var RequestHelper = require("../helpers/requestHelper.js");
 
 var ModelsContainer = function(){
-  this.requestHelper = new RequestHelper();
+  this.requestHelper = new RequestHelper;
 }
 
 ModelsContainer.prototype = {
@@ -35,3 +35,5 @@ ModelsContainer.prototype = {
     return barItems;
   }
 };
+
+module.exports = ModelsContainer;
