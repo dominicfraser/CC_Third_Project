@@ -63,16 +63,40 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports) {
+
+var Bar = function(options){
+  this.name = options.name;
+  this.cashDrawer = options.cashDrawer;
+}
+
+
+module.exports = Bar;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+var Player = function(options){
+  this.name = options.name;
+  this.wallet = options.wallet;
+}
+
+
+module.exports = Player;
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Game = __webpack_require__(7);
-var Player = __webpack_require__(6);
-var Bar = __webpack_require__(3);
+var Player = __webpack_require__(1);
+var Bar = __webpack_require__(0);
 
 var Map = function () {
   this.player = new Player({
@@ -165,10 +189,10 @@ var movePlayer = function(e){
 module.exports = Map;
 
 /***/ }),
-/* 1 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Map = __webpack_require__(0);
+var Map = __webpack_require__(2);
 
 var app = function () {
   new Map();
@@ -177,7 +201,7 @@ var app = function () {
 window.onload = app;
 
 /***/ }),
-/* 2 */
+/* 4 */
 /***/ (function(module, exports) {
 
 var RequestHelper = function() {
@@ -213,19 +237,7 @@ RequestHelper.prototype = {
 module.exports = RequestHelper;
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-var Bar = function(options){
-  this.name = options.name;
-  this.cashDrawer = options.cashDrawer;
-}
-
-
-module.exports = Bar;
-
-/***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 var Item = function(options){
@@ -237,13 +249,13 @@ var Item = function(options){
 module.exports = Item;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var PlayerModel = __webpack_require__(6);
-var BarModel = __webpack_require__(3);
-var ItemModel = __webpack_require__(4);
-var RequestHelper = __webpack_require__(2);
+var PlayerModel = __webpack_require__(1);
+var BarModel = __webpack_require__(0);
+var ItemModel = __webpack_require__(5);
+var RequestHelper = __webpack_require__(4);
 
 var ModelsContainer = function(){
   this.requestHelper = new RequestHelper;
@@ -252,7 +264,6 @@ var ModelsContainer = function(){
 ModelsContainer.prototype = {
   allPlayerItems: function(callback){
     this.requestHelper.makeGetRequest("http://localhost:3000/api/player_inventory", function(results){
-      console.log(results);
       var playerItems = this.populatePlayerItems(results);
       callback(playerItems);
     }.bind(this));
@@ -265,7 +276,6 @@ ModelsContainer.prototype = {
   },
   allBarItems: function(callback){
     this.requestHelper.makeGetRequest("http://localhost:3000/api/bar_inventory", function(results){
-      console.log(results);
       var barItems = this.populateBarItems(results);
       callback(barItems);
     }.bind(this));
@@ -281,22 +291,10 @@ ModelsContainer.prototype = {
 module.exports = ModelsContainer;
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-var Player = function(options){
-  this.name = options.name;
-  this.wallet = options.wallet;
-}
-
-
-module.exports = Player;
-
-/***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ModelsContainer = __webpack_require__(5)
+var ModelsContainer = __webpack_require__(6)
 
 var Game = function (player, bar) {
   this.player = player;
@@ -315,13 +313,24 @@ var Game = function (player, bar) {
 };
 
 Game.prototype = {
+
+  countItems: function (allItems, item) {
+    counter = 0
+    for (var i = 0; i < allItems.length; i++){
+      if (allItems[i].name == item.name)
+        counter += 1
+    }
+    return counter
+  },
+
   renderPlayerItems: function(playerItems){
     var select = document.getElementById("player-inventory");
     select.innerHTML = "";
 
     for (var item of playerItems){
+      var count = this.countItems(playerItems, item)
       var option = document.createElement('option');
-      option.innerText = item.name;
+      option.innerText = item.name + " (" + count + ")" 
       select.appendChild(option);
     }
   },
@@ -331,8 +340,9 @@ Game.prototype = {
     select.innerHTML = "";
 
     for (var item of barItems){
+      var count = this.countItems(barItems, item)
       var option = document.createElement("option");
-      option.innerText = item.name;
+      option.innerText = item.name + " (" + count + ")";
       select.appendChild(option);
     }
   }
