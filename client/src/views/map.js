@@ -22,19 +22,83 @@ var Map = function () {
 
   loadCanvas();
 
-
 };
 
 var loadCanvas = function() {
   var backdrop = document.createElement('img');
-  backdrop.src = "/public/img/backdrop_empty.png";
+  backdrop.src = "/public/img/edited_images/backdrop_empty.png";
+
+  var tableSet = document.createElement('img');
+  tableSet.src = "/public/img/edited_images/table_set.png";
+
+  var sofaSetBottom = document.createElement('img');
+  sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
+
+  var sofaSetTop = document.createElement('img');
+  sofaSetTop.src = "/public/img/edited_images/sofa_set.png";
+
+  var bartender = document.createElement('img');
+  bartender.src = "/public/img/edited_images/f1.png";
+
+  var stage = document.createElement('img');
+  stage.src = "/public/img/edited_images/stage.png";
+
+  var piano = document.createElement('img');
+  piano.src = "/public/img/edited_images/piano.png";
+
+  var mainGirl = document.createElement('img');
+  mainGirl.src = "/public/img/edited_images/f1girl.png";
 
   context = getCanvasContext();
 
-  backdrop.onload = function() {
-    context.drawImage(this, 0, 0, 700, 500);
+  // backdrop.onload = function() {
+  //   context.drawImage(this, 0, 0, 700, 500); 
+  //   // drawMap();
+  // };
+
+  tableSet.onload = function() {
+    context.drawImage(this, -200, 110, 700, 500);
     // drawMap();
-  }; 
+  };
+
+  sofaSetTop.onload = function() {
+    context.drawImage(this, 200, -30, 700, 500);
+    // drawMap();
+  };
+
+  sofaSetBottom.onload = function() {
+    context.drawImage(this, 200, 140, 700, 500);
+    // drawMap();
+  };
+
+  bartender.onload = function() {
+    context.drawImage(this, -190, -40, 700, 500);
+    // drawMap();
+  };
+
+  stage.onload = function() {
+    context.drawImage(this, 254, -140, 700, 500);
+    // drawMap();
+  };
+
+  piano.onload = function() {
+    context.drawImage(this, 50, -160, 700, 500);
+    // drawMap();
+  };
+
+  mainGirl.onload = function() {
+    context.drawImage(this, 20, 180, 700, 500);
+    // drawMap();
+  };
+
+  // backdrop.onload = function() {
+  //   context.drawImage(this, 0, 0, 700, 500);
+  //   console.log(tableSet);
+  //   tableSet.onload = function() {
+  //     context.drawImage(this, -200, 110, 700, 500);
+  //   }; 
+  //   // drawMap();
+  // };
 };
 
   // drawMap = function() {
