@@ -27,7 +27,7 @@ var Map = function () {
 
 var loadCanvas = function() {
   var backdrop = document.createElement('img');
-  backdrop.src = "/public/img/bar_full_img.png";
+  backdrop.src = "/public/img/backdrop_empty.png";
 
   context = getCanvasContext();
 
