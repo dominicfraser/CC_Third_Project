@@ -24,9 +24,8 @@ Game.prototype = {
     for (var item of playerItems){
       var option = document.createElement('option');
       option.innerText = item.name;
+      select.appendChild(option);
     }
-
-    select.appendChild(option);
   },
 
   renderBarItems: function(barItems){
@@ -36,6 +35,7 @@ Game.prototype = {
     for (var item of barItems){
       var option = document.createElement("option");
       option.innerText = item.name;
+      select.appendChild(option);
     }
   }
 };
