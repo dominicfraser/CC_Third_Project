@@ -216,6 +216,10 @@ var Game = function (player, bar) {
     this.renderPlayerItems(playerItems);
   }.bind(this));
 
+  modelsContainer.allBarItems(function(barItems){
+    this.renderBarItems(barItems);
+  }.bind(this));
+
 };
 
 Game.prototype = {
@@ -230,9 +234,20 @@ Game.prototype = {
 
     select.appendChild(option);
   },
+
+  renderBarItems: function(barItems){
+    var select = document.getElementById("bar-inventory");
+    select.innerHTML = "";
+
+    for (var item of barItems){
+      var option = document.createElement("option");
+      option.innerText = item.name;
+    }
+  }
 };
 
 module.exports = Game;
+
 
 /***/ }),
 /* 5 */
