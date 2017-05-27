@@ -1,6 +1,11 @@
 use codeclan_bar;
+db.dropDatabase();
 
 db.player_inventory.insert([
+  {
+    name: "Amstel",
+    value: 4
+  },
   {
     name: "Amstel",
     value: 4
@@ -8,6 +13,14 @@ db.player_inventory.insert([
 ]);
 
 db.bar_inventory.insert([
+  {
+    name: "Amstel",
+    value: 4
+  },
+  {
+    name: "Amstel",
+    value: 4
+  },
   {
     name: "Amstel",
     value: 4
@@ -27,5 +40,9 @@ db.bar_inventory.insert([
   {
     name: "Guinness",
     value: 3
+  },
+  {
+    name: "Amstel",
+    value: 4
   },
 ]);

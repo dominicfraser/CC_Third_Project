@@ -32,7 +32,10 @@ DbQueryHelper.prototype = {
     MongoClient.connect(this.url, function(err, db){
       if (db){
         var collection = db.collection("player_inventory");
-        collection.remove({item}, {JustOne: true});
+        collection.remove(item);
+        collection.find().toArray(function(err, docs){
+          onQueryFinishedCallback(docs);
+        })
       }
     })
   },
