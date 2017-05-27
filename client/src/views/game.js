@@ -17,13 +17,24 @@ var Game = function (player, bar) {
 };
 
 Game.prototype = {
+
+  countItems: function (allItems, item) {
+    counter = 0
+    for (var i = 0; i < allItems.length; i++){
+      if (allItems[i].name == item.name)
+        counter += 1
+    }
+    return counter
+  },
+
   renderPlayerItems: function(playerItems){
     var select = document.getElementById("player-inventory");
     select.innerHTML = "";
 
     for (var item of playerItems){
+      var count = this.countItems(playerItems, item)
       var option = document.createElement('option');
-      option.innerText = item.name;
+      option.innerText = item.name + " (" + count + ")" 
       select.appendChild(option);
     }
   },
@@ -33,8 +44,9 @@ Game.prototype = {
     select.innerHTML = "";
 
     for (var item of barItems){
+      var count = this.countItems(barItems, item)
       var option = document.createElement("option");
-      option.innerText = item.name;
+      option.innerText = item.name + " (" + count + ")";
       select.appendChild(option);
     }
   }
