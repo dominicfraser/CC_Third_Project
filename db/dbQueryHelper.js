@@ -31,7 +31,7 @@ DbQueryHelper.prototype = {
   removePlayerItem: function(item, onQueryFinishedCallback){
     MongoClient.connect(this.url, function(err, db){
       if (db){
-        var collection = db.collection(‘player_inventory’);
+        var collection = db.collection("player_inventory");
         collection.remove({item}, {JustOne: true});
       }
     })
