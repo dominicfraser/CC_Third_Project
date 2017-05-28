@@ -8,6 +8,7 @@ body {
   display: inline-block;
   width: 12%;
   height: 100%;
+  font-family: 'Quantico', serif;
 }
 
 #middle {
@@ -15,6 +16,8 @@ body {
   display: inline-block;
   width: 70%;
   height: 100%;
+  font-family: 'Bungee Inline', serif;
+
 }
 
 #stats {
@@ -22,6 +25,8 @@ body {
   display: inline-block;
   width: 12%;
   height: 100%;
+  font-family: 'Quantico', serif;
+
 }
 
 canvas {
