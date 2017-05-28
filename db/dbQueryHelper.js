@@ -13,9 +13,9 @@ DbQueryHelper.prototype = {
         collection.find().toArray(function(err, docs){
                   onQueryFinishedCallback(docs);
                 })
-              }
-            })
-          },
+            }
+      })
+  },
           
   allPlayerItems: function(onQueryFinishedCallback){
     MongoClient.connect(this.url, function(err, db){
