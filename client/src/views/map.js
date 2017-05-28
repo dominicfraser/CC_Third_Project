@@ -27,14 +27,12 @@ var Map = function () {
 
   //testing adding item
   // window.addEventListener('keydown', addItem);
-console.log(this.game)
-  var testItem = new Item({name: "Amstel", value: 4})
+// console.log(this.game)
+//   var testItem = new Item({name: "Amstel", value: 4})
 
-  this.game.addDrinkToPlayer(testItem)
-
+//   this.game.addDrinkToPlayer(testItem)
 
   loadCanvas();
-
 };
 
 //testing adding item
@@ -49,14 +47,78 @@ var addItem = function(e){
 
 var loadCanvas = function() {
   var backdrop = document.createElement('img');
-  backdrop.src = "/public/img/backdrop_empty.png";
+  backdrop.src = "/public/img/edited_images/backdrop_empty.png";
+
+  var tableSet = document.createElement('img');
+  tableSet.src = "/public/img/edited_images/table_set.png";
+
+  var sofaSetBottom = document.createElement('img');
+  sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
+
+  var sofaSetTop = document.createElement('img');
+  sofaSetTop.src = "/public/img/edited_images/sofa_set.png";
+
+  var bartender = document.createElement('img');
+  bartender.src = "/public/img/edited_images/f1bartender.png";
+
+  var stage = document.createElement('img');
+  stage.src = "/public/img/edited_images/stage.png";
+
+  var piano = document.createElement('img');
+  piano.src = "/public/img/edited_images/piano.png";
+
+  var mainGirl = document.createElement('img');
+  mainGirl.src = "/public/img/edited_images/f1girl.png";
+
+  var guy = document.createElement('img');
+  guy.src = "/public/img/edited_images/f1guy.png";
 
   context = getCanvasContext();
 
   backdrop.onload = function() {
-    context.drawImage(this, 0, 0, 700, 500);
-    // drawMap();
-  }; 
+    context.drawImage(this, 0, 0, 700, 500); 
+  };
+
+  tableSet.onload = function() {
+    context.drawImage(this, -200, 110, 700, 500);
+  };
+
+  sofaSetTop.onload = function() {
+    context.drawImage(this, 200, -30, 700, 500);
+  };
+
+  sofaSetBottom.onload = function() {
+    context.drawImage(this, 200, 140, 700, 500);
+  };
+
+  bartender.onload = function() {
+    context.drawImage(this, -190, -40, 700, 500);
+  };
+
+  stage.onload = function() {
+    context.drawImage(this, 254, -140, 700, 500);
+  };
+
+  piano.onload = function() {
+    context.drawImage(this, 50, -160, 700, 500);
+  };
+
+  mainGirl.onload = function() {
+    context.drawImage(this, 20, 180, 700, 500);
+  };
+
+  guy.onload = function() {
+    context.drawImage(this, 100, -30, 700, 500);
+  };
+
+  // backdrop.onload = function() {
+  //   context.drawImage(this, 0, 0, 700, 500);
+  //   console.log(tableSet);
+  //   tableSet.onload = function() {
+  //     context.drawImage(this, -200, 110, 700, 500);
+  //   }; 
+  //   // drawMap();
+  // };
 };
 
   // drawMap = function() {
