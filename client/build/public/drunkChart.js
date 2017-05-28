@@ -1,4 +1,4 @@
-var DrunkChart = function(){
+var DrunkChart = function(drunkLevel){
   var container = document.getElementById("player-drunk-level");
 
   var chart = new Highcharts.Chart({
@@ -7,28 +7,22 @@ var DrunkChart = function(){
         renderTo: container
       },
       title: {
-        text: "Pokemon Types I've Caught"
+        text: ""
       },
       series: [
         {
-          name: "Type",
+          name: "Drunk Level",
           data: [
             {
-              name: "Grass",
-              y: 74,
-              color: "#00ba2f"
+              name: "Drunk",
+              y: drunkLevel,
+              color: "#ffc700"
             },
             {
-              name: "Water",
-              y: 25,
-              color: "#73b7ff"
+              name: "Sober",
+              y: 100 - drunkLevel,
+              color: "#6bc4ea"
             },
-            {
-              name: "Fire",
-              y: 1,
-              color: "#ffac33",
-              sliced: true
-            }
           ]
         }
       ]

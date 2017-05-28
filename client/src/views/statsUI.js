@@ -11,7 +11,7 @@ var StatsUI = function(player, bar){
   var modelsContainer = new ModelsContainer;
   var moneyChart = new MoneyChart(this.player.wallet);
   var barInventoryChart = new BarInventoryChart(10);
-  var drunkLevelChart = new DrunkLevelChart();
+  var drunkLevelChart = new DrunkLevelChart(this.player.drunkLevel);
 
   };
 

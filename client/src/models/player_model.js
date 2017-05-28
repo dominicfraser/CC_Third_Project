@@ -7,7 +7,7 @@ var Player = function(options){
 Player.prototype = {
   subtractItemValue: function(item){
     this.wallet -= item.value;
-  },
+  }
 
 
 }
