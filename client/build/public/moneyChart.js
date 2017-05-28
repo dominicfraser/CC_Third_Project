@@ -1,26 +1,25 @@
-var MoneyChart = function (){
+// var player = require('../src/models/player_model.js');
+
+var MoneyChart = function (playerWallet){
   var container = document.getElementById("money-chart");
+
 
   var chart = new Highcharts.Chart({
     chart: {
-      type: "column",
+      type: "bar",
       renderTo: container
     },
     title: {
-      text: "Our Favourite Programming Languages"
+      text: ""
     },
     series: [
     {
-      name: "Cohort 11",
-      data: [8, 8, 6, 1]
-    },
-    {
-      name: "Cohort 12",
-      data: [17, 1, 0, 0]
+      name: "Your Money",
+      data: [playerWallet]
     }
     ],
     xAxis: {
-      categories: ["Ruby", "Java", "JavaScript", "COBOL"]
+      categories: ["£"]
     }
   });
 
