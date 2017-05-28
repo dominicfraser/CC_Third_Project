@@ -1,5 +1,6 @@
 var Game = require('./game.js');
 var InventoryUI = require('./inventoryUI.js');
+var StatsUI = require('./statsUI.js');
 var Player = require('../models/player_model.js');
 var Bar = require('../models/bar_model.js');
 
@@ -14,6 +15,7 @@ var Map = function () {
   });
   this.game = new Game(this.player, this.bar);
   this.inventoryUI = new InventoryUI(this.player, this.bar);
+  this.statsUI = new StatsUI(this.player, this.bar);
 
   context = getCanvasContext();
 
