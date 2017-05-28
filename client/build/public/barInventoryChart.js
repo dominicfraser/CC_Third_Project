@@ -24,4 +24,4 @@ var BarInventoryChart = function (barInventory){
 
 };
 
-module.exports = MoneyChart;
+module.exports = BarInventoryChart;
