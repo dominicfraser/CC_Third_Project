@@ -1,13 +1,14 @@
 body {
   margin: 0;
-  height: 100%
+  height: 100%;
 }
 
-#left {
+#inventory {
   border: 1px solid black;
   display: inline-block;
   width: 12%;
   height: 100%;
+  font-family: 'Quantico', serif;
 }
 
 #middle {
@@ -15,13 +16,17 @@ body {
   display: inline-block;
   width: 70%;
   height: 100%;
+  font-family: 'Bungee Inline', serif;
+
 }
 
-#right {
+#stats {
   border: 1px solid black;
   display: inline-block;
   width: 12%;
   height: 100%;
+  font-family: 'Quantico', serif;
+
 }
 
 canvas {

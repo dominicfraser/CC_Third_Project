@@ -10,7 +10,6 @@ var ModelsContainer = function(){
 ModelsContainer.prototype = {
   allPlayerItems: function(callback){
     this.requestHelper.makeGetRequest("http://localhost:3000/api/player_inventory", function(results){
-      console.log(results);
       var playerItems = this.populatePlayerItems(results);
       callback(playerItems);
     }.bind(this));
@@ -21,9 +20,14 @@ ModelsContainer.prototype = {
     });
     return playerItems;
   },
+  addPlayerItem: function(newItem, callback){
+    var itemData = JSON.stringify(newItem);
+    this.requestHelper.makePostRequest('https://localhost:3000/api/player_inventory', callback, itemData);
+  },
+
+
   allBarItems: function(callback){
     this.requestHelper.makeGetRequest("http://localhost:3000/api/bar_inventory", function(results){
-      console.log(results);
       var barItems = this.populateBarItems(results);
       callback(barItems);
     }.bind(this));

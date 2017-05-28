@@ -1,6 +1,9 @@
 var Game = require('./game.js');
+var InventoryUI = require('./inventoryUI.js');
+var StatsUI = require('./statsUI.js');
 var Player = require('../models/player_model.js');
 var Bar = require('../models/bar_model.js');
+var Item = require('../models/item_model.js');
 
 var Map = function () {
   this.player = new Player({
@@ -12,6 +15,8 @@ var Map = function () {
     cashDrawer: 1000
   });
   this.game = new Game(this.player, this.bar);
+  this.inventoryUI = new InventoryUI(this.player, this.bar);
+  this.statsUI = new StatsUI(this.player, this.bar);
 
   context = getCanvasContext();
 
@@ -20,9 +25,25 @@ var Map = function () {
   currentPosition = [90,90];
   window.addEventListener('keydown', movePlayer);
 
-  loadCanvas();
+  //testing adding item
+  // window.addEventListener('keydown', addItem);
+// console.log(this.game)
+//   var testItem = new Item({name: "Amstel", value: 4})
 
+//   this.game.addDrinkToPlayer(testItem)
+
+  loadCanvas();
 };
+
+//testing adding item
+var addItem = function(e){
+  if (e.key = "KeyA"){
+    this.game.addDrinkToPlayer({name: "Amstel", value: 4});
+    loadCanvas();
+  };
+}.bind(this); 
+
+
 
 var loadCanvas = function() {
   var backdrop = document.createElement('img');
