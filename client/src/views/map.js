@@ -38,7 +38,7 @@ var loadCanvas = function() {
   sofaSetTop.src = "/public/img/edited_images/sofa_set.png";
 
   var bartender = document.createElement('img');
-  bartender.src = "/public/img/edited_images/f1.png";
+  bartender.src = "/public/img/edited_images/f1bartender.png";
 
   var stage = document.createElement('img');
   stage.src = "/public/img/edited_images/stage.png";
