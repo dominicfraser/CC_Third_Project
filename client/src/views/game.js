@@ -4,12 +4,16 @@ var Game = function (player, bar) {
   this.player = player;
   this.bar = bar;
 
-  var modelsContainer = new ModelsContainer;
+  this.modelsContainer = new ModelsContainer;
 
 
 };
 
 Game.prototype = {
+
+  addDrinkToPlayer: function(drink, callback){
+    this.modelsContainer.addPlayerItem(drink, callback);
+  },
 
 };
 

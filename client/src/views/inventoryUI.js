@@ -6,13 +6,13 @@ var InventoryUI = function(player, bar){
 
   var modelsContainer = new ModelsContainer;
 
-    modelsContainer.allPlayerItems(function(playerItems){
-      this.renderPlayerItemsCount(playerItems);
-    }.bind(this));
+  modelsContainer.allPlayerItems(function(playerItems){
+    this.renderPlayerItemsCount(playerItems);
+  }.bind(this));
 
-    modelsContainer.allBarItems(function(barItems){
-      this.renderBarItemsCount(barItems);
-    }.bind(this));
+  modelsContainer.allBarItems(function(barItems){
+    this.renderBarItemsCount(barItems);
+  }.bind(this));
 
   };
 
