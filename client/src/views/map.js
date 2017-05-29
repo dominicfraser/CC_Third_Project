@@ -17,8 +17,8 @@ var Map = function () {
   mainContext = getMainCanvasContext();
   
   context.beginPath();
-  context.moveTo(90,90);
-  currentPosition = [90,90];
+  context.moveTo(0,0);
+  currentPosition = [0,0];
   window.addEventListener('keydown', movePlayer);
 
   window.addEventListener('keydown', placeOrder);
