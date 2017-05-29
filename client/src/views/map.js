@@ -236,7 +236,6 @@ var movePlayer = function(e){
       currentPosition[1] = positionY-5
       console.log("Up")
   }
-    }
   else if(e.key === "ArrowDown"){
     if (positionY + 5 <= 500){
       context.lineTo(positionX, (positionY+5))
