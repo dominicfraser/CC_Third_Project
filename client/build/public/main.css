@@ -3,6 +3,20 @@ body {
   height: 100%;
 }
 
+canvas { 
+  position: absolute;
+  border: 1px solid black;
+}
+  
+
+#main-canvas {
+  z-index: 1;
+}
+
+#player-canvas {
+  z-index: 10;
+}
+
 #inventory {
   border: 1px solid black;
   display: inline-block;
@@ -17,7 +31,6 @@ body {
   width: 70%;
   height: 100%;
   font-family: 'Bungee Inline', serif;
-
 }
 
 #stats {
@@ -26,9 +39,11 @@ body {
   width: 12%;
   height: 100%;
   font-family: 'Quantico', serif;
-
 }
 
-canvas {
+canvas { 
+  position: absolute;
   border: 1px solid black;
+  display: inline;
 }
+  

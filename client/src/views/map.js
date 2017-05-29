@@ -12,8 +12,9 @@ var Map = function () {
   this.inventoryUI = new InventoryUI(this.player, this.bar);
   this.statsUI = new StatsUI(this.player, this.bar);
 
-  context = getCanvasContext();
-
+  context = getPlayerCanvasContext();
+  mainContext = getMainCanvasContext();
+  
   context.beginPath();
   context.moveTo(90,90);
   currentPosition = [90,90];
@@ -71,10 +72,11 @@ var loadCanvas = function() {
   var guy = document.createElement('img');
   guy.src = "/public/img/edited_images/f1guy.png";
 
-  context = getCanvasContext();
+  context = getPlayerCanvasContext();
+  mainContext = getMainCanvasContext();
 
   backdrop.onload = function() {
-    context.drawImage(this, 0, 0, 700, 500); 
+    mainContext.drawImage(this, 0, 0, 700, 500); 
   };
 
   tableSet.onload = function() {
@@ -123,11 +125,18 @@ var loadCanvas = function() {
   //   context.drawImage(backdrop, 0, 0, 700, 500);
   // };
 
-var getCanvasContext = function(){
+var getMainCanvasContext = function(){
   var canvas = document.getElementById("main-canvas");
   var context = canvas.getContext("2d");
   return context;
 }
+
+var getPlayerCanvasContext = function(){
+  var canvas = document.getElementById("player-canvas");
+  var context = canvas.getContext("2d");
+  return context;
+}
+
 
 var movePlayer = function(e){
   var context  = getCanvasContext();
