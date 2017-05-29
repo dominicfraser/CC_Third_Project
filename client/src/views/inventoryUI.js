@@ -66,43 +66,12 @@ var InventoryUI = function(player, bar){
         return itemNames.indexOf(item.name) == index
       })
       console.log(filtered)
+      
       return filtered
-      // return itemList.filter(function(item, i) {
-      //   return itemList.indexOf?(item) == i;
-      // });
     },
 
-    // filterToUniqList: function(itemList){
-    //   return itemList.filter(function(item, i) {
-    //     return itemList.indexOf(item) == i; });
-    // },
 
-    // NO ID VERSION
-    // getAllNames: function(itemList){
-    //   var list = [];
-    //   for (var item of itemList) { 
-    //     var count = this.countItems(itemList, item)
-    //     list.push(item.name + " (" + count + ")")
-    //   }
-    //   return list
-    // },
 
-    // filterToUniqList: function(itemList){
-    //   return itemList.filter(function(v,i) {
-    //     return itemList.indexOf(v) == i; });
-    // },
-
-    // renderBarItems: function(barItems){
-    //   var select = document.getElementById("bar-inventory");
-    //   select.innerHTML = "";
-
-    //   for (var item of barItems){
-    //     var count = this.countItems(barItems, item)
-    //     var option = document.createElement("option");
-    //     option.innerText = item.name + " (" + count + ")";
-    //     select.appendChild(option);
-    //   }
-    // },
 
     renderBarItemsCount: function(barItems){
       var select = document.getElementById("bar-inventory");
