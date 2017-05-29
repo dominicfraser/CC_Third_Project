@@ -20,8 +20,8 @@ console.log('inside main map', this)
   mainContext = getMainCanvasContext();
   
   context.beginPath();
-  context.moveTo(90,90);
-  currentPosition = [90,90];
+  context.moveTo(0,0);
+  currentPosition = [0,0];
   window.addEventListener('keydown', movePlayer);
 
   window.addEventListener('keydown', this.placeOrder);
@@ -152,19 +152,17 @@ var getPlayerCanvasContext = function(){
 
 
 var movePlayer = function(e){
-  var context  = getMainCanvasContext();
+  var context  = getPlayerCanvasContext();
   var positionX = currentPosition[0];
   var positionY = currentPosition[1];
 
   if (e.key === "ArrowRight"){
+
     var hitRightBorder = positionX + 5 >= 710
 
     var hitLeftEdgeOfSquare = (positionX + 5 >= 180) && (positionY <= 180) || (positionX + 5 >= 180) && (positionY <= 360) 
 
     if (hitRightBorder){
-      console.log('can\'t move')
-    }
-    else if(hitLeftEdgeOfSquare){
       console.log('can\'t move')
     }
     else {
@@ -175,33 +173,45 @@ var movePlayer = function(e){
     }
   }
   else if(e.key === "ArrowLeft"){
-    if (positionX - 5 >= 90){
+    // if (positionX - 5 >= 0){
+      var hitLeftBorder = ((positionY - 5) <= 0)
+
+      var hitRightSideOfBar = (positionY <= 290 && positionY >= 0) && (positionX <= 240 && positionX >= 240)
+
+      if (hitLeftBorder){
+        return;
+      }
+      else if (hitRightSideOfBar){
+        return;
+      }
       context.lineTo((positionX-5), positionY)
       context.stroke()
       currentPosition[0] = positionX-5
       console.log("Left")
     }
-  }
+  
   else if(e.key === "ArrowUp"){
-    // if (positionY - 5 >= 90){
-      var hitTopBorder = positionX - 5 <= 0
+    // if (positionY - 5 >= 0){
+      var hitTopBorder = ((positionX - 5) <= 0)
 
-      var hitBottomOfBar = (positionX <= 0) && (positionY - 5 <= 294) || (positionX <= 240) && (positionY - 5 <= 294) 
+      var hitBottomOfBar = (positionX >= 0 && positionX <= 240) && (positionY <= 290 && positionY >= 235)
 
       if (hitTopBorder){
         console.log('can\'t move')
+        return;
       }
       else if (hitBottomOfBar){
         console.log('can\'t move')
+        return;
       }
 
       context.lineTo(positionX, (positionY-5))
       context.stroke()
       currentPosition[1] = positionY-5
       console.log("Up")
-    }
+  }
   else if(e.key === "ArrowDown"){
-    if (positionY + 5 <= 610){
+    if (positionY + 5 <= 500){
       context.lineTo(positionX, (positionY+5))
       context.stroke()
       currentPosition[1] = positionY+5

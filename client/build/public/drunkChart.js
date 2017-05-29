@@ -25,7 +25,10 @@ var DrunkChart = function(drunkLevel){
             },
           ]
         }
-      ]
+      ],
+      credits: {
+        enabled: false
+      }
     });
 }
   module.exports = DrunkChart;
