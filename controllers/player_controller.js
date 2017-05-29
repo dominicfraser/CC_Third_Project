@@ -2,7 +2,6 @@ var express = require('express');
 
 var playerRouter = express.Router();
 
-// var Player = require('../client/src/models/player_model.js');
 var Item = require('../client/src/models/item_model.js')
 
 var DbQueryHelper = require('../db/dbQueryHelper.js');

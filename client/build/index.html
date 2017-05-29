@@ -9,6 +9,7 @@
   <script src="http://code.highcharts.com/highcharts.js"></script>
 </head>
 <body>
+
   <section id="inventory"> 
     <h1>inventory</h1>
     <select id="player-inventory"></select>
@@ -17,11 +18,15 @@
 
 
   <section id="middle">
-    <h1>canvas</h1>
-    <canvas id="main-canvas" width="700" height="500"></canvas>
-    <canvas id="player-canvas" width="700" height="500"></canvas>
-    <h2>interaction area</h2>
-    <p id="interaction-message">My message</p>
+    <div id="middle-canvas">
+      <h1>canvas</h1>
+      <canvas id="main-canvas" width="700px" height="500px"></canvas>
+      <canvas id="player-canvas" width="700px" height="500px"></canvas>
+    </div>
+    <div id="middle-interaction">
+      <h2>interaction area</h2>
+      <p id="interaction-message">My message</p>
+    </div>
   </section>
   
 
@@ -32,6 +37,6 @@
     <div id="bar-inv-chart"></div>
 
   </section>
-  
+
 </body>
 </html>
