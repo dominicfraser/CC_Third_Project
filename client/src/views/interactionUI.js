@@ -8,7 +8,7 @@ var InteractionUI = function (player, bar) {
   this.game = new Game(this.player, this.bar);
   this.inventoryUI = new InventoryUI(this.player, this.bar);
 
-  console.log(this)
+  console.log('inside main interactionUI', this)
 };
 
 InteractionUI.prototype = {

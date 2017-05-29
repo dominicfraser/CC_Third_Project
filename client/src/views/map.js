@@ -26,9 +26,7 @@ console.log('inside main map', this)
 
   window.addEventListener('keydown', this.placeOrder);
 
-  // this.game.addDrinkToPlayer(testItem, function (response) {
-  //   console.log('addDrinkToPlayer response data', response)
-  // })
+
   // this.game.removeDrinkFromPlayer(testItem, function (response) {
   //   console.log('removeDrinkFromPlayer response data', response)
   // })
@@ -56,11 +54,13 @@ Map.prototype = {
 
   placeOrder: function(e){
     if (e.key === "o"){
-      // this.interactionUI = new InteractionUI(this.player, this.bar);
+      this.interactionUI = new InteractionUI(this.player, this.bar);
       this.interactionUI.askForDrink();
-      console.log('inside place order', this)
+      console.log('inside place order IF', this)
       //can't access this here
     };  
+      console.log('inside place order', this)
+
   }.bind(this),
 
 };
