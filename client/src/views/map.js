@@ -189,7 +189,18 @@ var movePlayer = function(e){
   }
 }
   else if(e.key === "ArrowUp"){
-    if (positionY - 5 >= 90){
+    // if (positionY - 5 >= 90){
+      var hitTopBorder = positionX - 5 <= 0
+
+      var hitBottomOfBar = (positionX <= 0) && (positionY - 5 <= 294) || (positionX <= 240) && (positionY - 5 <= 294) 
+
+      if (hitTopBorder){
+        console.log('can\'t move')
+      }
+      else if (hitBottomOfBar){
+        console.log('can\'t move')
+      }
+
       context.lineTo(positionX, (positionY-5))
       context.stroke()
       currentPosition[1] = positionY-5
