@@ -1,4 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
+var ObjectID = require("mongodb").ObjectID;
 
 var DbQueryHelper = function(){
   this.url = "mongodb://localhost:27017/codeclan_bar"
@@ -10,13 +11,13 @@ DbQueryHelper.prototype = {
       if (db){
         var collection = db.collection('player_inventory');
         collection.insert(playerItemToAdd);
+        console.log('item to add in queryHelper:', playerItemToAdd)
         collection.find().toArray(function(err, docs){
                   onQueryFinishedCallback(docs);
                 })
             }
       })
-  },
-          
+  },          
   allPlayerItems: function(onQueryFinishedCallback){
     MongoClient.connect(this.url, function(err, db){
       if (db){
@@ -27,12 +28,14 @@ DbQueryHelper.prototype = {
       }
     })
   },
-
-  removePlayerItem: function(item, onQueryFinishedCallback){
+  removePlayerItem: function(id, onQueryFinishedCallback){
     MongoClient.connect(this.url, function(err, db){
+      var mongoIdObject = ObjectID(id);
+      console.log('id in dbHelper', id)
+      console.log('mongoIdObject in dbHelper', mongoIdObject)
       if (db){
         var collection = db.collection("player_inventory");
-        collection.remove(item);
+        collection.remove({_id: mongoIdObject}, {justOne: true});
         collection.find().toArray(function(err, docs){
           onQueryFinishedCallback(docs);
         })
@@ -51,7 +54,6 @@ DbQueryHelper.prototype = {
               }
             })
           },
-
   allBarItems: function(onQueryFinishedCallback){
     MongoClient.connect(this.url, function(err, db){
       if (db){
@@ -62,8 +64,20 @@ DbQueryHelper.prototype = {
       }
     })
   },
+  removeBarItem: function(id, onQueryFinishedCallback){
+    MongoClient.connect(this.url, function(err, db){
+      var mongoIdObject = ObjectID(id);
+      if (db){
+        var collection = db.collection("bar_inventory");
+        collection.remove({_id: mongoIdObject}, {justOne: true});
+        collection.find().toArray(function(err, docs){
+          onQueryFinishedCallback(docs);
+        })
+      }
+    })
+  },
 
-}
+};
 
 
 module.exports = DbQueryHelper;

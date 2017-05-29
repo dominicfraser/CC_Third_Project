@@ -1,19 +1,14 @@
 var Game = require('./game.js');
 var InventoryUI = require('./inventoryUI.js');
 var StatsUI = require('./statsUI.js');
+var InteractionUI = require('./interactionUI.js');
 var Player = require('../models/player_model.js');
 var Bar = require('../models/bar_model.js');
 var Item = require('../models/item_model.js');
 
 var Map = function () {
-  this.player = new Player({
-    name: "Player1",
-    wallet: 100
-  });
-  this.bar = new Bar({
-    name: "Chanter",
-    cashDrawer: 1000
-  });
+  this.player = new Player({name: "Player1", wallet: 100});
+  this.bar = new Bar({name: "Chanter", cashDrawer: 1000});
   this.game = new Game(this.player, this.bar);
   this.inventoryUI = new InventoryUI(this.player, this.bar);
   this.statsUI = new StatsUI(this.player, this.bar);
@@ -26,12 +21,18 @@ var Map = function () {
   currentPosition = [90,90];
   window.addEventListener('keydown', movePlayer);
 
-  //testing adding item
-  // window.addEventListener('keydown', addItem);
-// console.log(this.game)
-//   var testItem = new Item({name: "Amstel", value: 4})
+  window.addEventListener('keydown', placeOrder);
 
-//   this.game.addDrinkToPlayer(testItem)
+  // testing adding item
+  // window.addEventListener('keydown', addItem);
+  var testItem = new Item({name: "Amstel", value: 4})
+
+  // this.game.addDrinkToPlayer(testItem, function (response) {
+  //   console.log('addDrinkToPlayer response data', response)
+  // })
+  // this.game.removeDrinkFromPlayer(testItem, function (response) {
+  //   console.log('removeDrinkFromPlayer response data', response)
+  // })
 
   loadCanvas();
 //////////////to test coords
@@ -53,12 +54,43 @@ var Map = function () {
 
 //testing adding item
 var addItem = function(e){
-  if (e.key = "KeyA"){
+  if (e.key === "a"){
     this.game.addDrinkToPlayer({name: "Amstel", value: 4});
     loadCanvas();
   };
 }.bind(this); 
 
+var placeOrder = function(e){
+console.log(e)
+  if (e.key === "o"){
+    this.interactionUI = new InteractionUI(this.player, this.bar);
+
+    var interactionArea = document.getElementById('middle');
+
+    var yesButton = document.createElement('button');
+    yesButton.innerHTML = "Yes";
+
+    var noButton = document.createElement('button');
+    noButton.innerHTML = "No";
+
+    interactionArea.appendChild(yesButton);
+    interactionArea.appendChild(noButton);
+
+    yesClick = yesButton.addEventListener('click', orderPlaced);
+    noClick = noButton.addEventListener('click', orderNotPlaced);
+  };
+
+
+}.bind(this);
+
+var orderPlaced = function () {
+  //DO SOON
+}
+
+var orderNotPlaced = function () {
+  messageDisplay = document.getElementById("interaction-message");
+  messageDisplay.innerHTML = "What a loser...";
+}
 
 
 var loadCanvas = function() {
@@ -127,15 +159,6 @@ var loadCanvas = function() {
   guy.onload = function() {
     context.drawImage(this, 100, -30, 700, 500);
   };
-
-  // backdrop.onload = function() {
-  //   context.drawImage(this, 0, 0, 700, 500);
-  //   console.log(tableSet);
-  //   tableSet.onload = function() {
-  //     context.drawImage(this, -200, 110, 700, 500);
-  //   }; 
-  //   // drawMap();
-  // };
 };
 
   // drawMap = function() {
@@ -156,7 +179,7 @@ var getPlayerCanvasContext = function(){
 
 
 var movePlayer = function(e){
-  var context  = getCanvasContext();
+  var context  = getMainCanvasContext();
   var positionX = currentPosition[0];
   var positionY = currentPosition[1];
 
@@ -186,8 +209,8 @@ var movePlayer = function(e){
       context.stroke()
       currentPosition[0] = positionX-5
       console.log("Left")
+    }
   }
-}
   else if(e.key === "ArrowUp"){
     // if (positionY - 5 >= 90){
       var hitTopBorder = positionX - 5 <= 0
@@ -205,22 +228,19 @@ var movePlayer = function(e){
       context.stroke()
       currentPosition[1] = positionY-5
       console.log("Up")
+    }
   }
-}
   else if(e.key === "ArrowDown"){
     if (positionY + 5 <= 610){
       context.lineTo(positionX, (positionY+5))
       context.stroke()
       currentPosition[1] = positionY+5
       console.log("Down")
-  }
-} else {
-  return;
-  };
-
+    }
+  } 
+  else { return; };
 
 };
-
 
 
 module.exports = Map;

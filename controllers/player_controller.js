@@ -2,7 +2,6 @@ var express = require('express');
 
 var playerRouter = express.Router();
 
-// var Player = require('../client/src/models/player_model.js');
 var Item = require('../client/src/models/item_model.js')
 
 var DbQueryHelper = require('../db/dbQueryHelper.js');
@@ -17,13 +16,14 @@ playerRouter.get('/', function(req,res){
 
 //delete item
 playerRouter.delete("/:id", function(req, res){
-  query.removePlayerItem(function(itemObject){
+  query.removePlayerItem(req.params.id, function(itemObject){
     res.json(itemObject);
   })
 });
 
 //add new item
 playerRouter.post('/', function(req, res) {
+  console.log('request body in controller:', req.body)
   var item = new Item({
     name: req.body.name,
     value: req.body.value,
