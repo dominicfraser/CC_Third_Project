@@ -10,13 +10,20 @@ var StatsUI = function(player, bar){
 
   var modelsContainer = new ModelsContainer;
   var moneyChart = new MoneyChart(this.player.wallet);
-  var barInventoryChart = new BarInventoryChart(10);
+  // var barInventoryChart;
   var drunkLevelChart = new DrunkLevelChart(this.player.drunkLevel);
+
+  
+  var barInventoryCount = modelsContainer.allBarItems(function(barInventory){
+     var barInventoryChart = new BarInventoryChart(barInventory.length)
+  });
+
+  
 
   };
 
   StatsUI.prototype = {
-
+  
   };
 
   module.exports = StatsUI;
