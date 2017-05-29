@@ -179,7 +179,7 @@ var getPlayerCanvasContext = function(){
 
 
 var movePlayer = function(e){
-  var context  = getMainCanvasContext();
+  var context  = getPlayerCanvasContext();
   var positionX = currentPosition[0];
   var positionY = currentPosition[1];
 
@@ -228,7 +228,6 @@ var movePlayer = function(e){
       context.stroke()
       currentPosition[1] = positionY-5
       console.log("Up")
-    }
   }
   else if(e.key === "ArrowDown"){
     if (positionY + 5 <= 610){
