@@ -4,40 +4,26 @@ var Game = function (player, bar) {
   this.player = player;
   this.bar = bar;
 
-  var modelsContainer = new ModelsContainer;
-
-  modelsContainer.allPlayerItems(function(playerItems){
-    this.renderPlayerItems(playerItems);
-  }.bind(this));
-
-  modelsContainer.allBarItems(function(barItems){
-    this.renderBarItems(barItems);
-  }.bind(this));
+  this.modelsContainer = new ModelsContainer;
 
 };
 
 Game.prototype = {
-  renderPlayerItems: function(playerItems){
-    var select = document.getElementById("player-inventory");
-    select.innerHTML = "";
 
-    for (var item of playerItems){
-      var option = document.createElement('option');
-      option.innerText = item.name;
-      select.appendChild(option);
-    }
+  addDrinkToPlayer: function(drink, callback){
+    this.modelsContainer.addPlayerItem(drink, callback);
+  },
+  removeDrinkFromPlayer: function(drink, callback){
+    this.modelsContainer.removePlayerItem(drink, callback);
   },
 
-  renderBarItems: function(barItems){
-    var select = document.getElementById("bar-inventory");
-    select.innerHTML = "";
+  addDrinkToBar: function(drink, callback){
+    this.modelsContainer.addBarItem(drink, callback);
+  },
+  removeDrinkFromBar: function(drink, callback){
+    this.modelsContainer.removeBarItem(drink, callback);
+  },
 
-    for (var item of barItems){
-      var option = document.createElement("option");
-      option.innerText = item.name;
-      select.appendChild(option);
-    }
-  }
 };
 
 module.exports = Game;

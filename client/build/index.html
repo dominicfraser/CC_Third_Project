@@ -3,27 +3,39 @@
 <head>
   <title>Chanter</title>
   <script src="bundle.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Quantico|Raleway" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bungee+Inline" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="public/main.css">
+  <script src="http://code.highcharts.com/highcharts.js"></script>
 </head>
 <body>
-  <section id="left"> 
-    <h1>left</h1>
+
+  <section id="inventory"> 
+    <h1>inventory</h1>
     <select id="player-inventory"></select>
     <select id="bar-inventory"></select>
   </section>
 
 
   <section id="middle">
-    <h1>middle</h1>
-    <canvas id="main-canvas" width="700" height="500"></canvas>
-    <h2>interaction area</h2>
+    <div id="middle-canvas">
+      <h1>canvas</h1>
+      <canvas id="main-canvas" width="700px" height="500px"></canvas>
+      <canvas id="player-canvas" width="700px" height="500px"></canvas>
+    </div>
+    <div id="middle-interaction">
+      <h2>interaction area</h2>
+      <p id="interaction-message">My message</p>
+    </div>
   </section>
   
 
-  <section id="right">
-    <h1>right</h1>
-    
+  <section id="stats">
+    <h1>stats</h1>
+    <div id="money-chart"></div>
+    <div id="player-drunk-level"></div>
+    <div id="bar-inv-chart"></div>
   </section>
-  
+
 </body>
 </html>
