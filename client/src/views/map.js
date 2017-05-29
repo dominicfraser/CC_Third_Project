@@ -39,30 +39,32 @@ var Map = function () {
 
 //testing adding item
 var addItem = function(e){
-  if (e.key = "KeyA"){
+  if (e.key === "a"){
     this.game.addDrinkToPlayer({name: "Amstel", value: 4});
     loadCanvas();
   };
 }.bind(this); 
 
 var placeOrder = function(e){
-  if (e.key = "Key O"){
+console.log(e)
+  if (e.key === "o"){
     this.interactionUI = new InteractionUI(this.player, this.bar);
 
-    interactionArea = document.getElementById('middle');
+    var interactionArea = document.getElementById('middle');
 
-    yesButton = document.createElement('button');
+    var yesButton = document.createElement('button');
     yesButton.innerHTML = "Yes";
 
-    noButton = document.createElement('button');
+    var noButton = document.createElement('button');
     noButton.innerHTML = "No";
 
     interactionArea.appendChild(yesButton);
     interactionArea.appendChild(noButton);
+
+    yesClick = yesButton.addEventListener('click', orderPlaced);
+    noClick = noButton.addEventListener('click', orderNotPlaced);
   };
 
-  yesClick = yesButton.addEventListener('click', orderPlaced);
-  noClick = noButton.addEventListener('click', orderNotPlaced);
 
 }.bind(this);
 
