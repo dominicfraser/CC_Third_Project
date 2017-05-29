@@ -7,7 +7,7 @@ db.player_inventory.insert([
     value: 4
   },
   {
-    name: "Amstel",
+    name: "Peroni",
     value: 4
   },
 ]);
@@ -34,7 +34,7 @@ db.bar_inventory.insert([
     value: 2
   },
   {
-    name: "Sex on the beach",
+    name: "Cocktail",
     value: 9
   },
   {

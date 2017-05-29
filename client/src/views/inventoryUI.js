@@ -19,21 +19,57 @@ var InventoryUI = function(player, bar){
   InventoryUI.prototype = {
 
     renderPlayerItemsCount: function(playerItems){
-      console.log('renderPlayerItemsCount')
-      var select = document.getElementById("player-inventory");
-      select.innerHTML = "";
 
-      // var names = this.getAllNames(playerItems);
-      // var playerItemsFiltered = this.filterToUniqList(names);
+     var tablePicture = document.getElementById("player-inventory-picture")
+
       var playerItemsWithCount = this.addCounts(playerItems)
       var playerItemsFiltered = this.filterToUniqList(playerItemsWithCount)
 
       for (var item of playerItemsFiltered){
-        var option = document.createElement('option');
-        option.innerText = item.name + ' (' + item.count + ')';
-        option.value = item.id;
-        // option.value = JSON.stringify(item);
-        select.appendChild(option);
+        if (item.name === "Peroni"){
+        var td = document.createElement('td')
+        var imagePeroni = document.createElement('img')
+        imagePeroni.src = "https://images-na.ssl-images-amazon.com/images/I/71wvhFzpnrL._SX385_.jpg";
+
+          td.appendChild(imagePeroni);
+          tablePicture.appendChild(td);
+
+          }
+        else if (item.name === "Amstel"){
+        var td = document.createElement('td')
+        var imageAmstel = document.createElement('img')
+        imageAmstel.src = "http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/298x308/9df78eab33525d08d6e5fb8d27136e95/pimages/Amstel330ml.jpg";
+
+          td.appendChild(imageAmstel);
+          tablePicture.appendChild(td);
+
+          } 
+          else if (item.name === "Guinness"){
+          var td = document.createElement('td')
+          var imageGuinness = document.createElement('img')
+          imageGuinness.src = "http://monipag.com/victor-pellegrin/wp-content/uploads/sites/1696/2015/11/draught_pint_l.jpg";
+
+            td.appendChild(imageGuinness);
+            tablePicture.appendChild(td);
+
+          }  
+          else if (item.name === "Apple Juice"){
+          var td = document.createElement('td')
+          var imageAppleJuice = document.createElement('img')
+          imageAppleJuice.src = "http://www.foodsafetynews.com/files/2013/07/applejuice_406.jpg";
+
+            td.appendChild(imageAppleJuice);
+            tablePicture.appendChild(td);
+
+            } 
+          else if (item.name === "Cocktail"){
+          var td = document.createElement('td')
+          var imageCocktail = document.createElement('img')
+          imageCocktail.src = "http://az659704.vo.msecnd.net/v1/image/c_lpad,w_1500,h_1500/v1400600701/cocktail_manhattan-1.png";
+
+            td.appendChild(imageCocktail);
+            tablePicture.appendChild(td);
+        }
       }
     },
 
