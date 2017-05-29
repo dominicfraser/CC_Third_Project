@@ -14,6 +14,8 @@ var Map = function () {
   this.statsUI = new StatsUI(this.player, this.bar);
   this.interactionUI = new InteractionUI(this.player, this.bar);
 
+console.log('inside main map', this)
+
   context = getPlayerCanvasContext();
   mainContext = getMainCanvasContext();
   
@@ -22,7 +24,7 @@ var Map = function () {
   currentPosition = [90,90];
   window.addEventListener('keydown', movePlayer);
 
-  window.addEventListener('keydown', placeOrder);
+  window.addEventListener('keydown', this.placeOrder);
 
   // this.game.addDrinkToPlayer(testItem, function (response) {
   //   console.log('addDrinkToPlayer response data', response)
@@ -49,20 +51,19 @@ var Map = function () {
 };  
 //////////// delete after use
 //END MAIN MAP 
-//testing adding item
-// var addItem = function(e){
-//   if (e.key === "a"){
-//     this.game.addDrinkToPlayer({name: "Amstel", value: 4});
-//     loadCanvas();
-//   };
-// }.bind(this); 
 
-var placeOrder = function(e){
-  if (e.key === "o"){
-    this.interactionUI = new InteractionUI(this.player, this.bar);
-    this.interactionUI.askForDrink();
-  };  
-}.bind(this);
+Map.prototype = {
+
+  placeOrder: function(e){
+    if (e.key === "o"){
+      // this.interactionUI = new InteractionUI(this.player, this.bar);
+      this.interactionUI.askForDrink();
+      console.log('inside place order', this)
+      //can't access this here
+    };  
+  }.bind(this),
+
+};
 
 
 var loadCanvas = function() {

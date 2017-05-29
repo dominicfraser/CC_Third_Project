@@ -19,7 +19,6 @@ var InventoryUI = function(player, bar){
   InventoryUI.prototype = {
 
     renderPlayerItemsCount: function(playerItems){
-      console.log('renderPlayerItemsCount')
       var select = document.getElementById("player-inventory");
       select.innerHTML = "";
 
@@ -54,19 +53,13 @@ var InventoryUI = function(player, bar){
     },
 
     filterToUniqList: function(itemList){
-      console.log('filterToUniqList', itemList)
       var itemNames = itemList.map(function (item) {
         return item.name
       })
 
       var filtered = itemList.filter(function (item, index)  {
-        console.log(item, index)
-        console.log(itemNames.indexOf(item.name) == index)
-
         return itemNames.indexOf(item.name) == index
-      })
-      console.log(filtered)
-      
+      })      
       return filtered
     },
 
