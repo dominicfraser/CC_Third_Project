@@ -207,22 +207,25 @@ var movePlayer = function(e){
     }
   }
   else if(e.key === "ArrowUp"){
-    // if (positionY - 5 >= 90){
-      var hitTopBorder = positionX - 5 <= 0
+    // if (positionY - 5 >= 0){
+      var hitTopBorder = ((positionX - 5) <= 0)
 
-      var hitBottomOfBar = (positionX >= 0) && (positionY - 5 <= 290) || (positionX <= 240) && (positionY - 5 <= 290) 
+      var hitBottomOfBar = (positionX >= 0 && positionX <= 240) && (positionY <= 290 && positionY >= 235)
 
       if (hitTopBorder){
         console.log('can\'t move')
+        return;
       }
       else if (hitBottomOfBar){
         console.log('can\'t move')
+        return;
       }
 
       context.lineTo(positionX, (positionY-5))
       context.stroke()
       currentPosition[1] = positionY-5
       console.log("Up")
+    // }
   }
   else if(e.key === "ArrowDown"){
     if (positionY + 5 <= 500){
