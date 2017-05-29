@@ -34,7 +34,22 @@ var Map = function () {
 //   this.game.addDrinkToPlayer(testItem)
 
   loadCanvas();
+//////////////to test coords
+  var canvas = document.getElementById("player-canvas");
+
+    function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top
+        };
+      }
+      canvas.addEventListener('click', function(evt) {
+        var mousePos = getMousePos(canvas, evt);
+        console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
+      }, false);
 };
+//////////// delete after use
 
 //testing adding item
 var addItem = function(e){
