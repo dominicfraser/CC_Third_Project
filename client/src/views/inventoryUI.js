@@ -9,6 +9,7 @@ var InventoryUI = function(player, bar){
   modelsContainer.allPlayerItems(function(playerItems){
     this.renderPlayerItemsCount(playerItems);
   }.bind(this));
+  
   modelsContainer.allPlayerItems(function(playerItems){
     this.renderPlayerItemsCountDropdown(playerItems);
   }.bind(this));
@@ -44,7 +45,7 @@ var InventoryUI = function(player, bar){
         },
 
     renderPlayerItemsCount: function(playerItems){
-
+      
      var tablePicture = document.getElementById("player-inventory-picture")
 
       var playerItemsWithCount = this.addCounts(playerItems)
@@ -170,19 +171,13 @@ var InventoryUI = function(player, bar){
     },
 
     filterToUniqList: function(itemList){
-      console.log('filterToUniqList', itemList)
       var itemNames = itemList.map(function (item) {
         return item.name
       })
 
       var filtered = itemList.filter(function (item, index)  {
-        console.log(item, index)
-        console.log(itemNames.indexOf(item.name) == index)
-
         return itemNames.indexOf(item.name) == index
-      })
-      console.log(filtered)
-      
+      })      
       return filtered
     },
 
@@ -190,15 +185,17 @@ var InventoryUI = function(player, bar){
       var select = document.getElementById("bar-inventory-dropdown");
       select.innerHTML = "";
 
-      var names = this.getAllNames(barItems);
-      var barItemsFiltered = this.filterToUniqList(names);
+      var barItemsWithCount = this.addCounts(barItems)
+      var barItemsFiltered = this.filterToUniqList(barItemsWithCount)
 
       for (var item of barItemsFiltered){
         var option = document.createElement("option");
-        option.innerText = item;
+        option.innerText = item.name + ' (' + item.count + ')';
+        option.value = item.id;
         select.appendChild(option);
       }
     },
   };
+
 
   module.exports = InventoryUI;

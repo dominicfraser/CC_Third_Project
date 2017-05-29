@@ -18,7 +18,18 @@ var BarInventoryChart = function (barInventory){
     }
     ],
     xAxis: {
-      categories: ["£"]
+      categories: [""]
+    },
+    yAxis: {
+      title: {
+        text: "Bar Drinks Remaining"
+      }
+    },
+    legend: {
+      enabled: false
+    },
+    credits: {
+      enabled: false
     }
   });
 

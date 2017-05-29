@@ -12,24 +12,21 @@ var Map = function () {
   this.game = new Game(this.player, this.bar);
   this.inventoryUI = new InventoryUI(this.player, this.bar);
   this.statsUI = new StatsUI(this.player, this.bar);
+  this.interactionUI = new InteractionUI(this.player, this.bar);
+
+console.log('inside main map', this)
 
   context = getPlayerCanvasContext();
   mainContext = getMainCanvasContext();
   
   context.beginPath();
-  context.moveTo(90,90);
-  currentPosition = [90,90];
+  context.moveTo(0,0);
+  currentPosition = [0,0];
   window.addEventListener('keydown', movePlayer);
 
-  window.addEventListener('keydown', placeOrder);
+  window.addEventListener('keydown', this.placeOrder);
 
-  // testing adding item
-  // window.addEventListener('keydown', addItem);
-  var testItem = new Item({name: "Amstel", value: 4})
 
-  // this.game.addDrinkToPlayer(testItem, function (response) {
-  //   console.log('addDrinkToPlayer response data', response)
-  // })
   // this.game.removeDrinkFromPlayer(testItem, function (response) {
   //   console.log('removeDrinkFromPlayer response data', response)
   // })
@@ -49,48 +46,24 @@ var Map = function () {
         var mousePos = getMousePos(canvas, evt);
         console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
       }, false);
-};
+};  
 //////////// delete after use
+//END MAIN MAP 
 
-//testing adding item
-var addItem = function(e){
-  if (e.key === "a"){
-    this.game.addDrinkToPlayer({name: "Amstel", value: 4});
-    loadCanvas();
-  };
-}.bind(this); 
+Map.prototype = {
 
-var placeOrder = function(e){
-console.log(e)
-  if (e.key === "o"){
-    this.interactionUI = new InteractionUI(this.player, this.bar);
+  placeOrder: function(e){
+    if (e.key === "o"){
+      this.interactionUI = new InteractionUI(this.player, this.bar);
+      this.interactionUI.askForDrink();
+      console.log('inside place order IF', this)
+      //can't access this here
+    };  
+      console.log('inside place order', this)
 
-    var interactionArea = document.getElementById('middle');
+  }.bind(this),
 
-    var yesButton = document.createElement('button');
-    yesButton.innerHTML = "Yes";
-
-    var noButton = document.createElement('button');
-    noButton.innerHTML = "No";
-
-    interactionArea.appendChild(yesButton);
-    interactionArea.appendChild(noButton);
-
-    yesClick = yesButton.addEventListener('click', orderPlaced);
-    noClick = noButton.addEventListener('click', orderNotPlaced);
-  };
-
-
-}.bind(this);
-
-var orderPlaced = function () {
-  //DO SOON
-}
-
-var orderNotPlaced = function () {
-  messageDisplay = document.getElementById("interaction-message");
-  messageDisplay.innerHTML = "What a loser...";
-}
+};
 
 
 var loadCanvas = function() {
@@ -179,21 +152,17 @@ var getPlayerCanvasContext = function(){
 
 
 var movePlayer = function(e){
-  var context  = getMainCanvasContext();
+  var context  = getPlayerCanvasContext();
   var positionX = currentPosition[0];
   var positionY = currentPosition[1];
 
   if (e.key === "ArrowRight"){
-    // positionX += 5
 
     var hitRightBorder = positionX + 5 >= 710
 
     var hitLeftEdgeOfSquare = (positionX + 5 >= 180) && (positionY <= 180) || (positionX + 5 >= 180) && (positionY <= 360) 
 
     if (hitRightBorder){
-      console.log('can\'t move')
-    }
-    else if(hitLeftEdgeOfSquare){
       console.log('can\'t move')
     }
     else {
@@ -204,41 +173,53 @@ var movePlayer = function(e){
     }
   }
   else if(e.key === "ArrowLeft"){
-    if (positionX - 5 >= 90){
+    // if (positionX - 5 >= 0){
+      var hitLeftBorder = ((positionY - 5) <= 0)
+
+      var hitRightSideOfBar = (positionY <= 290 && positionY >= 0) && (positionX <= 240 && positionX >= 240)
+
+      if (hitLeftBorder){
+        return;
+      }
+      else if (hitRightSideOfBar){
+        return;
+      }
       context.lineTo((positionX-5), positionY)
       context.stroke()
       currentPosition[0] = positionX-5
       console.log("Left")
     }
-  }
+  
   else if(e.key === "ArrowUp"){
-    // if (positionY - 5 >= 90){
-      var hitTopBorder = positionX - 5 <= 0
+    // if (positionY - 5 >= 0){
+      var hitTopBorder = ((positionX - 5) <= 0)
 
-      var hitBottomOfBar = (positionX <= 0) && (positionY - 5 <= 294) || (positionX <= 240) && (positionY - 5 <= 294) 
+      var hitBottomOfBar = (positionX >= 0 && positionX <= 240) && (positionY <= 290 && positionY >= 235)
 
       if (hitTopBorder){
         console.log('can\'t move')
+        return;
       }
       else if (hitBottomOfBar){
         console.log('can\'t move')
+        return;
       }
 
       context.lineTo(positionX, (positionY-5))
       context.stroke()
       currentPosition[1] = positionY-5
       console.log("Up")
+
+  }
+  else if(e.key === "ArrowDown"){
+    if (positionY + 5 <= 500){
+      context.lineTo(positionX, (positionY+5))
+      context.stroke()
+      currentPosition[1] = positionY+5
+      console.log("Down")
     }
+  } 
 
-
-      else if(e.key === "ArrowDown"){
-        if (positionY + 5 <= 610){
-          context.lineTo(positionX, (positionY+5))
-          context.stroke()
-          currentPosition[1] = positionY+5
-          console.log("Down")
-        }
-      } 
   else { return; };
 
 };
