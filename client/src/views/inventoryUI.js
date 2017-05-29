@@ -17,13 +17,17 @@ var InventoryUI = function(player, bar){
     this.renderBarItemsCount(barItems);
   }.bind(this));
 
+  modelsContainer.allBarItems(function(barItems){
+    this.renderBarItemsCountDropdown(barItems);
+  }.bind(this));
+
   };
 
   InventoryUI.prototype = {
 
     renderPlayerItemsCountDropdown: function(playerItems){
           var select = document.getElementById("player-inventory-dropdown");
-          select.innerHTML = "Choose a drink to drink";
+          select.innerHTML = "";
 
           // var names = this.getAllNames(playerItems);
           // var playerItemsFiltered = this.filterToUniqList(names);
@@ -86,12 +90,67 @@ var InventoryUI = function(player, bar){
           else if (item.name === "Cocktail"){
           var td = document.createElement('td')
           var imageCocktailButton = document.createElement('button')
-          imageCocktailButton.innerHTML = "<img src =http://az659704.vo.msecnd.net/v1/image/c_lpad,w_1500,h_1500/v1400600701/cocktail_manhattan-1.png";
+          imageCocktailButton.innerHTML = "<img src =http://az659704.vo.msecnd.net/v1/image/c_lpad,w_1500,h_1500/v1400600701/cocktail_manhattan-1.png>";
 
-            td.appendChild(imageCocktail);
+            td.appendChild(imageCocktailButton);
             tablePicture.appendChild(td);
         }
       }
+    },
+
+    renderBarItemsCount: function(barItems){
+
+     var tablePicture = document.getElementById("bar-inventory-picture")
+
+      var barItems = this.getAllNames(barItems);
+      var barItemsFiltered = this.filterToUniqList(barItems);
+
+      for (var item of barItemsFiltered){
+        if (item.name === "Peroni"){
+        var td = document.createElement('td')
+        var imagePeroniButton = document.createElement('button')
+        imagePeroniButton.innerHTML = "<img src = https://images-na.ssl-images-amazon.com/images/I/71wvhFzpnrL._SX385_.jpg>"
+
+          td.appendChild(imagePeroniButton);
+          tablePicture.appendChild(td);
+
+        }
+        else if (item.name === "Amstel"){
+        var td = document.createElement('td')
+        var imageAmstelButton = document.createElement('button')
+        imageAmstelButton.innerHTML = "<img src = http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/298x308/9df78eab33525d08d6e5fb8d27136e95/pimages/Amstel330ml.jpg>";
+
+          td.appendChild(imageAmstelButton);
+          tablePicture.appendChild(td);
+
+          } 
+          else if (item.name === "Guinness"){
+          var td = document.createElement('td')
+          var imageGuinnessButton = document.createElement('button')
+          imageGuinnessButton.innerHTML = "<img src = http://3.bp.blogspot.com/-DOthabqw9gQ/UtG_OpxcyFI/AAAAAAAAAEQ/yVjnr0-nO58/s1600/Guinness+single+glass.jpg>";
+
+            td.appendChild(imageGuinnessButton);
+            tablePicture.appendChild(td);
+
+          }  
+          else if (item.name === "Apple Juice"){
+          var td = document.createElement('td')
+          var imageAppleJuiceButton = document.createElement('button')
+          imageAppleJuiceButton.innerHTML = "<img src = http://www.foodsafetynews.com/files/2013/07/applejuice_406.jpg>";
+
+            td.appendChild(imageAppleJuiceButton);
+            tablePicture.appendChild(td);
+
+            } 
+          else if (item.name === "Cocktail"){
+          var td = document.createElement('td')
+          var imageCocktailButton = document.createElement('button')
+          imageCocktailButton.innerHTML = "<img src =http://az659704.vo.msecnd.net/v1/image/c_lpad,w_1500,h_1500/v1400600701/cocktail_manhattan-1.png>";
+
+            td.appendChild(imageCocktailButton);
+            tablePicture.appendChild(td);
+      }
+    } 
     },
 
     addCounts: function (items) {
@@ -127,8 +186,8 @@ var InventoryUI = function(player, bar){
       return filtered
     },
 
-    renderBarItemsCount: function(barItems){
-      var select = document.getElementById("bar-inventory");
+    renderBarItemsCountDropdown: function(barItems){
+      var select = document.getElementById("bar-inventory-dropdown");
       select.innerHTML = "";
 
       var names = this.getAllNames(barItems);

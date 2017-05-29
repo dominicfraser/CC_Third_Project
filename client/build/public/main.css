@@ -40,6 +40,10 @@ section {
   font-family: 'Bungee Inline', serif;
 }
 
+#interaction-message{
+  font-family: 'Quantico', serif;
+}
+
 #middle-canvas {
   height: 78%;
   border: 1px solid blue;
@@ -65,10 +69,18 @@ table {
   border: 1px solid black;
 }
 
+
 #player-inventory-picture td img {
-    height: 50px;
-    width: 50px;
+    height: auto;
+    width: auto;
 }
+
+td button img {
+    width: auto;
+    height: auto;
+}
+
+
 
 
   
