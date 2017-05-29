@@ -1,6 +1,20 @@
  <!DOCTYPE html>
 <html>
 <head>
+<script>
+function initCanvas(){
+  var ctx = document.getElementById('player-canvas').getContext('2d');
+  ctx.canvas.addEventListener('mousemove', function(event){
+    var mouseX = event.clientX - ctx.canvas.offsetLeft;
+    var mouseY = event.clientY - ctx.canvas.offsetTop;
+    var status = document.getElementById('status');
+    status.innerHTML = mouseX+" | "+mouseY;
+  });
+}
+window.addEventListener('load', function(event){
+  initCanvas();
+})
+  </script>
   <title>Chanter</title>
   <script src="bundle.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Quantico|Raleway" rel="stylesheet">
@@ -17,7 +31,7 @@
 
 
   <section id="middle">
-    <h1>canvas</h1>
+    <h1 id="status">0 | 0</h1>
     <canvas id="main-canvas" width="700" height="500"></canvas>
     <canvas id="player-canvas" width="700" height="500"></canvas>
     <h2>interaction area</h2>
