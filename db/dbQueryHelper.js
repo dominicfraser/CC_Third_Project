@@ -17,8 +17,7 @@ DbQueryHelper.prototype = {
                 })
             }
       })
-  },
-          
+  },          
   allPlayerItems: function(onQueryFinishedCallback){
     MongoClient.connect(this.url, function(err, db){
       if (db){
@@ -29,7 +28,6 @@ DbQueryHelper.prototype = {
       }
     })
   },
-
   removePlayerItem: function(id, onQueryFinishedCallback){
     MongoClient.connect(this.url, function(err, db){
       var mongoIdObject = ObjectID(id);
@@ -56,7 +54,6 @@ DbQueryHelper.prototype = {
               }
             })
           },
-
   allBarItems: function(onQueryFinishedCallback){
     MongoClient.connect(this.url, function(err, db){
       if (db){
@@ -67,8 +64,20 @@ DbQueryHelper.prototype = {
       }
     })
   },
+  removeBarItem: function(id, onQueryFinishedCallback){
+    MongoClient.connect(this.url, function(err, db){
+      var mongoIdObject = ObjectID(id);
+      if (db){
+        var collection = db.collection("bar_inventory");
+        collection.remove({_id: mongoIdObject}, {justOne: true});
+        collection.find().toArray(function(err, docs){
+          onQueryFinishedCallback(docs);
+        })
+      }
+    })
+  },
 
-}
+};
 
 
 module.exports = DbQueryHelper;

@@ -1,6 +1,7 @@
 var Game = require('./game.js');
 var InventoryUI = require('./inventoryUI.js');
 var StatsUI = require('./statsUI.js');
+var InteractionUI = require('./interactionUI.js');
 var Player = require('../models/player_model.js');
 var Bar = require('../models/bar_model.js');
 var Item = require('../models/item_model.js');
@@ -20,6 +21,8 @@ var Map = function () {
   currentPosition = [90,90];
   window.addEventListener('keydown', movePlayer);
 
+  window.addEventListener('keydown', placeOrder);
+
   // testing adding item
   // window.addEventListener('keydown', addItem);
   var testItem = new Item({name: "Amstel", value: 4})
@@ -32,16 +35,62 @@ var Map = function () {
   // })
 
   loadCanvas();
+//////////////to test coords
+  var canvas = document.getElementById("player-canvas");
+
+    function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top
+        };
+      }
+      canvas.addEventListener('click', function(evt) {
+        var mousePos = getMousePos(canvas, evt);
+        console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
+      }, false);
 };
+//////////// delete after use
 
 //testing adding item
 var addItem = function(e){
-  if (e.key = "KeyA"){
+  if (e.key === "a"){
     this.game.addDrinkToPlayer({name: "Amstel", value: 4});
     loadCanvas();
   };
 }.bind(this); 
 
+var placeOrder = function(e){
+console.log(e)
+  if (e.key === "o"){
+    this.interactionUI = new InteractionUI(this.player, this.bar);
+
+    var interactionArea = document.getElementById('middle');
+
+    var yesButton = document.createElement('button');
+    yesButton.innerHTML = "Yes";
+
+    var noButton = document.createElement('button');
+    noButton.innerHTML = "No";
+
+    interactionArea.appendChild(yesButton);
+    interactionArea.appendChild(noButton);
+
+    yesClick = yesButton.addEventListener('click', orderPlaced);
+    noClick = noButton.addEventListener('click', orderNotPlaced);
+  };
+
+
+}.bind(this);
+
+var orderPlaced = function () {
+  //DO SOON
+}
+
+var orderNotPlaced = function () {
+  messageDisplay = document.getElementById("interaction-message");
+  messageDisplay.innerHTML = "What a loser...";
+}
 
 
 var loadCanvas = function() {
@@ -110,15 +159,6 @@ var loadCanvas = function() {
   guy.onload = function() {
     context.drawImage(this, 100, -30, 700, 500);
   };
-
-  // backdrop.onload = function() {
-  //   context.drawImage(this, 0, 0, 700, 500);
-  //   console.log(tableSet);
-  //   tableSet.onload = function() {
-  //     context.drawImage(this, -200, 110, 700, 500);
-  //   }; 
-  //   // drawMap();
-  // };
 };
 
   // drawMap = function() {
@@ -139,7 +179,7 @@ var getPlayerCanvasContext = function(){
 
 
 var movePlayer = function(e){
-  var context  = getCanvasContext();
+  var context  = getMainCanvasContext();
   var positionX = currentPosition[0];
   var positionY = currentPosition[1];
 
@@ -172,7 +212,18 @@ var movePlayer = function(e){
     }
   }
   else if(e.key === "ArrowUp"){
-    if (positionY - 5 >= 90){
+    // if (positionY - 5 >= 90){
+      var hitTopBorder = positionX - 5 <= 0
+
+      var hitBottomOfBar = (positionX <= 0) && (positionY - 5 <= 294) || (positionX <= 240) && (positionY - 5 <= 294) 
+
+      if (hitTopBorder){
+        console.log('can\'t move')
+      }
+      else if (hitBottomOfBar){
+        console.log('can\'t move')
+      }
+
       context.lineTo(positionX, (positionY-5))
       context.stroke()
       currentPosition[1] = positionY-5
