@@ -10,9 +10,9 @@ var InventoryUI = function(player, bar){
     this.renderPlayerItemsCount(playerItems);
   }.bind(this));
 
-  // modelsContainer.allBarItems(function(barItems){
-  //   this.renderBarItemsCount(barItems);
-  // }.bind(this));
+  modelsContainer.allBarItems(function(barItems){
+    this.renderBarItemsCount(barItems);
+  }.bind(this));
 
   };
 
@@ -22,8 +22,6 @@ var InventoryUI = function(player, bar){
       var select = document.getElementById("player-inventory");
       select.innerHTML = "";
 
-      // var names = this.getAllNames(playerItems);
-      // var playerItemsFiltered = this.filterToUniqList(names);
       var playerItemsWithCount = this.addCounts(playerItems)
       var playerItemsFiltered = this.filterToUniqList(playerItemsWithCount)
 
@@ -65,20 +63,21 @@ var InventoryUI = function(player, bar){
 
 
 
-
     renderBarItemsCount: function(barItems){
       var select = document.getElementById("bar-inventory");
       select.innerHTML = "";
 
-      var names = this.getAllNames(barItems);
-      var barItemsFiltered = this.filterToUniqList(names);
+      var barItemsWithCount = this.addCounts(barItems)
+      var barItemsFiltered = this.filterToUniqList(barItemsWithCount)
 
       for (var item of barItemsFiltered){
         var option = document.createElement("option");
-        option.innerText = item;
+        option.innerText = item.name + ' (' + item.count + ')';
+        option.value = item.id;
         select.appendChild(option);
       }
     },
   };
+
 
   module.exports = InventoryUI;
