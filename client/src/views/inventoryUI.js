@@ -13,9 +13,9 @@ var InventoryUI = function(player, bar){
     this.renderPlayerItemsCountDropdown(playerItems);
   }.bind(this));
 
-  // modelsContainer.allBarItems(function(barItems){
-  //   this.renderBarItemsCount(barItems);
-  // }.bind(this));
+  modelsContainer.allBarItems(function(barItems){
+    this.renderBarItemsCount(barItems);
+  }.bind(this));
 
   };
 
@@ -50,8 +50,7 @@ var InventoryUI = function(player, bar){
         if (item.name === "Peroni"){
         var td = document.createElement('td')
         var imagePeroniButton = document.createElement('button')
-        imagePeroniButton.innerHTML = "<img src = https://images-na.ssl-images-amazon.com/images/I/71wvhFzpnrL._SX385_.jpg"
-
+        imagePeroniButton.innerHTML = "<img src = https://images-na.ssl-images-amazon.com/images/I/71wvhFzpnrL._SX385_.jpg>"
 
           td.appendChild(imagePeroniButton);
           tablePicture.appendChild(td);
@@ -59,35 +58,35 @@ var InventoryUI = function(player, bar){
           }
         else if (item.name === "Amstel"){
         var td = document.createElement('td')
-        var imageAmstel = document.createElement('img')
-        imageAmstel.src = "http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/298x308/9df78eab33525d08d6e5fb8d27136e95/pimages/Amstel330ml.jpg";
+        var imageAmstelButton = document.createElement('button')
+        imageAmstelButton.innerHTML = "<img src = http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/298x308/9df78eab33525d08d6e5fb8d27136e95/pimages/Amstel330ml.jpg>";
 
-          td.appendChild(imageAmstel);
+          td.appendChild(imageAmstelButton);
           tablePicture.appendChild(td);
 
           } 
           else if (item.name === "Guinness"){
           var td = document.createElement('td')
-          var imageGuinness = document.createElement('img')
-          imageGuinness.src = "http://3.bp.blogspot.com/-DOthabqw9gQ/UtG_OpxcyFI/AAAAAAAAAEQ/yVjnr0-nO58/s1600/Guinness+single+glass.jpg";
+          var imageGuinnessButton = document.createElement('button')
+          imageGuinnessButton.innerHTML = "<img src = http://3.bp.blogspot.com/-DOthabqw9gQ/UtG_OpxcyFI/AAAAAAAAAEQ/yVjnr0-nO58/s1600/Guinness+single+glass.jpg>";
 
-            td.appendChild(imageGuinness);
+            td.appendChild(imageGuinnessButton);
             tablePicture.appendChild(td);
 
           }  
           else if (item.name === "Apple Juice"){
           var td = document.createElement('td')
-          var imageAppleJuice = document.createElement('img')
-          imageAppleJuice.src = "http://www.foodsafetynews.com/files/2013/07/applejuice_406.jpg";
+          var imageAppleJuiceButton = document.createElement('button')
+          imageAppleJuiceButton.innerHTML = "<img src = http://www.foodsafetynews.com/files/2013/07/applejuice_406.jpg>";
 
-            td.appendChild(imageAppleJuice);
+            td.appendChild(imageAppleJuiceButton);
             tablePicture.appendChild(td);
 
             } 
           else if (item.name === "Cocktail"){
           var td = document.createElement('td')
-          var imageCocktail = document.createElement('img')
-          imageCocktail.src = "http://az659704.vo.msecnd.net/v1/image/c_lpad,w_1500,h_1500/v1400600701/cocktail_manhattan-1.png";
+          var imageCocktailButton = document.createElement('button')
+          imageCocktailButton.innerHTML = "<img src =http://az659704.vo.msecnd.net/v1/image/c_lpad,w_1500,h_1500/v1400600701/cocktail_manhattan-1.png";
 
             td.appendChild(imageCocktail);
             tablePicture.appendChild(td);
@@ -126,21 +125,6 @@ var InventoryUI = function(player, bar){
       console.log(filtered)
       
       return filtered
-    },
-
-
-    renderBarItemsCount: function(barItems){
-      var select = document.getElementById("bar-inventory");
-      select.innerHTML = "";
-
-      var names = this.getAllNames(barItems);
-      var barItemsFiltered = this.filterToUniqList(names);
-
-      for (var item of barItemsFiltered){
-        var option = document.createElement("option");
-        option.innerText = item;
-        select.appendChild(option);
-      }
     },
 
     renderBarItemsCount: function(barItems){
