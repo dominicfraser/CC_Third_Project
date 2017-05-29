@@ -6,7 +6,6 @@ var Game = function (player, bar) {
 
   this.modelsContainer = new ModelsContainer;
 
-
 };
 
 Game.prototype = {
@@ -14,9 +13,15 @@ Game.prototype = {
   addDrinkToPlayer: function(drink, callback){
     this.modelsContainer.addPlayerItem(drink, callback);
   },
-
   removeDrinkFromPlayer: function(drink, callback){
     this.modelsContainer.removePlayerItem(drink, callback);
+  },
+
+  addDrinkToBar: function(drink, callback){
+    this.modelsContainer.addBarItem(drink, callback);
+  },
+  removeDrinkFromBar: function(drink, callback){
+    this.modelsContainer.removeBarItem(drink, callback);
   },
 
 };
