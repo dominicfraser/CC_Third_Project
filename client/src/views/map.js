@@ -12,6 +12,7 @@ var Map = function () {
   this.game = new Game(this.player, this.bar);
   this.inventoryUI = new InventoryUI(this.player, this.bar);
   this.statsUI = new StatsUI(this.player, this.bar);
+  this.interactionUI = new InteractionUI(this.player, this.bar);
 
   context = getPlayerCanvasContext();
   mainContext = getMainCanvasContext();
@@ -22,10 +23,6 @@ var Map = function () {
   window.addEventListener('keydown', movePlayer);
 
   window.addEventListener('keydown', placeOrder);
-
-  // testing adding item
-  // window.addEventListener('keydown', addItem);
-  var testItem = new Item({name: "Amstel", value: 4})
 
   // this.game.addDrinkToPlayer(testItem, function (response) {
   //   console.log('addDrinkToPlayer response data', response)
@@ -49,48 +46,23 @@ var Map = function () {
         var mousePos = getMousePos(canvas, evt);
         console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
       }, false);
-};
+};  
 //////////// delete after use
-
+//END MAIN MAP 
 //testing adding item
-var addItem = function(e){
-  if (e.key === "a"){
-    this.game.addDrinkToPlayer({name: "Amstel", value: 4});
-    loadCanvas();
-  };
-}.bind(this); 
+// var addItem = function(e){
+//   if (e.key === "a"){
+//     this.game.addDrinkToPlayer({name: "Amstel", value: 4});
+//     loadCanvas();
+//   };
+// }.bind(this); 
 
 var placeOrder = function(e){
-console.log(e)
   if (e.key === "o"){
     this.interactionUI = new InteractionUI(this.player, this.bar);
-
-    var interactionArea = document.getElementById('middle');
-
-    var yesButton = document.createElement('button');
-    yesButton.innerHTML = "Yes";
-
-    var noButton = document.createElement('button');
-    noButton.innerHTML = "No";
-
-    interactionArea.appendChild(yesButton);
-    interactionArea.appendChild(noButton);
-
-    yesClick = yesButton.addEventListener('click', orderPlaced);
-    noClick = noButton.addEventListener('click', orderNotPlaced);
-  };
-
-
+    this.interactionUI.askForDrink();
+  };  
 }.bind(this);
-
-var orderPlaced = function () {
-  //DO SOON
-}
-
-var orderNotPlaced = function () {
-  messageDisplay = document.getElementById("interaction-message");
-  messageDisplay.innerHTML = "What a loser...";
-}
 
 
 var loadCanvas = function() {
@@ -184,8 +156,6 @@ var movePlayer = function(e){
   var positionY = currentPosition[1];
 
   if (e.key === "ArrowRight"){
-    // positionX += 5
-
     var hitRightBorder = positionX + 5 >= 710
 
     var hitLeftEdgeOfSquare = (positionX + 5 >= 180) && (positionY <= 180) || (positionX + 5 >= 180) && (positionY <= 360) 
