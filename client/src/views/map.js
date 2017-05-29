@@ -199,13 +199,23 @@ var movePlayer = function(e){
     }
   }
   else if(e.key === "ArrowLeft"){
-    if (positionX - 5 >= 0){
+    // if (positionX - 5 >= 0){
+      var hitLeftBorder = ((positionY - 5) <= 0)
+
+      var hitRightSideOfBar = (positionY <= 290 && positionY >= 0) && (positionX <= 240 && positionX >= 240)
+
+      if (hitLeftBorder){
+        return;
+      }
+      else if (hitRightSideOfBar){
+        return;
+      }
       context.lineTo((positionX-5), positionY)
       context.stroke()
       currentPosition[0] = positionX-5
       console.log("Left")
     }
-  }
+  
   else if(e.key === "ArrowUp"){
     // if (positionY - 5 >= 0){
       var hitTopBorder = ((positionX - 5) <= 0)
