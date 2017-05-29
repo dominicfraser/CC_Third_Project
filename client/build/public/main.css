@@ -4,7 +4,7 @@ body {
 }
 
 canvas { 
-  /*position: absolute;*/
+  position: absolute;
   border: 1px solid black;
   display: inline-block;
   margin-left: 26px;
@@ -64,5 +64,11 @@ section {
 table {
   border: 1px solid black;
 }
+
+#player-inventory-picture td img {
+    height: 50px;
+    width: 50px;
+}
+
 
   

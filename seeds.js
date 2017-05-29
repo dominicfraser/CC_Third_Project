@@ -8,7 +8,15 @@ db.player_inventory.insert([
   },
   {
     name: "Peroni",
-    value: 4
+    value: 6
+  },
+  {
+    name: "Guinness",
+    value: 3
+  },
+  {
+    name: "Cocktail",
+    value: 9
   },
 ]);
 

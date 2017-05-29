@@ -9,6 +9,9 @@ var InventoryUI = function(player, bar){
   modelsContainer.allPlayerItems(function(playerItems){
     this.renderPlayerItemsCount(playerItems);
   }.bind(this));
+  modelsContainer.allPlayerItems(function(playerItems){
+    this.renderPlayerItemsCountDropdown(playerItems);
+  }.bind(this));
 
   // modelsContainer.allBarItems(function(barItems){
   //   this.renderBarItemsCount(barItems);
@@ -17,6 +20,24 @@ var InventoryUI = function(player, bar){
   };
 
   InventoryUI.prototype = {
+
+    renderPlayerItemsCountDropdown: function(playerItems){
+          var select = document.getElementById("player-inventory-dropdown");
+          select.innerHTML = "Choose a drink to drink";
+
+          // var names = this.getAllNames(playerItems);
+          // var playerItemsFiltered = this.filterToUniqList(names);
+          var playerItemsWithCount = this.addCounts(playerItems)
+          var playerItemsFiltered = this.filterToUniqList(playerItemsWithCount)
+
+          for (var item of playerItemsFiltered){
+            var option = document.createElement('option');
+            option.innerText = item.name + ' (' + item.count + ')';
+            option.value = item.id;
+            // option.value = JSON.stringify(item);
+            select.appendChild(option);
+          }
+        },
 
     renderPlayerItemsCount: function(playerItems){
 
@@ -28,10 +49,11 @@ var InventoryUI = function(player, bar){
       for (var item of playerItemsFiltered){
         if (item.name === "Peroni"){
         var td = document.createElement('td')
-        var imagePeroni = document.createElement('img')
-        imagePeroni.src = "https://images-na.ssl-images-amazon.com/images/I/71wvhFzpnrL._SX385_.jpg";
+        var imagePeroniButton = document.createElement('button')
+        imagePeroniButton.innerHTML = "<img src = https://images-na.ssl-images-amazon.com/images/I/71wvhFzpnrL._SX385_.jpg"
 
-          td.appendChild(imagePeroni);
+
+          td.appendChild(imagePeroniButton);
           tablePicture.appendChild(td);
 
           }
@@ -47,7 +69,7 @@ var InventoryUI = function(player, bar){
           else if (item.name === "Guinness"){
           var td = document.createElement('td')
           var imageGuinness = document.createElement('img')
-          imageGuinness.src = "http://monipag.com/victor-pellegrin/wp-content/uploads/sites/1696/2015/11/draught_pint_l.jpg";
+          imageGuinness.src = "http://3.bp.blogspot.com/-DOthabqw9gQ/UtG_OpxcyFI/AAAAAAAAAEQ/yVjnr0-nO58/s1600/Guinness+single+glass.jpg";
 
             td.appendChild(imageGuinness);
             tablePicture.appendChild(td);
@@ -107,7 +129,19 @@ var InventoryUI = function(player, bar){
     },
 
 
+    renderBarItemsCount: function(barItems){
+      var select = document.getElementById("bar-inventory");
+      select.innerHTML = "";
 
+      var names = this.getAllNames(barItems);
+      var barItemsFiltered = this.filterToUniqList(names);
+
+      for (var item of barItemsFiltered){
+        var option = document.createElement("option");
+        option.innerText = item;
+        select.appendChild(option);
+      }
+    },
 
     renderBarItemsCount: function(barItems){
       var select = document.getElementById("bar-inventory");
