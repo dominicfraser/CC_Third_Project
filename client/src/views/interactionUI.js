@@ -52,6 +52,8 @@ InteractionUI.prototype = {
 
 };
 
-
+// this.game.removeDrinkFromPlayer(testItem, function (response) {
+//   console.log('removeDrinkFromPlayer response data', response)
+// })
 
 module.exports = InteractionUI;

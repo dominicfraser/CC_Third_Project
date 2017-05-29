@@ -26,11 +26,6 @@ console.log('inside main map', this)
 
   window.addEventListener('keydown', this.placeOrder);
 
-
-  // this.game.removeDrinkFromPlayer(testItem, function (response) {
-  //   console.log('removeDrinkFromPlayer response data', response)
-  // })
-
   loadCanvas();
 //////////////to test coords
   var canvas = document.getElementById("player-canvas");

@@ -71,8 +71,8 @@ table {
 
 
 #player-inventory-picture td img {
-    height: auto;
-    width: auto;
+    height: 30px;
+    width: 30px;
 }
 
 td button img {
