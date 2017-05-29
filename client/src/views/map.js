@@ -1,6 +1,7 @@
 var Game = require('./game.js');
 var InventoryUI = require('./inventoryUI.js');
 var StatsUI = require('./statsUI.js');
+var InteractionUI = require('./interactionUI.js');
 var Player = require('../models/player_model.js');
 var Bar = require('../models/bar_model.js');
 var Item = require('../models/item_model.js');
@@ -19,6 +20,8 @@ var Map = function () {
   context.moveTo(90,90);
   currentPosition = [90,90];
   window.addEventListener('keydown', movePlayer);
+
+  window.addEventListener('keydown', placeOrder);
 
   // testing adding item
   // window.addEventListener('keydown', addItem);
@@ -42,6 +45,35 @@ var addItem = function(e){
   };
 }.bind(this); 
 
+var placeOrder = function(e){
+  if (e.key = "Key O"){
+    this.interactionUI = new InteractionUI(this.player, this.bar);
+
+    interactionArea = document.getElementById('middle');
+
+    yesButton = document.createElement('button');
+    yesButton.innerHTML = "Yes";
+
+    noButton = document.createElement('button');
+    noButton.innerHTML = "No";
+
+    interactionArea.appendChild(yesButton);
+    interactionArea.appendChild(noButton);
+  };
+
+  yesClick = yesButton.addEventListener('click', orderPlaced);
+  noClick = noButton.addEventListener('click', orderNotPlaced);
+
+}.bind(this);
+
+var orderPlaced = function () {
+  //DO SOON
+}
+
+var orderNotPlaced = function () {
+  messageDisplay = document.getElementById("interaction-message");
+  messageDisplay.innerHTML = "What a loser...";
+}
 
 
 var loadCanvas = function() {
@@ -110,15 +142,6 @@ var loadCanvas = function() {
   guy.onload = function() {
     context.drawImage(this, 100, -30, 700, 500);
   };
-
-  // backdrop.onload = function() {
-  //   context.drawImage(this, 0, 0, 700, 500);
-  //   console.log(tableSet);
-  //   tableSet.onload = function() {
-  //     context.drawImage(this, -200, 110, 700, 500);
-  //   }; 
-  //   // drawMap();
-  // };
 };
 
   // drawMap = function() {
@@ -139,7 +162,7 @@ var getPlayerCanvasContext = function(){
 
 
 var movePlayer = function(e){
-  var context  = getCanvasContext();
+  var context  = getMainCanvasContext();
   var positionX = currentPosition[0];
   var positionY = currentPosition[1];
 

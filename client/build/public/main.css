@@ -4,10 +4,10 @@ body {
 }
 
 canvas { 
-  position: absolute;
+  /*position: absolute;*/
   border: 1px solid black;
+  display: inline;
 }
-  
 
 #main-canvas {
   z-index: 1;
@@ -39,11 +39,5 @@ canvas {
   width: 12%;
   height: 100%;
   font-family: 'Quantico', serif;
-}
-
-canvas { 
-  position: absolute;
-  border: 1px solid black;
-  display: inline;
 }
   
