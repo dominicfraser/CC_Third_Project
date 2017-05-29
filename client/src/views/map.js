@@ -25,12 +25,17 @@ var Map = function () {
   currentPosition = [90,90];
   window.addEventListener('keydown', movePlayer);
 
-  //testing adding item
+  // testing adding item
   // window.addEventListener('keydown', addItem);
-// console.log(this.game)
-//   var testItem = new Item({name: "Amstel", value: 4})
+  console.log(this.game)
+  var testItem = new Item({name: "Amstel", value: 4})
 
-//   this.game.addDrinkToPlayer(testItem)
+  // this.game.addDrinkToPlayer(testItem, function (response) {
+  //   console.log('addDrinkToPlayer response data', response)
+  // })
+  // this.game.removeDrinkFromPlayer(testItem, function (response) {
+  //   console.log('removeDrinkFromPlayer response data', response)
+  // })
 
   loadCanvas();
 };

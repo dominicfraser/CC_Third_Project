@@ -17,13 +17,14 @@ playerRouter.get('/', function(req,res){
 
 //delete item
 playerRouter.delete("/:id", function(req, res){
-  query.removePlayerItem(function(itemObject){
+  query.removePlayerItem(req.params.id, function(itemObject){
     res.json(itemObject);
   })
 });
 
 //add new item
 playerRouter.post('/', function(req, res) {
+  console.log('request body in controller:', req.body)
   var item = new Item({
     name: req.body.name,
     value: req.body.value,
