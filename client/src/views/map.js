@@ -209,6 +209,7 @@ var movePlayer = function(e){
       context.stroke()
       currentPosition[1] = positionY-5
       console.log("Up")
+
   }
   else if(e.key === "ArrowDown"){
     if (positionY + 5 <= 500){
@@ -218,6 +219,7 @@ var movePlayer = function(e){
       console.log("Down")
     }
   } 
+
   else { return; };
 
 };

@@ -11,7 +11,13 @@ var Game = function (player, bar) {
 Game.prototype = {
 
   addDrinkToPlayer: function(drink, callback){
-    this.modelsContainer.addPlayerItem(drink, callback);
+    if(modelsContainer.allPlayerItems >= 3){
+      return
+    }
+      else{
+            this.modelsContainer.addPlayerItem(drink, callback);
+  }
+
   },
   removeDrinkFromPlayer: function(drink, callback){
     this.modelsContainer.removePlayerItem(drink, callback);

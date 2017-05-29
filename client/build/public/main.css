@@ -27,7 +27,7 @@ section {
 
 #inventory {
   width: 19%;
-  font-family: 'Quantico', serif;
+  font-family: 'Bungee Inline', serif;
 }
 
 #middle {
@@ -37,6 +37,10 @@ section {
 
 #stats {
   width: 19%;
+  font-family: 'Bungee Inline', serif;
+}
+
+#interaction-message{
   font-family: 'Quantico', serif;
 }
 
@@ -60,4 +64,23 @@ section {
 #bar-inv-chart {
   height: 150px;
 }
+
+table {
+  border: 1px solid black;
+}
+
+
+#player-inventory-picture td img {
+    height: auto;
+    width: auto;
+}
+
+td button img {
+    width: auto;
+    height: auto;
+}
+
+
+
+
   
