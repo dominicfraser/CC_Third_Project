@@ -3,7 +3,7 @@ var ModelsContainer = require('../models/models_container')
 var Game = function (player, bar) {
   this.player = player;
   this.bar = bar;
-
+//DB Querys 
   this.modelsContainer = new ModelsContainer;
 
 };
