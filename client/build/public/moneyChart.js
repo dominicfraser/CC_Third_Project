@@ -20,6 +20,17 @@ var MoneyChart = function (playerWallet){
     ],
     xAxis: {
       categories: ["£"]
+    },
+    yAxis: {
+      title: {
+        text: "Your Money"
+      }
+    },
+    legend: {
+      enabled: false
+    },
+    credits: {
+      enabled: false
     }
   });
 
