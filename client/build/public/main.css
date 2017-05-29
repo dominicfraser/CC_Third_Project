@@ -4,7 +4,7 @@ body {
 }
 
 canvas { 
-  /*position: absolute;*/
+  position: absolute;
   border: 1px solid black;
   display: inline-block;
   margin-left: 26px;
