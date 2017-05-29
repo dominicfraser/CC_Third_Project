@@ -15,6 +15,10 @@ Game.prototype = {
     this.modelsContainer.addPlayerItem(drink, callback);
   },
 
+  removeDrinkFromPlayer: function(drink, callback){
+    this.modelsContainer.removePlayerItem(drink, callback);
+  },
+
 };
 
 module.exports = Game;

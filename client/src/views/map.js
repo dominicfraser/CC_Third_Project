@@ -6,14 +6,8 @@ var Bar = require('../models/bar_model.js');
 var Item = require('../models/item_model.js');
 
 var Map = function () {
-  this.player = new Player({
-    name: "Player1",
-    wallet: 100
-  });
-  this.bar = new Bar({
-    name: "Chanter",
-    cashDrawer: 1000
-  });
+  this.player = new Player({name: "Player1", wallet: 100});
+  this.bar = new Bar({name: "Chanter", cashDrawer: 1000});
   this.game = new Game(this.player, this.bar);
   this.inventoryUI = new InventoryUI(this.player, this.bar);
   this.statsUI = new StatsUI(this.player, this.bar);
@@ -25,12 +19,16 @@ var Map = function () {
   currentPosition = [90,90];
   window.addEventListener('keydown', movePlayer);
 
-  //testing adding item
+  // testing adding item
   // window.addEventListener('keydown', addItem);
-// console.log(this.game)
-//   var testItem = new Item({name: "Amstel", value: 4})
+  var testItem = new Item({name: "Amstel", value: 4})
 
-//   this.game.addDrinkToPlayer(testItem)
+  // this.game.addDrinkToPlayer(testItem, function (response) {
+  //   console.log('addDrinkToPlayer response data', response)
+  // })
+  // this.game.removeDrinkFromPlayer(testItem, function (response) {
+  //   console.log('removeDrinkFromPlayer response data', response)
+  // })
 
   loadCanvas();
 };
@@ -162,30 +160,27 @@ var movePlayer = function(e){
       context.stroke()
       currentPosition[0] = positionX-5
       console.log("Left")
+    }
   }
-}
   else if(e.key === "ArrowUp"){
     if (positionY - 5 >= 90){
       context.lineTo(positionX, (positionY-5))
       context.stroke()
       currentPosition[1] = positionY-5
       console.log("Up")
+    }
   }
-}
   else if(e.key === "ArrowDown"){
     if (positionY + 5 <= 610){
       context.lineTo(positionX, (positionY+5))
       context.stroke()
       currentPosition[1] = positionY+5
       console.log("Down")
-  }
-} else {
-  return;
-  };
-
+    }
+  } 
+  else { return; };
 
 };
-
 
 
 module.exports = Map;
