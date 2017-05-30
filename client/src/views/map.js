@@ -144,6 +144,8 @@ Map.prototype = {
     else if(e.key === "ArrowUp"){
         var hitTopBorder = ((positionY - 5) <= 0)
 
+        var hitWallBorder = (positionX <= 700 && positionX >= 0) && (positionY <= 90 && positionY >= 90)
+
         var hitBottomOfBar = (positionX >= 0 && positionX <= 240) && (positionY <= 290 && positionY >= 235)
 
         var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410)
@@ -153,6 +155,9 @@ Map.prototype = {
 
         if (hitTopBorder){
           console.log('can\'t move')
+          return;
+        }
+        else if (hitWallBorder){
           return;
         }
         else if (hitBottomOfBar){
