@@ -88,6 +88,8 @@ Map.prototype = {
 
       var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115)
 
+      var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345)
+
       if (hitRightBorder){
         console.log('can\'t move')
       }
@@ -95,10 +97,13 @@ Map.prototype = {
         return;
       }
       else if (hitChairsTable){
-          return;
+        return;
       }
       else if (hitChairsTable){
-                return;
+        return;
+      }
+      else if (hitPiano){
+        return;
       }
       else {
         this.moveSprite(this.playerBegin, 5, 0)
@@ -118,7 +123,7 @@ Map.prototype = {
 
         var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115)
 
-        var hitRightSideOfPiano = (positionY <= 125 && positionY >= 60) && (positionX <= 435 && positionX >= 435)
+        var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345)
 
         if (hitLeftBorder){
           return;
@@ -132,7 +137,7 @@ Map.prototype = {
         else if (hitChairsTable){
           return;
         }
-        else if (hitRightSideOfPiano){
+        else if (hitPiano){
           return;
         }
 
@@ -152,6 +157,8 @@ Map.prototype = {
 
         var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115)
 
+        var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345)
+
 
         if (hitTopBorder){
           console.log('can\'t move')
@@ -168,6 +175,9 @@ Map.prototype = {
           return;
         }
         else if (hitChairsTable){
+          return;
+        }
+        else if (hitPiano){
           return;
         }
         this.moveSprite(this.playerBegin, 0, -5)
