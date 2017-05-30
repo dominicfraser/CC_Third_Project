@@ -3,7 +3,7 @@ var ModelsContainer = require('../models/models_container')
 var InventoryUI = function(player, bar){
   this.player = player;
   this.bar = bar;
-
+  
   var modelsContainer = new ModelsContainer;
 
   modelsContainer.allPlayerItems(function(playerItems){
@@ -100,18 +100,39 @@ InventoryUI.prototype = {
   },
 
   renderBarItemsImages: function(barItems){
-   var tablePicture = document.getElementById("bar-inventory-picture")
-   tablePicture.innerHTML = ""
+    var barTable = document.getElementById("bar-inventory-table");
+    barTable.innerHTML = "";
+    var rowInUse = document.createElement("tr");
+
     var barItems = this.addCounts(barItems);
     var barItemsFiltered = this.filterToUniqList(barItems);
 
-    for (var item of barItemsFiltered){
-      var td = document.createElement('td')
-      var imageDrinkButton = document.createElement('button')
-      imageDrinkButton.innerHTML = "<img src = http://icons.iconarchive.com/icons/iconshock/brilliant-food/256/beer-icon.png>"
+    var columnPositionCounter = 0;
 
-      td.appendChild(imageDrinkButton);
-      tablePicture.appendChild(td);
+    for (var item of barItemsFiltered){
+      columnPositionCounter += 1
+
+      if (columnPositionCounter <= 3){
+        var td = document.createElement('td')
+        var imageDrinkButton = document.createElement('button')
+        imageDrinkButton.innerHTML = "<img src = http://icons.iconarchive.com/icons/iconshock/brilliant-food/256/beer-icon.png>"
+
+        td.appendChild(imageDrinkButton);
+        rowInUse.appendChild(td);  
+        barTable.appendChild(rowInUse);
+      } 
+      else {
+        columnPositionCounter = 0;
+        rowInUse = document.createElement('tr')
+
+        var td = document.createElement('td')
+        var imageDrinkButton = document.createElement('button')
+        imageDrinkButton.innerHTML = "<img src = http://icons.iconarchive.com/icons/iconshock/brilliant-food/256/beer-icon.png>"
+
+        td.appendChild(imageDrinkButton);
+        rowInUse.appendChild(td);  
+        barTable.appendChild(rowInUse);
+      }
     }
   },
   renderBarItemsCountDropdown: function(barItems){
