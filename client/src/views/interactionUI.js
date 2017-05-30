@@ -32,12 +32,13 @@ InteractionUI.prototype = {
 
   orderPlaced: function() {
     console.log('in order placed in interactionUI',this)
-    this.game.addDrinkToPlayer({name: "test", value: 10}, function (response) {
+    this.game.addDrinkToPlayer({name: "test", value: 10, alcoholLevel: 4}, function (response) {
       console.log('Drink should now be added to player')
     });
 
     console.log(this.player.wallet)
-    this.player.subtractItemValue({name: "test", value: 10});
+    this.player.subtractItemValue({name: "test", value: 10, alcoholLevel: 4});
+    this.player.increaseDrunkLevel({name: "test", value: 10, alcoholLevel: 4});
 
     // this.game.removeDrinkFromBar({name: "test", value: 10}, function (response) {
     //   console.log('Drink should now be removed from bar');
