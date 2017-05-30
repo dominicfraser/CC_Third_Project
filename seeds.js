@@ -3,54 +3,54 @@ db.dropDatabase();
 
 db.player_inventory.insert([
   {
-    name: "Amstel",
+    name: "Beer",
     value: 4
   },
   {
-    name: "Peroni",
-    value: 6
+    name: "Wine",
+    value: 5
   },
   {
-    name: "Guinness",
+    name: "Apple Juice",
+    value: 2
+  },
+  {
+    name: "Coke",
     value: 3
-  },
-  {
-    name: "Cocktail",
-    value: 9
   },
 ]);
 
 db.bar_inventory.insert([
   {
-    name: "Amstel",
+    name: "Cocktail",
+    value: 8
+  },
+  {
+    name: "Beer",
     value: 4
   },
   {
-    name: "Amstel",
+    name: "Beer",
     value: 4
   },
   {
-    name: "Amstel",
-    value: 4
+    name: "Wine",
+    value: 5
   },
   {
-    name: "Peroni",
-    value: 6
-  },
-  {
-    name: "apple juice",
+    name: "Apple Juice",
     value: 2
   },
   {
-    name: "Cocktail",
-    value: 9
-  },
-  {
-    name: "Guinness",
+    name: "Coke",
     value: 3
   },
   {
-    name: "Amstel",
-    value: 4
+    name: "Cocktail",
+    value: 8
+  },
+  {
+    name: "Wine",
+    value: 5 
   },
 ]);
