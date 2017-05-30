@@ -18,7 +18,7 @@ console.log('inside main map', this)
 
   this.context = this.getPlayerCanvasContext();
   this.mainContext = this.getMainCanvasContext();
-
+//canvas image setup
   this.backdrop = document.createElement('img');
   this.backdrop.src = "/public/img/edited_images/backdrop_empty.png";
 
@@ -139,8 +139,6 @@ Map.prototype = {
   },
 
   loadCanvas: function() {
-    var backdrop = document.createElement('img');
-    backdrop.src = "/public/img/edited_images/backdrop_empty.png";
 
     var tableSet = document.createElement('img');
     tableSet.src = "/public/img/edited_images/table_set.png";
@@ -167,7 +165,7 @@ Map.prototype = {
     context = this.getPlayerCanvasContext();
     mainContext = this.getMainCanvasContext();
 
-    backdrop.onload = function() {
+    this.backdrop.onload = function() {
       mainContext.drawImage(this, 0, 0, 700, 500); 
     };
 

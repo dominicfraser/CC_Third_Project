@@ -11,19 +11,30 @@ var Game = function (player, bar) {
 Game.prototype = {
 
   addDrinkToPlayer: function(drink, callback){
-      // if(modelsContainer.allPlayerItems >= 3){
-      //   return
-      // }
-      //   else{
-      // }
+      
 
-      if (drink.value <= this.player.wallet){
+      var outerStatus = this.modelsContainer.allPlayerItems(function(playerItems){
+      var handsFull = false;
+      var amountInHands = playerItems.length;
+      if(amountInHands >= 3){
+        handsFull = true
+      };
+
+      var innerStatus = "not set";
+      if (drink.value <= this.player.wallet && handsFull === false){
         this.modelsContainer.addPlayerItem(drink, callback);
-        return true
+        innerStatus = true
       } 
       else {
-        return false
+        innerStatus = false
       }
+
+      return innerStatus
+// console.log('playerItems', playerItems.length)
+      }.bind(this));
+console.log('status in GAME', outerStatus)
+      
+      return outerStatus
   },
   
   removeDrinkFromPlayer: function(drink, callback){

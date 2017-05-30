@@ -68,8 +68,8 @@ console.log('in setTimeout', this.player)
             this.player.subtractItemValue({name: "test", value: 10, alcoholLevel: 4});
             this.player.increaseDrunkLevel({name: "test", value: 10, alcoholLevel: 4});
 
-            this.game.removeDrinkFromBar({id: "592d72654cfcf4a239eead0f"}, function (response) {
-                console.log('Drink should now be removed from bar'); })
+            // this.game.removeDrinkFromBar({id: "592d72654cfcf4a239eead0e"}, function (response) {
+            //     console.log('Drink should now be removed from bar'); })
               this.inventoryUI = new InventoryUI(this.player, this.bar);
               this.statsUI = new StatsUI(this.player, this.bar);
 
