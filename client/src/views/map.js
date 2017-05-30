@@ -71,6 +71,7 @@ Map.prototype = {
 
   moveSprite: function(playerDirectionImage, xInc, yInc){
     this.drawBar();
+    context.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 50, 50)
     context.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
   },
 
@@ -81,7 +82,7 @@ Map.prototype = {
 
     if (e.key === "ArrowRight"){
 
-      var hitRightBorder = positionX + 5 >= 710
+      var hitRightBorder = positionX + 5 >= 700
 
       if (hitRightBorder){
         console.log('can\'t move')
