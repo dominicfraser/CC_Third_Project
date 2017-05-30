@@ -25,7 +25,10 @@ var MoneyChart = function (playerWallet){
     },
     yAxis: {
       title: {
-        text: "Your Money"
+        text: "Your Money",
+        style: {
+          color: "white"
+        }
       },
       min: 0
     },
