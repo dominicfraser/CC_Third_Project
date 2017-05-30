@@ -11,12 +11,12 @@ var Game = function (player, bar) {
 Game.prototype = {
 
   addDrinkToPlayer: function(drink, callback){
-    if(modelsContainer.allPlayerItems >= 3){
-      return
-    }
-      else{
+      // if(modelsContainer.allPlayerItems >= 3){
+      //   return
+      // }
+      //   else{
             this.modelsContainer.addPlayerItem(drink, callback);
-  }
+  // }
 
   },
   removeDrinkFromPlayer: function(drink, callback){

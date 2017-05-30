@@ -30,13 +30,12 @@ InteractionUI.prototype = {
   },
 
   orderPlaced: function() {
-    console.log(this)
+    console.log('in order placed in interactionUI',this)
     this.game.addDrinkToPlayer({name: "test", value: 10}, function (response) {
       console.log('addDrinkToPlayer response data', response)
     })
 
-    this.inventoryUI.renderPlayerItemsCount();
-    this.inventoryUI.renderBarItemsCount();
+    this.inventoryUI = new InventoryUI(this.player, this.bar);
   },
 
   orderNotPlaced: function() {

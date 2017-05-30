@@ -14,6 +14,7 @@ var Map = function () {
   this.statsUI = new StatsUI(this.player, this.bar);
   this.interactionUI = new InteractionUI(this.player, this.bar);
 
+
 console.log('inside main map', this)
 
   context = getPlayerCanvasContext();
@@ -24,8 +25,9 @@ console.log('inside main map', this)
   currentPosition = [0,0];
   window.addEventListener('keydown', movePlayer);
 
-  window.addEventListener('keydown', this.placeOrder);
+  window.addEventListener('keydown', this.placeOrder.bind(this));
 
+  
   loadCanvas();
 //////////////to test coords
   var canvas = document.getElementById("player-canvas");
@@ -49,14 +51,12 @@ Map.prototype = {
 
   placeOrder: function(e){
     if (e.key === "o"){
-      this.interactionUI = new InteractionUI(this.player, this.bar);
+      console.log('inside IF of place order',this);
       this.interactionUI.askForDrink();
-      console.log('inside place order IF', this)
-      //can't access this here
     };  
       console.log('inside place order', this)
 
-  }.bind(this),
+  },
 
 };
 
