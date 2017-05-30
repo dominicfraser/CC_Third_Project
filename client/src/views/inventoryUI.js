@@ -116,6 +116,8 @@ InventoryUI.prototype = {
         var td = document.createElement('td')
         var imageDrinkButton = document.createElement('button')
         imageDrinkButton.innerHTML = "<img src = http://icons.iconarchive.com/icons/iconshock/brilliant-food/256/beer-icon.png>"
+        // td.setAttribute("style","width:30px")
+        // td.setAttribute("style","height:30px")
 
         td.appendChild(imageDrinkButton);
         rowInUse.appendChild(td);  
