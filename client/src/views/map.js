@@ -84,7 +84,7 @@ Map.prototype = {
 
       var hitRightBorder = positionX + 5 >= 700
 
-      var hitGuy = (positionY <= 255 && positionY >= 190) && (positionX <= 470 && positionX >= 430)
+      var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410)
 
       var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115)
 
@@ -93,9 +93,10 @@ Map.prototype = {
       }
       else if (hitGuy){
         return;
-      }else if (hitChairsTable){
+      }
+      else if (hitChairsTable){
           return;
-        }
+      }
       else if (hitChairsTable){
                 return;
       }
@@ -113,7 +114,7 @@ Map.prototype = {
 
         var hitRightSideOfBar = (positionY <= 280 && positionY >= 0) && (positionX <= 240 && positionX >= 240)
 
-        var hitGuy = (positionY <= 255 && positionY >= 190) && (positionX <= 470 && positionX >= 430)
+        var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410)
 
         var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115)
 
@@ -145,7 +146,7 @@ Map.prototype = {
 
         var hitBottomOfBar = (positionX >= 0 && positionX <= 240) && (positionY <= 290 && positionY >= 235)
 
-        var hitGuy = (positionY <= 265 && positionY >= 200) && (positionX <= 470 && positionX >= 405)
+        var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410)
 
         var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115)
 
@@ -173,7 +174,7 @@ Map.prototype = {
 
         var hitBottomBorder = ((positionY + 5) >= 500)
         
-        var hitGuy = (positionY <= 255 && positionY >= 190) && (positionX <= 470 && positionX >= 430)
+        var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410)
 
         var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115)
 
