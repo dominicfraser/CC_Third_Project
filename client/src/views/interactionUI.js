@@ -19,6 +19,25 @@ var InteractionUI = function (player, bar) {
 };
 
 InteractionUI.prototype = {
+
+  askToPlayPiano: function(){
+    this.displayMessage("Let's turn up the funk in here");
+    var interactionArea = document.getElementById('middle');
+
+    if(this.flag == false){
+      interactionArea.appendChild(this.yesButton);
+      interactionArea.appendChild(this.noButton);
+
+      yesClick = this.yesButton.addEventListener('click', this.playMusic.bind(this));
+      noClick = this.noButton.addEventListener('click', function(){
+        this.dontPlayMusic(this.yesButton, this.noButton)
+      }.bind(this));
+
+      this.flag = true;
+    }
+
+  },
+
   askForDrink: function(){
     this.displayMessage("Would you like a drink?");
     var interactionArea = document.getElementById('middle');
