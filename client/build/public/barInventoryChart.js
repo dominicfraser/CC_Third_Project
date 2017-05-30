@@ -24,7 +24,8 @@ var BarInventoryChart = function (barInventory){
     yAxis: {
       title: {
         text: "Bar Drinks Remaining"
-      }
+      },
+      min: 0
     },
     legend: {
       enabled: false

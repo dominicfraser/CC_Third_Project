@@ -25,7 +25,8 @@ var MoneyChart = function (playerWallet){
     yAxis: {
       title: {
         text: "Your Money"
-      }
+      },
+      min: 0
     },
     legend: {
       enabled: false
