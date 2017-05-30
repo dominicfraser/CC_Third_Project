@@ -3,54 +3,136 @@ db.dropDatabase();
 
 db.player_inventory.insert([
   {
-    name: "Amstel",
-    value: 4
+    name: "Beer",
+    value: 4,
+    alcoholLevel: 4
   },
   {
-    name: "Peroni",
-    value: 6
+    name: "Wine",
+    value: 5,
+    alcoholLevel: 6
   },
   {
-    name: "Guinness",
-    value: 3
+    name: "Apple Juice",
+    value: 2,
+    alcoholLevel: -2
   },
   {
-    name: "Cocktail",
-    value: 9
+    name: "Coke",
+    value: 3,
+    alcoholLevel: -5
   },
 ]);
 
 db.bar_inventory.insert([
   {
-    name: "Amstel",
-    value: 4
+    name: "Pina Colada",
+    value: 8,
+    alcoholLevel: 10
   },
   {
-    name: "Amstel",
-    value: 4
+    name: "Pina Colada",
+    value: 8,
+    alcoholLevel: 10
   },
   {
-    name: "Amstel",
-    value: 4
+    name: "Pina Colada",
+    value: 8,
+    alcoholLevel: 10
   },
   {
-    name: "Peroni",
-    value: 6
+    name: "Beer",
+    value: 4,
+    alcoholLevel: 4
   },
   {
-    name: "apple juice",
-    value: 2
+    name: "Beer",
+    value: 4,
+    alcoholLevel: 4
   },
   {
-    name: "Cocktail",
-    value: 9
+    name: "Wine",
+    value: 5,
+    alcoholLevel: 6
   },
   {
-    name: "Guinness",
-    value: 3
+    name: "Apple Juice",
+    value: 2,
+    alcoholLevel: -2
   },
   {
-    name: "Amstel",
-    value: 4
+    name: "Coke",
+    value: 3,
+    alcoholLevel: -5
+  },
+  {
+    name: "Apple Juice",
+    value: 2,
+    alcoholLevel: -2
+  },
+  {
+    name: "Coke",
+    value: 3,
+    alcoholLevel: -5
+  },
+  {
+    name: "Apple Juice",
+    value: 2,
+    alcoholLevel: -2
+  },
+  {
+    name: "Coke",
+    value: 3,
+    alcoholLevel: -5
+  },
+  {
+    name: "Apple Juice",
+    value: 2,
+    alcoholLevel: -2
+  },
+  {
+    name: "Coke",
+    value: 3,
+    alcoholLevel: -5
+  },
+  {
+    name: "Apple Juice",
+    value: 2,
+    alcoholLevel: -2
+  },
+  {
+    name: "Coke",
+    value: 3,
+    alcoholLevel: -5
+  },
+  {
+    name: "Apple Juice",
+    value: 2,
+    alcoholLevel: -2
+  },
+  {
+    name: "Coke",
+    value: 3,
+    alcoholLevel: -5
+  },
+  {
+    name: "Long Island Iced Tea",
+    value: 10,
+    alcoholLevel:25
+  },
+  {
+    name: "Long Island Iced Tea",
+    value: 10,
+    alcoholLevel:25
+  },
+  {
+    name: "Long Island Iced Tea",
+    value: 10,
+    alcoholLevel:25
+  },
+  {
+    name: "Wine",
+    value: 5,
+    alcoholLevel: 6
   },
 ]);
