@@ -115,7 +115,7 @@ InteractionUI.prototype = {
 
   orderNotPlaced: function(yesButton, noButton) {
     messageDisplay = document.getElementById("interaction-message");
-    messageDisplay.innerHTML = "What a loser...";
+    messageDisplay.innerHTML = "Alright, then go sit over there with Dominic...";
 
     setTimeout(function(){
       this.displayMessage("");
