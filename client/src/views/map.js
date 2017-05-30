@@ -21,6 +21,8 @@ console.log('inside main map', this)
 
   this.backdrop = document.createElement('img');
   this.backdrop.src = "/public/img/edited_images/backdrop_empty.png";
+  this.player = document.createElement('img');
+  this.player.src = "/public/img/edited_images/f1girl2.png"
 
   // var playerLeft = document.createElement('img');
   // playerLeft.src = "../build/public/img/edited_images/f1girl.png";
@@ -52,9 +54,8 @@ console.log('inside main map', this)
         var mousePos = getMousePos(canvas, evt);
         console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
       }, false);
-  };  
 //////////// delete after use
-//END MAIN MAP 
+  };                          //END MAIN MAP 
 
 Map.prototype = {
 
@@ -66,10 +67,8 @@ Map.prototype = {
 
   placeOrder: function(e){
     if (e.key === "o"){
-      // console.log('inside IF of place order',this);
       this.interactionUI.askForDrink();
     };  
-      // console.log('inside place order', this)
   },
 
   interactWithMan: function(e){
@@ -84,6 +83,7 @@ Map.prototype = {
 
   moveSprite: function(playerDirectionImage, xInc, yInc){
     this.drawBar();
+    this.player.innerHTML = "";
     context.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 40)
     context.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
   },
@@ -206,18 +206,15 @@ Map.prototype = {
         else if (hitSofas){
           return;
         }
-     
+
         this.moveSprite(this.playerBegin, 0, +5)
         this.currentPosition[1] = positionY+5
       }
      
-
     else { return; }
   },
 
   loadCanvas: function() {
-    var backdrop = document.createElement('img');
-    backdrop.src = "/public/img/edited_images/backdrop_empty.png";
 
     var tableSet = document.createElement('img');
     tableSet.src = "/public/img/edited_images/table_set.png";
@@ -240,11 +237,10 @@ Map.prototype = {
     var guy = document.createElement('img');
     guy.src = "/public/img/edited_images/f1guy.png";
 
-
     context = this.getPlayerCanvasContext();
     mainContext = this.getMainCanvasContext();
 
-    backdrop.onload = function() {
+    this.backdrop.onload = function() {
       mainContext.drawImage(this, 0, 0, 700, 500); 
     };
 
@@ -274,6 +270,10 @@ Map.prototype = {
 
     guy.onload = function() {
       context.drawImage(this, 100, -30, 700, 500);
+    };
+
+    this.player.onload = function() {
+      context.drawImage(this, 0, 200, 700, 500);
     };
   },
 
