@@ -28,14 +28,21 @@ section {
 
 #inventory {
   width: 19%;
-}
+  text-align: center;
+  background-image: url("/public/img/edited_images/corkboard.jpg")
+  }
 
 #middle {
   width: 60%;
+
 }
 
 #stats {
   width: 19%;
+  text-align: center;
+  background-image: url("/public/img/edited_images/corkboard.jpg")
+
+
 }
 
 #interaction-message{
@@ -53,12 +60,17 @@ section {
 
 #money-chart, #bar-inv-chart {
   height: 150px;
+  background-image: url("/public/img/edited_images/corkboard.jpg");
+  opacity: 0.75;
+
 }
 
 #player-drunk-level {
   height: 250px;
-}
+  background-image: url("/public/img/edited_images/corkboard.jpg");
+  opacity: 0.75;
 
+}
 
 table {
   border: 1px solid black;

@@ -14,21 +14,29 @@ var Map = function () {
   this.statsUI = new StatsUI(this.player, this.bar);
   this.interactionUI = new InteractionUI(this.player, this.bar);
 
-
 console.log('inside main map', this)
 
-  context = getPlayerCanvasContext();
-  mainContext = getMainCanvasContext();
-  
-  context.beginPath();
-  context.moveTo(0,0);
-  currentPosition = [0,0];
-  window.addEventListener('keydown', movePlayer);
+  this.context = this.getPlayerCanvasContext();
+  this.mainContext = this.getMainCanvasContext();
 
+  this.backdrop = document.createElement('img');
+  this.backdrop.src = "/public/img/edited_images/backdrop_empty.png";
+
+  // var playerLeft = document.createElement('img');
+  // playerLeft.src = "../build/public/img/edited_images/f1girl.png";
+
+  this.playerBegin = document.createElement('img');
+  this.playerBegin.src = "/public/img/edited_images/f1girl.png"
+  this.playerHeight = 500;
+  this.playerWidth = 700;
+
+  this.currentPosition = [350,450];
+
+  window.addEventListener('keydown', this.movePlayer.bind(this));
+  
   window.addEventListener('keydown', this.placeOrder.bind(this));
 
-  
-  loadCanvas();
+  this.loadCanvas();
 //////////////to test coords
   var canvas = document.getElementById("player-canvas");
 
@@ -43,7 +51,7 @@ console.log('inside main map', this)
         var mousePos = getMousePos(canvas, evt);
         console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
       }, false);
-};  
+  };  
 //////////// delete after use
 //END MAIN MAP 
 
@@ -55,167 +63,154 @@ Map.prototype = {
       this.interactionUI.askForDrink();
     };  
       // console.log('inside place order', this)
-
   },
 
-};
+  drawBar: function() {
+    this.mainContext.drawImage(this.backdrop, 0, 0, 700, 500);
+  },
 
+  moveSprite: function(playerDirectionImage, xInc, yInc){
+    this.drawBar();
+    context.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 50, 50)
+    context.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
+  },
 
-var loadCanvas = function() {
-  var backdrop = document.createElement('img');
-  backdrop.src = "/public/img/edited_images/backdrop_empty.png";
+  movePlayer: function(e){
+    var context  = this.getPlayerCanvasContext();
+    var positionX = this.currentPosition[0];
+    var positionY = this.currentPosition[1];
 
-  var tableSet = document.createElement('img');
-  tableSet.src = "/public/img/edited_images/table_set.png";
+    if (e.key === "ArrowRight"){
 
-  var sofaSetBottom = document.createElement('img');
-  sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
+      var hitRightBorder = positionX + 5 >= 700
 
-  var sofaSetTop = document.createElement('img');
-  sofaSetTop.src = "/public/img/edited_images/sofa_set.png";
-
-  var bartender = document.createElement('img');
-  bartender.src = "/public/img/edited_images/f1bartender.png";
-
-  var stage = document.createElement('img');
-  stage.src = "/public/img/edited_images/stage.png";
-
-  var piano = document.createElement('img');
-  piano.src = "/public/img/edited_images/piano.png";
-
-  var mainGirl = document.createElement('img');
-  mainGirl.src = "/public/img/edited_images/f1girl.png";
-
-  var guy = document.createElement('img');
-  guy.src = "/public/img/edited_images/f1guy.png";
-
-  context = getPlayerCanvasContext();
-  mainContext = getMainCanvasContext();
-
-  backdrop.onload = function() {
-    mainContext.drawImage(this, 0, 0, 700, 500); 
-  };
-
-  tableSet.onload = function() {
-    context.drawImage(this, -200, 110, 700, 500);
-  };
-
-  sofaSetTop.onload = function() {
-    context.drawImage(this, 200, -30, 700, 500);
-  };
-
-  sofaSetBottom.onload = function() {
-    context.drawImage(this, 200, 140, 700, 500);
-  };
-
-  bartender.onload = function() {
-    context.drawImage(this, -190, -40, 700, 500);
-  };
-
-  stage.onload = function() {
-    context.drawImage(this, 254, -140, 700, 500);
-  };
-
-  piano.onload = function() {
-    context.drawImage(this, 50, -160, 700, 500);
-  };
-
-  mainGirl.onload = function() {
-    context.drawImage(this, 20, 180, 700, 500);
-  };
-
-  guy.onload = function() {
-    context.drawImage(this, 100, -30, 700, 500);
-  };
-};
-
-  // drawMap = function() {
-  //   context.drawImage(backdrop, 0, 0, 700, 500);
-  // };
-
-var getMainCanvasContext = function(){
-  var canvas = document.getElementById("main-canvas");
-  var context = canvas.getContext("2d");
-  return context;
-}
-
-var getPlayerCanvasContext = function(){
-  var canvas = document.getElementById("player-canvas");
-  var context = canvas.getContext("2d");
-  return context;
-}
-
-
-var movePlayer = function(e){
-  var context  = getPlayerCanvasContext();
-  var positionX = currentPosition[0];
-  var positionY = currentPosition[1];
-
-  if (e.key === "ArrowRight"){
-
-    var hitRightBorder = positionX + 5 >= 710
-
-    var hitLeftEdgeOfSquare = (positionX + 5 >= 180) && (positionY <= 180) || (positionX + 5 >= 180) && (positionY <= 360) 
-
-    if (hitRightBorder){
-      console.log('can\'t move')
-    }
-    else {
-      context.lineTo((positionX+5), positionY)
-      context.stroke()
-      currentPosition[0] = positionX+5
-      console.log("Right")
-    }
-  }
-  else if(e.key === "ArrowLeft"){
-    // if (positionX - 5 >= 0){
-      var hitLeftBorder = ((positionY - 5) <= 0)
-
-      var hitRightSideOfBar = (positionY <= 290 && positionY >= 0) && (positionX <= 240 && positionX >= 240)
-
-      if (hitLeftBorder){
-        return;
-      }
-      else if (hitRightSideOfBar){
-        return;
-      }
-      context.lineTo((positionX-5), positionY)
-      context.stroke()
-      currentPosition[0] = positionX-5
-      console.log("Left")
-    }
-  
-  else if(e.key === "ArrowUp"){
-    // if (positionY - 5 >= 0){
-      var hitTopBorder = ((positionX - 5) <= 0)
-
-      var hitBottomOfBar = (positionX >= 0 && positionX <= 240) && (positionY <= 290 && positionY >= 235)
-
-      if (hitTopBorder){
+      if (hitRightBorder){
         console.log('can\'t move')
-        return;
       }
-      else if (hitBottomOfBar){
-        console.log('can\'t move')
-        return;
+      else {
+        this.moveSprite(this.playerBegin, 5, 0)
+        this.currentPosition[0] = positionX+5
+        console.log("Right")
       }
-
-      context.lineTo(positionX, (positionY-5))
-      context.stroke()
-      currentPosition[1] = positionY-5
-      console.log("Up")
-
-  }
-  else if(e.key === "ArrowDown"){
-    if (positionY + 5 <= 500){
-      context.lineTo(positionX, (positionY+5))
-      context.stroke()
-      currentPosition[1] = positionY+5
-      console.log("Down")
     }
-  } 
+    else if(e.key === "ArrowLeft"){
+        var hitLeftBorder = ((positionY - 5) <= 0)
 
-  else { return; };
+        var hitRightSideOfBar = (positionY <= 290 && positionY >= 0) && (positionX <= 240 && positionX >= 240)
+
+        if (hitLeftBorder){
+          return;
+        }
+        else if (hitRightSideOfBar){
+          return;
+        }
+        this.moveSprite(this.playerBegin, -5, 0)
+        this.currentPosition[0] = positionX-5
+        console.log("Left")
+      }
+    
+    else if(e.key === "ArrowUp"){
+        var hitTopBorder = ((positionX - 5) <= 0)
+
+        var hitBottomOfBar = (positionX >= 0 && positionX <= 240) && (positionY <= 290 && positionY >= 235)
+
+        if (hitTopBorder){
+          console.log('can\'t move')
+          return;
+        }
+        else if (hitBottomOfBar){
+          console.log('can\'t move')
+          return;
+        }
+        this.moveSprite(this.playerBegin, 0, -5)
+        this.currentPosition[1] = positionY-5
+        console.log("Up")
+
+    }
+    else if(e.key === "ArrowDown"){
+      if (positionY + 5 <= 500){
+        this.moveSprite(this.playerBegin, 0, +5)
+        this.currentPosition[1] = positionY+5
+        console.log("Down")
+      }
+    } 
+
+    else { return; }
+  },
+
+  loadCanvas: function() {
+    var backdrop = document.createElement('img');
+    backdrop.src = "/public/img/edited_images/backdrop_empty.png";
+
+    var tableSet = document.createElement('img');
+    tableSet.src = "/public/img/edited_images/table_set.png";
+
+    var sofaSetBottom = document.createElement('img');
+    sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
+
+    var sofaSetTop = document.createElement('img');
+    sofaSetTop.src = "/public/img/edited_images/sofa_set.png";
+
+    var bartender = document.createElement('img');
+    bartender.src = "/public/img/edited_images/f1bartender.png";
+
+    var stage = document.createElement('img');
+    stage.src = "/public/img/edited_images/stage.png";
+
+    var piano = document.createElement('img');
+    piano.src = "/public/img/edited_images/piano.png";
+
+    var guy = document.createElement('img');
+    guy.src = "/public/img/edited_images/f1guy.png";
+
+
+    context = this.getPlayerCanvasContext();
+    mainContext = this.getMainCanvasContext();
+
+    backdrop.onload = function() {
+      mainContext.drawImage(this, 0, 0, 700, 500); 
+    };
+
+    tableSet.onload = function() {
+      context.drawImage(this, -200, 110, 700, 500);
+    };
+
+    sofaSetTop.onload = function() {
+      context.drawImage(this, 200, -30, 700, 500);
+    };
+
+    sofaSetBottom.onload = function() {
+      context.drawImage(this, 200, 140, 700, 500);
+    };
+
+    bartender.onload = function() {
+      context.drawImage(this, -190, -40, 700, 500);
+    };
+
+    stage.onload = function() {
+      context.drawImage(this, 254, -140, 700, 500);
+    };
+
+    piano.onload = function() {
+      context.drawImage(this, 50, -160, 700, 500);
+    };
+
+    guy.onload = function() {
+      context.drawImage(this, 100, -30, 700, 500);
+    };
+  },
+
+  getMainCanvasContext: function(){
+    var canvas = document.getElementById("main-canvas");
+    var context = canvas.getContext("2d");
+    return context;
+  },
+
+  getPlayerCanvasContext: function(){
+    var canvas = document.getElementById("player-canvas");
+    var context = canvas.getContext("2d");
+    return context;
+  },
 
 };
 
