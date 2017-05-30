@@ -4,53 +4,135 @@ db.dropDatabase();
 db.player_inventory.insert([
   {
     name: "Beer",
-    value: 4
+    value: 4,
+    alcoholLevel: 4
   },
   {
     name: "Wine",
-    value: 5
+    value: 5,
+    alcoholLevel: 6
   },
   {
     name: "Apple Juice",
-    value: 2
+    value: 2,
+    alcoholLevel: -2
   },
   {
     name: "Coke",
-    value: 3
+    value: 3,
+    alcoholLevel: -5
   },
 ]);
 
 db.bar_inventory.insert([
   {
-    name: "Cocktail",
-    value: 8
+    name: "Pina Colada",
+    value: 8,
+    alcoholLevel: 10
+  },
+  {
+    name: "Pina Colada",
+    value: 8,
+    alcoholLevel: 10
+  },
+  {
+    name: "Pina Colada",
+    value: 8,
+    alcoholLevel: 10
   },
   {
     name: "Beer",
-    value: 4
+    value: 4,
+    alcoholLevel: 4
   },
   {
     name: "Beer",
-    value: 4
+    value: 4,
+    alcoholLevel: 4
   },
   {
     name: "Wine",
-    value: 5
+    value: 5,
+    alcoholLevel: 6
   },
   {
     name: "Apple Juice",
-    value: 2
+    value: 2,
+    alcoholLevel: -2
   },
   {
     name: "Coke",
-    value: 3
+    value: 3,
+    alcoholLevel: -5
   },
   {
-    name: "Cocktail",
-    value: 8
+    name: "Apple Juice",
+    value: 2,
+    alcoholLevel: -2
+  },
+  {
+    name: "Coke",
+    value: 3,
+    alcoholLevel: -5
+  },
+  {
+    name: "Apple Juice",
+    value: 2,
+    alcoholLevel: -2
+  },
+  {
+    name: "Coke",
+    value: 3,
+    alcoholLevel: -5
+  },
+  {
+    name: "Apple Juice",
+    value: 2,
+    alcoholLevel: -2
+  },
+  {
+    name: "Coke",
+    value: 3,
+    alcoholLevel: -5
+  },
+  {
+    name: "Apple Juice",
+    value: 2,
+    alcoholLevel: -2
+  },
+  {
+    name: "Coke",
+    value: 3,
+    alcoholLevel: -5
+  },
+  {
+    name: "Apple Juice",
+    value: 2,
+    alcoholLevel: -2
+  },
+  {
+    name: "Coke",
+    value: 3,
+    alcoholLevel: -5
+  },
+  {
+    name: "Long Island Iced Tea",
+    value: 10,
+    alcoholLevel:25
+  },
+  {
+    name: "Long Island Iced Tea",
+    value: 10,
+    alcoholLevel:25
+  },
+  {
+    name: "Long Island Iced Tea",
+    value: 10,
+    alcoholLevel:25
   },
   {
     name: "Wine",
-    value: 5 
+    value: 5,
+    alcoholLevel: 6
   },
 ]);
