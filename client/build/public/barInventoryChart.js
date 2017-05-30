@@ -6,7 +6,8 @@ var BarInventoryChart = function (barInventory){
   var chart = new Highcharts.Chart({
     chart: {
       type: "bar",
-      renderTo: container
+      renderTo: container,
+      backgroundColor: '#453535'
     },
     title: {
       text: ""

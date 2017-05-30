@@ -62,7 +62,6 @@ section {
   height: 150px;
   background-image: url("/public/img/edited_images/corkboard.jpg");
   opacity: 0.75;
-
 }
 
 #player-drunk-level {
@@ -73,8 +72,8 @@ section {
 
 table {
   border: 1px solid black;
-  background-color: grey;
-  opacity: 0.60;
+  /*background-color: grey;*/
+  background: rgba(69, 53, 53, 0.3);
 }
 
 #player-inventory-picture td img {
@@ -97,6 +96,5 @@ button {
   border: 0;
   background: transparent;
 }
-
 
 

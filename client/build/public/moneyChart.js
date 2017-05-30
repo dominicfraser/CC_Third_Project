@@ -7,7 +7,9 @@ var MoneyChart = function (playerWallet){
   var chart = new Highcharts.Chart({
     chart: {
       type: "bar",
-      renderTo: container
+      renderTo: container,
+      backgroundColor: '#453535',
+      fillOpacity: '0.1'
     },
     title: {
       text: ""

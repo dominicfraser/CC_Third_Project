@@ -4,7 +4,8 @@ var DrunkChart = function(drunkLevel){
   var chart = new Highcharts.Chart({
       chart: {
         type: "pie",
-        renderTo: container
+        renderTo: container,
+        backgroundColor: '#453535'
       },
       title: {
         text: ""
