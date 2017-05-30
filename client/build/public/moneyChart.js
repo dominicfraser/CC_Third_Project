@@ -15,11 +15,23 @@ var MoneyChart = function (playerWallet){
     series: [
     {
       name: "Your Money",
-      data: [playerWallet]
+      data: [playerWallet],
+      color: "#ffd24d"
     }
     ],
     xAxis: {
       categories: ["£"]
+    },
+    yAxis: {
+      title: {
+        text: "Your Money"
+      }
+    },
+    legend: {
+      enabled: false
+    },
+    credits: {
+      enabled: false
     }
   });
 

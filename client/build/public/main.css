@@ -1,6 +1,7 @@
 body {
   margin: 0;
   height: 100vh;
+  font-family: 'Bungee Inline', serif;
 }
 
 canvas { 
@@ -27,16 +28,17 @@ section {
 
 #inventory {
   width: 19%;
-  font-family: 'Quantico', serif;
 }
 
 #middle {
   width: 60%;
-  font-family: 'Bungee Inline', serif;
 }
 
 #stats {
   width: 19%;
+}
+
+#interaction-message{
   font-family: 'Quantico', serif;
 }
 
@@ -49,7 +51,7 @@ section {
   border: 1px solid blue;
 }
 
-#money-chart {
+#money-chart, #bar-inv-chart {
   height: 150px;
 }
 
@@ -57,7 +59,25 @@ section {
   height: 250px;
 }
 
-#bar-inv-chart {
-  height: 150px;
+
+table {
+  border: 1px solid black;
 }
-  
+
+#player-inventory-picture td img {
+    height: 30px;
+    width: 30px;
+}
+
+td button img {
+    width: auto;
+    height: auto;
+}
+
+#bar-inventory-picture td img {
+    height: 30px;
+    width: 30px;
+}
+
+
+

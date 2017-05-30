@@ -14,11 +14,23 @@ var BarInventoryChart = function (barInventory){
     series: [
     {
       name: "Bar Inventory",
-      data: [tempAmount]
+      data: [tempAmount],
+      color: "#6600cc"
     }
     ],
     xAxis: {
-      categories: ["£"]
+      categories: [""]
+    },
+    yAxis: {
+      title: {
+        text: "Bar Drinks Remaining"
+      }
+    },
+    legend: {
+      enabled: false
+    },
+    credits: {
+      enabled: false
     }
   });
 
