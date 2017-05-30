@@ -21,6 +21,8 @@ console.log('inside main map', this)
 
   this.backdrop = document.createElement('img');
   this.backdrop.src = "/public/img/edited_images/backdrop_empty.png";
+  this.player = document.createElement('img');
+  this.player.src = "/public/img/edited_images/f1girl2.png"
 
   // var playerLeft = document.createElement('img');
   // playerLeft.src = "../build/public/img/edited_images/f1girl.png";
@@ -52,9 +54,8 @@ console.log('inside main map', this)
         var mousePos = getMousePos(canvas, evt);
         console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
       }, false);
-  };  
 //////////// delete after use
-//END MAIN MAP 
+  };                          //END MAIN MAP 
 
 Map.prototype = {
 
@@ -66,10 +67,8 @@ Map.prototype = {
 
   placeOrder: function(e){
     if (e.key === "o"){
-      // console.log('inside IF of place order',this);
       this.interactionUI.askForDrink();
     };  
-      // console.log('inside place order', this)
   },
 
   interactWithMan: function(e){
@@ -78,25 +77,22 @@ Map.prototype = {
     }
   },
 
-  drawBar: function() {
-    this.mainContext.drawImage(this.backdrop, 0, 0, 700, 500);
-  },
-
   moveSprite: function(playerDirectionImage, xInc, yInc){
-    this.drawBar();
+    this.player.innerHTML = "";
     context.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 40)
     context.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
+console.log('x', this.currentPosition[0])
+console.log('y', this.currentPosition[1])
   },
 
   movePlayer: function(e){
-    var context  = this.getPlayerCanvasContext();
     var positionX = this.currentPosition[0];
     var positionY = this.currentPosition[1];
 
     if (e.key === "ArrowRight"){
       var hitRightBorder = ((positionX + 5) >= 700);
       var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
-      var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115);
+      var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX === 105);
       var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345);
       var hitStage = (positionY <= 160 && positionY >= 85) && (positionX <= 700 && positionX >= 485);
       var hitSofas = (positionY <= 500 && positionY >= 200) && (positionX <= 700 && positionX >= 600);
@@ -128,10 +124,10 @@ Map.prototype = {
     }
     
     else if(e.key === "ArrowLeft"){
-        var hitLeftBorder = ((positionX - 5) <= 0)
+        var hitLeftBorder = ((positionX - 5) <= 5)
         var hitRightSideOfBar = (positionY <= 280 && positionY >= 0) && (positionX <= 240 && positionX >= 240);
         var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
-        var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115);
+        var hitChairsTable = (positionY <= 490 && positionY >= 370) && (positionX === 185);
         var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345);
 
         if (hitLeftBorder){
@@ -159,7 +155,7 @@ Map.prototype = {
         var hitWallBorder = (positionX <= 700 && positionX >= 0) && (positionY <= 90 && positionY >= 90);
         var hitBottomOfBar = (positionX >= 0 && positionX <= 240) && (positionY <= 290 && positionY >= 235);
         var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
-        var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115);
+        var hitChairsTable = (positionY === 480) && (positionX <= 190 && positionX >=115);
         var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345);
         var hitStage = (positionY <= 160 && positionY >= 85) && (positionX <= 700 && positionX >= 485);
 
@@ -189,35 +185,32 @@ Map.prototype = {
     }
     
     else if(e.key === "ArrowDown"){
-        var hitBottomBorder = ((positionY + 5) >= 500)
-        var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
-        var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115);
-        var hitSofas = (positionY <= 500 && positionY >= 200) && (positionX <= 700 && positionX >= 600);
+      var hitBottomBorder = ((positionY + 5) >= 485)
+      var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
+      var hitChairsTable = (positionY === 365) && (positionX <= 190 && positionX >=110);
+      var hitSofas = (positionY <= 500 && positionY >= 200) && (positionX <= 700 && positionX >= 600);
 
-        if (hitBottomBorder){
-          return;
-        }
-        else if (hitGuy){
-          return;
-        }
-        else if (hitChairsTable){
-          return;
-        }
-        else if (hitSofas){
-          return;
-        }
-     
-        this.moveSprite(this.playerBegin, 0, +5)
-        this.currentPosition[1] = positionY+5
+      if (hitBottomBorder){
+        return;
       }
-     
+      else if (hitGuy){
+        return;
+      }
+      else if (hitChairsTable){
+        return;
+      }
+      else if (hitSofas){
+        return;
+      }
 
+      this.moveSprite(this.playerBegin, 0, +5)
+      this.currentPosition[1] = positionY+5
+    }
+     
     else { return; }
   },
 
   loadCanvas: function() {
-    var backdrop = document.createElement('img');
-    backdrop.src = "/public/img/edited_images/backdrop_empty.png";
 
     var tableSet = document.createElement('img');
     tableSet.src = "/public/img/edited_images/table_set.png";
@@ -240,11 +233,10 @@ Map.prototype = {
     var guy = document.createElement('img');
     guy.src = "/public/img/edited_images/f1guy.png";
 
-
     context = this.getPlayerCanvasContext();
     mainContext = this.getMainCanvasContext();
 
-    backdrop.onload = function() {
+    this.backdrop.onload = function() {
       mainContext.drawImage(this, 0, 0, 700, 500); 
     };
 
@@ -274,6 +266,10 @@ Map.prototype = {
 
     guy.onload = function() {
       context.drawImage(this, 100, -30, 700, 500);
+    };
+
+    this.player.onload = function() {
+      context.drawImage(this, 0, 200, 700, 500);
     };
   },
 
