@@ -20,11 +20,13 @@ Game.prototype = {
       if (drink.value <= this.player.wallet){
         this.modelsContainer.addPlayerItem(drink, callback);
         return true
-      } else {
+      } 
+      else {
         return false
       }
 
   },
+  
   removeDrinkFromPlayer: function(drink, callback){
     this.modelsContainer.removePlayerItem(drink, callback);
   },

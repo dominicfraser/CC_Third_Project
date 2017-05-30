@@ -51,10 +51,10 @@ Map.prototype = {
 
   placeOrder: function(e){
     if (e.key === "o"){
-      console.log('inside IF of place order',this);
+      // console.log('inside IF of place order',this);
       this.interactionUI.askForDrink();
     };  
-      console.log('inside place order', this)
+      // console.log('inside place order', this)
 
   },
 
