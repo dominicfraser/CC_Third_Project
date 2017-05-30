@@ -79,6 +79,23 @@ InteractionUI.prototype = {
     }.bind(this), 2000, yesButton, noButton);
   },
 
+  speakToMan: function(){
+    this.displayMessage("Hello there, would you like some money?");
+    var interactionArea = document.getElementById('middle');
+
+    if(this.flag == false){
+      interactionArea.appendChild(this.yesButton);
+      interactionArea.appendChild(this.noButton);
+    }
+
+    yesClick = this.yesButton.addEventListener('click', this.acceptMan.bind(this));
+    noClick = this.noButton.addEventListener(function(){
+      this.rejectMan(this.yesButton, this.noButton)
+    }.bind(this));
+
+    this.flag = true;
+  },
+
   displayMessage: function(message){
     messageDisplay = document.getElementById("interaction-message");
     messageDisplay.innerHTML = message;

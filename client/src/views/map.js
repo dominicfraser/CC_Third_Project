@@ -36,6 +36,8 @@ console.log('inside main map', this)
   
   window.addEventListener('keydown', this.placeOrder.bind(this));
 
+  window.addEventListener('keydown', this.interactWithMan.bind(this));
+
   this.loadCanvas();
 //////////////to test coords
   var canvas = document.getElementById("player-canvas");
@@ -63,6 +65,12 @@ Map.prototype = {
       this.interactionUI.askForDrink();
     };  
       // console.log('inside place order', this)
+  },
+
+  interactWithMan: function(e){
+    if(e.key === "p"){
+      this.interactionUI.speakToMan();
+    }
   },
 
   drawBar: function() {
