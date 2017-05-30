@@ -10,6 +10,9 @@ Player.prototype = {
   },
   increaseDrunkLevel: function(drink){
     this.drunkLevel += drink.alcoholLevel;
+  },
+  acceptMoneyFromMan: function(money){
+    this.wallet += money;
   }
 
 

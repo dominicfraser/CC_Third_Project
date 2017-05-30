@@ -89,11 +89,39 @@ InteractionUI.prototype = {
     }
 
     yesClick = this.yesButton.addEventListener('click', this.acceptMan.bind(this));
-    noClick = this.noButton.addEventListener(function(){
+    noClick = this.noButton.addEventListener('click', function(){
       this.rejectMan(this.yesButton, this.noButton)
     }.bind(this));
 
     this.flag = true;
+  },
+
+  rejectMan: function(yesButton, noButton){
+    messageDisplay = document.getElementById("interaction-message");
+    messageDisplay.innerHTML = "What an idiot...";
+
+    setTimeout(function(){
+      this.displayMessage("");
+      this.yesButton.remove();
+      this.noButton.remove();
+      this.flag = false;
+    }.bind(this), 2000, yesButton, noButton);
+  },
+
+  acceptMan: function(){
+    this.player.acceptMoneyFromMan(20);
+
+    messageDisplay = document.getElementById("interaction-message");
+    this.displayMessage("Aha! Here's 20 big ones! Go forth and quench thy thirst.")
+    this.statsUI = new StatsUI(this.player, this.bar);
+
+
+    setTimeout(function(){
+      this.displayMessage("");
+      this.yesButton.remove();
+      this.noButton.remove();
+      this.flag = false;
+    }.bind(this), 2000, yesButton, noButton);
   },
 
   displayMessage: function(message){
