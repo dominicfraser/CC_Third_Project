@@ -55,7 +55,7 @@ InventoryUI.prototype = {
       else if (item.name === "Wine"){
       var td = document.createElement('td')
       var imageWineButton = document.createElement('button')
-      imageWineButton.innerHTML = "<img src = /public/img/edited_images/wine.jpg>"
+      imageWineButton.innerHTML = "<img src = /public/img/edited_images/wine.png>"
 
         td.appendChild(imageWineButton);
         tablePicture.appendChild(td);
@@ -64,7 +64,7 @@ InventoryUI.prototype = {
         else if (item.name === "Coke"){
         var td = document.createElement('td')
         var imageCokeButton = document.createElement('button')
-        imageCokeButton.innerHTML = "<img src = /public/img/edited_images/coke.jpg>";
+        imageCokeButton.innerHTML = "<img src = /public/img/edited_images/coke.png>";
 
           td.appendChild(imageCokeButton);
           tablePicture.appendChild(td);
@@ -73,7 +73,7 @@ InventoryUI.prototype = {
         else if (item.name === "Apple Juice"){
         var td = document.createElement('td')
         var imageAppleJuiceButton = document.createElement('button')
-        imageAppleJuiceButton.innerHTML = "<img src = /public/img/edited_images/applejuice.jpg>"
+        imageAppleJuiceButton.innerHTML = "<img src = /public/img/edited_images/apple_juice.png>"
 
           td.appendChild(imageAppleJuiceButton);
           tablePicture.appendChild(td);
@@ -82,7 +82,7 @@ InventoryUI.prototype = {
         else if (item.name === "Long Island Iced Tea"){
         var td = document.createElement('td')
         var imageLongIslandIcedTeaButton = document.createElement('button')
-        imageLongIslandIcedTeaButton.innerHTML = "<img src = /public/img/edited_images/longislandicedtea.png>";
+        imageLongIslandIcedTeaButton.innerHTML = "<img src = /public/img/edited_images/long_island.png>";
 
         td.appendChild(imageLongIslandIcedTeaButton);
         tablePicture.appendChild(td);
@@ -90,7 +90,7 @@ InventoryUI.prototype = {
         else if (item.name === "Pina Colada"){
         var td = document.createElement('td')
         var imagePinaColadaButton = document.createElement('button')
-        imagePinaColadaButton.innerHTML = "<img src = /public/img/edited_images/pinacolada.png>";
+        imagePinaColadaButton.innerHTML = "<img src = /public/img/edited_images/pina_colada.png>";
 
         td.appendChild(imagePinaColadaButton);
         tablePicture.appendChild(td);
