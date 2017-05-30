@@ -53,6 +53,50 @@ ModelsContainer.prototype = {
     var itemData = JSON.stringify(itemToRemove);
     this.requestHelper.makeDeleteRequest('http://localhost:3000/api/bar_inventory/' + id, callback);
   },
+  findSpecificBarItem: function(id, callback){
+    // var allBarItems = [];
+    // var itemToFind = "nothing here";
+// console.log('type of id', typeof id)
+    this.requestHelper.makeGetRequest("http://localhost:3000/api/bar_inventory", function(results){
+      var barItems = this.populateBarItems(results);
+        for(item of barItems){
+           if(item.id == id){
+                var itemToFind = item;
+            }
+        }
+console.log('this is a callback? in MOD CONT',callback)
+
+      callback(itemToFind);
+    }.bind(this));
+
+//     var itemToFind = "nothing here"
+
+//     this.allBarItems(function(barItems){
+// // console.log('barItems in allBarItems callback in findSpecificBarItem', barItems)
+//           for(item of barItems){
+// // console.log('item of barItems', item)
+//             if(item.id == id){
+// // console.log('id in for loop condition met', id)
+// // console.log('item.id',item.id)
+// // console.log('itemToFind in for loop', itemToFind)
+// // console.log('type of item.id', typeof item.id)
+//               itemToFind = item;
+//             }
+//           }
+
+//     });
+// // console.log('itemToFind', itemToFind)
+
+//    // while (itemToFind !== "nothing here") {
+// // console.log('itemToFind after for', itemToFind)
+//       callback(itemToFind);
+
+     // var holder = "do nothing"
+   // }
+       
+    
+  },
 };
+ 
 
 module.exports = ModelsContainer;

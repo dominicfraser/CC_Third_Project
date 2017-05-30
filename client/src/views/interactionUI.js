@@ -39,13 +39,24 @@ InteractionUI.prototype = {
   orderPlaced: function() {
     this.displayMessage("Please select your drink from the bar inventory");
     //set on click listeners for bar
-    var orderedDrink = null;
+    var orderedDrinkId = null;
     this.inventoryUI.addEventListenersBarButtons(function(id){
 console.log('callback id', id)
-      orderedDrink = id;
-console.log('orderedDrink after callback',orderedDrink)
+      orderedDrinkId = id;
+console.log('orderedDrinkId after callback',orderedDrinkId)
 
-      if(orderedDrink !== null){
+      if(orderedDrinkId !== null){
+        var itemOrdered = null;
+        this.game.findBarDrinkById(orderedDrinkId, function(itemToFind){
+          itemOrdered = itemToFind;
+        })
+
+
+
+console.log('item ordered in interactionUI', itemOrdered)
+
+        // if(itemOrdered !== null && itemOrdered !== undefined){
+          //remove above when fixed wait time in findSpecificBarItem??
         var status = this.game.addDrinkToPlayer({name: "test", value: 10, alcoholLevel: 4}, function (response) {
 console.log('Drink should now be added to player')
         })
@@ -57,8 +68,8 @@ console.log('in setTimeout', this.player)
             this.player.subtractItemValue({name: "test", value: 10, alcoholLevel: 4});
             this.player.increaseDrunkLevel({name: "test", value: 10, alcoholLevel: 4});
 
-            // this.game.removeDrinkFromBar({name: "test", value: 10}, function (response) {
-              //   console.log('Drink should now be removed from bar');
+            this.game.removeDrinkFromBar({id: "592d72654cfcf4a239eead0f"}, function (response) {
+                console.log('Drink should now be removed from bar'); })
               this.inventoryUI = new InventoryUI(this.player, this.bar);
               this.statsUI = new StatsUI(this.player, this.bar);
 
@@ -73,6 +84,7 @@ console.log('in setTimeout', this.player)
             this.flag = false;
 
         }.bind(this), 2000, this.yesButton, this.noButton);
+      // }
       }
     }.bind(this)); 
   },

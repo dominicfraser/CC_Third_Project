@@ -24,7 +24,6 @@ Game.prototype = {
       else {
         return false
       }
-
   },
   
   removeDrinkFromPlayer: function(drink, callback){
@@ -36,6 +35,13 @@ Game.prototype = {
   },
   removeDrinkFromBar: function(drink, callback){
     this.modelsContainer.removeBarItem(drink, callback);
+  },
+
+  findBarDrinkById: function(id, callback){
+console.log('findBarDrinkById id',id)
+console.log('this is a callback? in GAME',callback)
+
+    callback(this.modelsContainer.findSpecificBarItem(id));
   },
 
 };

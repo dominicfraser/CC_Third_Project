@@ -159,18 +159,29 @@ InventoryUI.prototype = {
 
   addEventListenersBarButtons: function(callback){
 console.log('inside addEvent')
-    var barTable = document.getElementById("bar-inventory-table"); 
-    for (var i = 0, row; row = barTable.rows[i]; i++) {
-    
+    var barTable = document.getElementById("bar-inventory-table");
+    var rowNumber = -1; 
+    var buttonNames = [];
+    for (var i = 0, row; row = barTable.rows[i]; i++) { 
        for (var d = 0, td; td = row.cells[d]; d++) {
-         var button = td.children[0]
-         console.log(button.value)
-         button.addEventListener('click', function(){
-  console.log('button click', button.value)
-            callback(button.value)
+        rowNumber += 1;
+        var cellIndex = rowNumber;
+        buttonNames.push(cellIndex)
+
+        buttonNames[cellIndex] = td.children[0]
+
+// console.log('buttonNames cellIndex value', buttonNames[cellIndex].value)
+
+        buttonNames[cellIndex].addEventListener('click', function(){
+
+console.log('button click', buttonNames[cellIndex].value)
+            callback(buttonNames[cellIndex].value)
          })
+//seems that the returned id of the onclick is always the last drinks id, even though the list of all buttons shows them with different ids 
+// console.log('list of buttons with eventListeners?', buttonNames)
        }  
     }
+console.log('button names array', buttonNames)
   },
 
   addCounts: function (items) {
