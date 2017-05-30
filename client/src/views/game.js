@@ -1,4 +1,4 @@
-var ModelsContainer = require('../models/models_container')
+var ModelsContainer = require('../models/models_container');
 
 var Game = function (player, bar) {
   this.player = player;
@@ -15,8 +15,14 @@ Game.prototype = {
       //   return
       // }
       //   else{
-            this.modelsContainer.addPlayerItem(drink, callback);
-  // }
+      // }
+
+      if (drink.value <= this.player.wallet){
+        this.modelsContainer.addPlayerItem(drink, callback);
+        return true
+      } else {
+        return false
+      }
 
   },
   removeDrinkFromPlayer: function(drink, callback){
