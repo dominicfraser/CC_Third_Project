@@ -23,15 +23,16 @@ console.log('inside main map', this)
   // var playerLeft = document.createElement('img');
   // playerLeft.src = "../build/public/img/edited_images/f1girl.png";
 
-  var playerBegin = document.createElement('img');
-  playerBegin.src = "../build/public/img/edited_images/f1girl.png"
-  var playerHeight = 45;
-  var playerWidth = playerHeight;
+  this.playerBegin = document.createElement('img');
+  this.playerBegin.src = "/public/img/edited_images/f1girl.png"
+  // this.playerBegin.src = "/public/img/edited_images/beer-icon-1.png"
+  this.playerHeight = 45;
+  this.playerWidth = this.playerHeight;
   
   context.beginPath();
-  context.moveTo(350,500);
-  currentPosition = [350,500];
-  window.addEventListener('keydown', movePlayer);
+  context.moveTo(350,450);
+  this.currentPosition = [350,450];
+  window.addEventListener('keydown', this.movePlayer.bind(this));
   
   window.addEventListener('keydown', this.placeOrder.bind(this));
 
@@ -61,8 +62,87 @@ Map.prototype = {
       console.log('inside IF of place order',this);
       this.interactionUI.askForDrink();
     };  
-      console.log('inside place order', this)
+      // console.log('inside place order', this)
   },
+
+  moveSprite: function(playerDirectionImage, xInc, yInc){
+    context.drawImage(playerDirectionImage, this.currentPosition[0]+xInc, this.currentPosition[1]+yInc, this.playerWidth, this.playerHeight)
+    // this.currentPosition[0] += xInc;
+    // this.currentPosition[1] += yInc;
+  },
+
+  movePlayer: function(e){
+    var context  = getPlayerCanvasContext();
+    var positionX = this.currentPosition[0];
+    var positionY = this.currentPosition[1];
+
+    if (e.key === "ArrowRight"){
+
+      var hitRightBorder = positionX + 5 >= 710
+
+      if (hitRightBorder){
+        console.log('can\'t move')
+      }
+      else {
+        this.moveSprite(this.playerBegin, 5, 0)
+
+        context.lineTo((positionX+5), positionY)
+        context.stroke()
+        this.currentPosition[0] = positionX+5
+        console.log("Right")
+      }
+    }
+    else if(e.key === "ArrowLeft"){
+      // if (positionX - 5 >= 0){
+        var hitLeftBorder = ((positionY - 5) <= 0)
+
+        var hitRightSideOfBar = (positionY <= 290 && positionY >= 0) && (positionX <= 240 && positionX >= 240)
+
+        if (hitLeftBorder){
+          return;
+        }
+        else if (hitRightSideOfBar){
+          return;
+        }
+        context.lineTo((positionX-5), positionY)
+        context.stroke()
+        this.currentPosition[0] = positionX-5
+        console.log("Left")
+      }
+    
+    else if(e.key === "ArrowUp"){
+      // if (positionY - 5 >= 0){
+        var hitTopBorder = ((positionX - 5) <= 0)
+
+        var hitBottomOfBar = (positionX >= 0 && positionX <= 240) && (positionY <= 290 && positionY >= 235)
+
+        if (hitTopBorder){
+          console.log('can\'t move')
+          return;
+        }
+        else if (hitBottomOfBar){
+          console.log('can\'t move')
+          return;
+        }
+
+        context.lineTo(positionX, (positionY-5))
+        context.stroke()
+        this.currentPosition[1] = positionY-5
+        console.log("Up")
+
+    }
+    else if(e.key === "ArrowDown"){
+      if (positionY + 5 <= 500){
+        context.lineTo(positionX, (positionY+5))
+        context.stroke()
+        this.currentPosition[1] = positionY+5
+        console.log("Down")
+      }
+    } 
+
+    else { return; }
+  },
+
 
 };
 
@@ -89,11 +169,12 @@ var loadCanvas = function() {
   var piano = document.createElement('img');
   piano.src = "/public/img/edited_images/piano.png";
 
-  var mainGirl = document.createElement('img');
-  mainGirl.src = "/public/img/edited_images/f1girl.png";
+  // var mainGirl = document.createElement('img');
+  // mainGirl.src = "/public/img/edited_images/f1girl.png";
 
   var guy = document.createElement('img');
   guy.src = "/public/img/edited_images/f1guy.png";
+
 
   context = getPlayerCanvasContext();
   mainContext = getMainCanvasContext();
@@ -126,9 +207,9 @@ var loadCanvas = function() {
     context.drawImage(this, 50, -160, 700, 500);
   };
 
-  mainGirl.onload = function() {
-    context.drawImage(this, 20, 180, 700, 500);
-  };
+  // mainGirl.onload = function() {
+  //   context.drawImage(this, 20, 180, 700, 500);
+  // };
 
   guy.onload = function() {
     context.drawImage(this, 100, -30, 700, 500);
@@ -150,86 +231,6 @@ var getPlayerCanvasContext = function(){
   var context = canvas.getContext("2d");
   return context;
 }
-
-var moveSprite = function(playerDirection, xInc, yInc){
-  var playerImage = this.playerBegin;
-  context.drawImage(playerImage, this.currentPosition[0]+xInc, this.currentPosition[1]+yInc, this.playerWidth, this.playerHeight)
-  this.currentPosition[0] += xInc;
-  this.currentPosition[1] += yInc;
-}
-
-var movePlayer = function(e){
-  var context  = getPlayerCanvasContext();
-  var positionX = currentPosition[0];
-  var positionY = currentPosition[1];
-
-  if (e.key === "ArrowRight"){
-
-    var hitRightBorder = positionX + 5 >= 710
-
-    var hitLeftEdgeOfSquare = (positionX + 5 >= 180) && (positionY <= 180) || (positionX + 5 >= 180) && (positionY <= 360) 
-
-    if (hitRightBorder){
-      console.log('can\'t move')
-    }
-    else {
-      context.lineTo((positionX+5), positionY)
-      context.stroke()
-      currentPosition[0] = positionX+5
-      console.log("Right")
-    }
-  }
-  else if(e.key === "ArrowLeft"){
-    // if (positionX - 5 >= 0){
-      var hitLeftBorder = ((positionY - 5) <= 0)
-
-      var hitRightSideOfBar = (positionY <= 290 && positionY >= 0) && (positionX <= 240 && positionX >= 240)
-
-      if (hitLeftBorder){
-        return;
-      }
-      else if (hitRightSideOfBar){
-        return;
-      }
-      context.lineTo((positionX-5), positionY)
-      context.stroke()
-      currentPosition[0] = positionX-5
-      console.log("Left")
-    }
-  
-  else if(e.key === "ArrowUp"){
-    // if (positionY - 5 >= 0){
-      var hitTopBorder = ((positionX - 5) <= 0)
-
-      var hitBottomOfBar = (positionX >= 0 && positionX <= 240) && (positionY <= 290 && positionY >= 235)
-
-      if (hitTopBorder){
-        console.log('can\'t move')
-        return;
-      }
-      else if (hitBottomOfBar){
-        console.log('can\'t move')
-        return;
-      }
-
-      context.lineTo(positionX, (positionY-5))
-      context.stroke()
-      currentPosition[1] = positionY-5
-      console.log("Up")
-
-  }
-  else if(e.key === "ArrowDown"){
-    if (positionY + 5 <= 500){
-      context.lineTo(positionX, (positionY+5))
-      context.stroke()
-      currentPosition[1] = positionY+5
-      console.log("Down")
-    }
-  } 
-
-  else { return; };
-
-};
 
 
 module.exports = Map;
