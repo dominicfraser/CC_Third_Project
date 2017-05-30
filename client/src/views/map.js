@@ -35,7 +35,7 @@ console.log('inside main map', this)
   window.addEventListener('keydown', this.movePlayer.bind(this));
   window.addEventListener('keydown', this.placeOrder.bind(this));
   window.addEventListener('keydown', this.interactWithMan.bind(this));
-  window.addEventListener(‘keydown’, this.playMusic.bind(this));
+  window.addEventListener('keydown', this.playMusic.bind(this));
 
   this.loadCanvas();
 //////////////to test coords
