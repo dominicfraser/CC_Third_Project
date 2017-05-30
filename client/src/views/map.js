@@ -15,24 +15,21 @@ var Map = function () {
 
   context = getPlayerCanvasContext();
   mainContext = getMainCanvasContext();
+
+  // var playerLeft = document.createElement('img');
+  // playerLeft.src = "../build/public/img/edited_images/f1girl.png";
+
+  var playerBegin = document.createElement('img');
+  playerBegin.src = "../build/public/img/edited_images/f1girl.png"
+  var playerHeight = 45;
+  var playerWidth = playerHeight;
   
   context.beginPath();
-  context.moveTo(0,0);
-  currentPosition = [0,0];
+  context.moveTo(350,500);
+  currentPosition = [350,500];
   window.addEventListener('keydown', movePlayer);
 
   window.addEventListener('keydown', placeOrder);
-
-  // testing adding item
-  // window.addEventListener('keydown', addItem);
-  var testItem = new Item({name: "Amstel", value: 4})
-
-  // this.game.addDrinkToPlayer(testItem, function (response) {
-  //   console.log('addDrinkToPlayer response data', response)
-  // })
-  // this.game.removeDrinkFromPlayer(testItem, function (response) {
-  //   console.log('removeDrinkFromPlayer response data', response)
-  // })
 
   loadCanvas();
 //////////////to test coords
@@ -51,14 +48,6 @@ var Map = function () {
       }, false);
 };
 //////////// delete after use
-
-//testing adding item
-var addItem = function(e){
-  if (e.key === "a"){
-    this.game.addDrinkToPlayer({name: "Amstel", value: 4});
-    loadCanvas();
-  };
-}.bind(this); 
 
 var placeOrder = function(e){
 console.log(e)
@@ -82,15 +71,6 @@ console.log(e)
 
 
 }.bind(this);
-
-var orderPlaced = function () {
-  //DO SOON
-}
-
-var orderNotPlaced = function () {
-  messageDisplay = document.getElementById("interaction-message");
-  messageDisplay.innerHTML = "What a loser...";
-}
 
 
 var loadCanvas = function() {
@@ -177,6 +157,12 @@ var getPlayerCanvasContext = function(){
   return context;
 }
 
+var moveSprite = function(playerDirection, xInc, yInc){
+  var playerImage = this.playerBegin;
+  context.drawImage(playerImage, this.currentPosition[0]+xInc, this.currentPosition[1]+yInc, this.playerWidth, this.playerHeight)
+  this.currentPosition[0] += xInc;
+  this.currentPosition[1] += yInc;
+}
 
 var movePlayer = function(e){
   var context  = getPlayerCanvasContext();
