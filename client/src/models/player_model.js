@@ -13,9 +13,7 @@ Player.prototype = {
   },
   acceptMoneyFromMan: function(money){
     this.wallet += money;
-  }
-
-
+  },
 }
 
 
