@@ -92,6 +92,8 @@ Map.prototype = {
 
       var hitStage = (positionY <= 160 && positionY >= 85) && (positionX <= 700 && positionX >= 485)
 
+      var hitSofas = (positionY <= 500 && positionY >= 200) && (positionX <= 700 && positionX >= 600)
+
       if (hitRightBorder){
         console.log('can\'t move')
       }
@@ -108,6 +110,9 @@ Map.prototype = {
         return;
       }
       else if (hitStage){
+        return;
+      }
+      else if (hitSofas){
         return;
       }
       else {
@@ -202,6 +207,8 @@ Map.prototype = {
 
         var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115)
 
+        var hitSofas = (positionY <= 500 && positionY >= 200) && (positionX <= 700 && positionX >= 600)
+
 
         if (hitBottomBorder){
           return;
@@ -210,6 +217,9 @@ Map.prototype = {
           return;
         }
         else if (hitChairsTable){
+          return;
+        }
+        else if (hitSofas){
           return;
         }
      
@@ -260,11 +270,11 @@ Map.prototype = {
     };
 
     sofaSetTop.onload = function() {
-      context.drawImage(this, 300, 15, 700, 500);
+      context.drawImage(this, 300, 35, 700, 500);
     };
 
     sofaSetBottom.onload = function() {
-      context.drawImage(this, 300, 140, 700, 500);
+      context.drawImage(this, 300, 170, 700, 500);
     };
 
     bartender.onload = function() {
