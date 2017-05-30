@@ -33,8 +33,9 @@ console.log('inside main map', this)
   this.currentPosition = [350,450];
 
   window.addEventListener('keydown', this.movePlayer.bind(this));
-  
   window.addEventListener('keydown', this.placeOrder.bind(this));
+  window.addEventListener('keydown', this.interactWithMan.bind(this));
+  window.addEventListener('keydown', this.playMusic.bind(this));
 
   this.loadCanvas();
 //////////////to test coords
@@ -57,12 +58,24 @@ console.log('inside main map', this)
 
 Map.prototype = {
 
+  playMusic: function(e){
+     if (e.key === "m"){
+       this.interactionUI.askToPlayPiano();
+     };
+  },
+
   placeOrder: function(e){
     if (e.key === "o"){
       // console.log('inside IF of place order',this);
       this.interactionUI.askForDrink();
     };  
       // console.log('inside place order', this)
+  },
+
+  interactWithMan: function(e){
+    if(e.key === "p"){
+      this.interactionUI.speakToMan();
+    }
   },
 
   drawBar: function() {

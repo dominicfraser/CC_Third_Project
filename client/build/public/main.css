@@ -91,7 +91,7 @@ td button img {
     height: auto;
 }
 
-#bar-inventory-table tr td img {
+#bar-inventory-table td img {
     height: 30px;
     width: 30px;
 }
@@ -101,5 +101,4 @@ button {
   border: 0;
   background: transparent;
 }
-
 
