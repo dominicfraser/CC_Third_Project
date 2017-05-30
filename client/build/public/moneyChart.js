@@ -15,7 +15,8 @@ var MoneyChart = function (playerWallet){
     series: [
     {
       name: "Your Money",
-      data: [playerWallet]
+      data: [playerWallet],
+      color: "#ffd24d"
     }
     ],
     xAxis: {

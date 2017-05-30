@@ -16,12 +16,12 @@ var DrunkChart = function(drunkLevel){
             {
               name: "Drunk",
               y: drunkLevel,
-              color: "#ffc700"
+              color: "#ff0000"
             },
             {
               name: "Sober",
               y: 100 - drunkLevel,
-              color: "#6bc4ea"
+              color: "#00cc00"
             },
           ]
         }

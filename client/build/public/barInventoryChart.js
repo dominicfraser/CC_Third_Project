@@ -14,7 +14,8 @@ var BarInventoryChart = function (barInventory){
     series: [
     {
       name: "Bar Inventory",
-      data: [tempAmount]
+      data: [tempAmount],
+      color: "#6600cc"
     }
     ],
     xAxis: {
