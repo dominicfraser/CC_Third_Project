@@ -1,5 +1,6 @@
 var Game = require('./game.js');
 var InventoryUI = require('./inventoryUI.js');
+var StatsUI = require('./statsUI.js');
 
 var InteractionUI = function (player, bar) {
   this.player = player;
@@ -32,10 +33,16 @@ InteractionUI.prototype = {
   orderPlaced: function() {
     console.log('in order placed in interactionUI',this)
     this.game.addDrinkToPlayer({name: "test", value: 10}, function (response) {
-      console.log('addDrinkToPlayer response data', response)
-    })
+      console.log('Drink should now be added to player')
+    });
 
+    console.log(this.player.wallet)
+    this.player.subtractItemValue({name: "test", value: 10});
+
+    // this.game.removeDrinkFromBar({name: "test", value: 10}, function (response) {
+    //   console.log('Drink should now be removed from bar');
     this.inventoryUI = new InventoryUI(this.player, this.bar);
+    this.statsUI = new StatsUI(this.player, this.bar);
   },
 
   orderNotPlaced: function() {
