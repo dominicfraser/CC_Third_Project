@@ -13,7 +13,6 @@ var InteractionUI = function (player, bar) {
 
   this.yesButton = document.createElement('button');
   this.yesButton.innerHTML = "Yes";
-
   this.noButton = document.createElement('button');
   this.noButton.innerHTML = "No";
 };
@@ -38,7 +37,7 @@ InteractionUI.prototype = {
 
   orderPlaced: function() {
     this.displayMessage("Please select your drink from the bar inventory");
-    //set on click listeners for bar
+ //set on click listeners for bar
     var orderedDrinkId = null;
     this.inventoryUI.addEventListenersBarButtons(function(id){
 console.log('callback id', id)
@@ -50,8 +49,6 @@ console.log('orderedDrinkId after callback',orderedDrinkId)
         this.game.findBarDrinkById(orderedDrinkId, function(itemToFind){
           itemOrdered = itemToFind;
         })
-
-
 
 console.log('item ordered in interactionUI', itemOrdered)
 
@@ -76,7 +73,7 @@ console.log('in setTimeout', this.player)
               this.displayMessage("You bought a drink!");
             } 
             else {
-              this.displayMessage("You don't have enough money to buy another drink, sort yourself out!");
+              this.displayMessage("You don't have enough money to buy another drink, sort yourself out! // or hands are full");
             };
 
             this.yesButton.remove();
@@ -105,7 +102,6 @@ console.log('in setTimeout', this.player)
     messageDisplay = document.getElementById("interaction-message");
     messageDisplay.innerHTML = message;
   },
-
 
 };
 
