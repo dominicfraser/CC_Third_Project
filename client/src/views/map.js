@@ -26,8 +26,8 @@ console.log('inside main map', this)
   this.playerBegin = document.createElement('img');
   this.playerBegin.src = "/public/img/edited_images/f1girl.png"
   // this.playerBegin.src = "/public/img/edited_images/beer-icon-1.png"
-  this.playerHeight = 45;
-  this.playerWidth = this.playerHeight;
+  this.playerHeight = 500;
+  this.playerWidth = 700;
   
   context.beginPath();
   context.moveTo(350,450);
@@ -66,7 +66,7 @@ Map.prototype = {
   },
 
   moveSprite: function(playerDirectionImage, xInc, yInc){
-    context.drawImage(playerDirectionImage, this.currentPosition[0]+xInc, this.currentPosition[1]+yInc, this.playerWidth, this.playerHeight)
+    context.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
     // this.currentPosition[0] += xInc;
     // this.currentPosition[1] += yInc;
   },
@@ -104,6 +104,8 @@ Map.prototype = {
         else if (hitRightSideOfBar){
           return;
         }
+        this.moveSprite(this.playerBegin, -5, 0)
+
         context.lineTo((positionX-5), positionY)
         context.stroke()
         this.currentPosition[0] = positionX-5
@@ -124,6 +126,7 @@ Map.prototype = {
           console.log('can\'t move')
           return;
         }
+        this.moveSprite(this.playerBegin, 0, -5)
 
         context.lineTo(positionX, (positionY-5))
         context.stroke()
@@ -133,6 +136,8 @@ Map.prototype = {
     }
     else if(e.key === "ArrowDown"){
       if (positionY + 5 <= 500){
+        this.moveSprite(this.playerBegin, 0, +5)
+
         context.lineTo(positionX, (positionY+5))
         context.stroke()
         this.currentPosition[1] = positionY+5
