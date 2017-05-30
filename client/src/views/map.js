@@ -25,13 +25,11 @@ console.log('inside main map', this)
 
   this.playerBegin = document.createElement('img');
   this.playerBegin.src = "/public/img/edited_images/f1girl.png"
-  // this.playerBegin.src = "/public/img/edited_images/beer-icon-1.png"
   this.playerHeight = 500;
   this.playerWidth = 700;
   
-  context.beginPath();
-  context.moveTo(350,450);
   this.currentPosition = [350,450];
+
   window.addEventListener('keydown', this.movePlayer.bind(this));
   
   window.addEventListener('keydown', this.placeOrder.bind(this));
@@ -65,10 +63,13 @@ Map.prototype = {
       // console.log('inside place order', this)
   },
 
+  drawBar: function() {
+    context.drawImage(backdrop, 0, 0, 700, 500);
+  },
+
   moveSprite: function(playerDirectionImage, xInc, yInc){
     context.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
-    // this.currentPosition[0] += xInc;
-    // this.currentPosition[1] += yInc;
+    // this.drawBar();
   },
 
   movePlayer: function(e){
@@ -85,15 +86,11 @@ Map.prototype = {
       }
       else {
         this.moveSprite(this.playerBegin, 5, 0)
-
-        context.lineTo((positionX+5), positionY)
-        context.stroke()
         this.currentPosition[0] = positionX+5
         console.log("Right")
       }
     }
     else if(e.key === "ArrowLeft"){
-      // if (positionX - 5 >= 0){
         var hitLeftBorder = ((positionY - 5) <= 0)
 
         var hitRightSideOfBar = (positionY <= 290 && positionY >= 0) && (positionX <= 240 && positionX >= 240)
@@ -105,15 +102,11 @@ Map.prototype = {
           return;
         }
         this.moveSprite(this.playerBegin, -5, 0)
-
-        context.lineTo((positionX-5), positionY)
-        context.stroke()
         this.currentPosition[0] = positionX-5
         console.log("Left")
       }
     
     else if(e.key === "ArrowUp"){
-      // if (positionY - 5 >= 0){
         var hitTopBorder = ((positionX - 5) <= 0)
 
         var hitBottomOfBar = (positionX >= 0 && positionX <= 240) && (positionY <= 290 && positionY >= 235)
@@ -127,9 +120,6 @@ Map.prototype = {
           return;
         }
         this.moveSprite(this.playerBegin, 0, -5)
-
-        context.lineTo(positionX, (positionY-5))
-        context.stroke()
         this.currentPosition[1] = positionY-5
         console.log("Up")
 
@@ -137,9 +127,6 @@ Map.prototype = {
     else if(e.key === "ArrowDown"){
       if (positionY + 5 <= 500){
         this.moveSprite(this.playerBegin, 0, +5)
-
-        context.lineTo(positionX, (positionY+5))
-        context.stroke()
         this.currentPosition[1] = positionY+5
         console.log("Down")
       }
@@ -173,9 +160,6 @@ var loadCanvas = function() {
 
   var piano = document.createElement('img');
   piano.src = "/public/img/edited_images/piano.png";
-
-  // var mainGirl = document.createElement('img');
-  // mainGirl.src = "/public/img/edited_images/f1girl.png";
 
   var guy = document.createElement('img');
   guy.src = "/public/img/edited_images/f1guy.png";
@@ -212,18 +196,10 @@ var loadCanvas = function() {
     context.drawImage(this, 50, -160, 700, 500);
   };
 
-  // mainGirl.onload = function() {
-  //   context.drawImage(this, 20, 180, 700, 500);
-  // };
-
   guy.onload = function() {
     context.drawImage(this, 100, -30, 700, 500);
   };
 };
-
-  // drawMap = function() {
-  //   context.drawImage(backdrop, 0, 0, 700, 500);
-  // };
 
 var getMainCanvasContext = function(){
   var canvas = document.getElementById("main-canvas");
