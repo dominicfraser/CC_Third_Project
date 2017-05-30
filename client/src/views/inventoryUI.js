@@ -157,6 +157,22 @@ InventoryUI.prototype = {
     }
   },
 
+  addEventListenersBarButtons: function(callback){
+console.log('inside addEvent')
+    var barTable = document.getElementById("bar-inventory-table"); 
+    for (var i = 0, row; row = barTable.rows[i]; i++) {
+    
+       for (var d = 0, td; td = row.cells[d]; d++) {
+         var button = td.children[0]
+         console.log(button.value)
+         button.addEventListener('click', function(){
+  console.log('button click', button.value)
+            callback(button.value)
+         })
+       }  
+    }
+  },
+
   addCounts: function (items) {
     for (item of items) {
       item.count = this.countItems(items, item);

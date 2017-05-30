@@ -22,7 +22,7 @@ InteractionUI.prototype = {
   askForDrink: function(){
     this.displayMessage("Would you like a drink?");
     var interactionArea = document.getElementById('middle');
-
+    console.log('in askForDrink in interactionUI')
     if(this.flag == false){
       interactionArea.appendChild(this.yesButton);
       interactionArea.appendChild(this.noButton);
@@ -37,34 +37,48 @@ InteractionUI.prototype = {
   },
 
   orderPlaced: function() {
-    var status = this.game.addDrinkToPlayer({name: "test", value: 10, alcoholLevel: 4}, function (response) {
-        console.log('Drink should now be added to player')
-      })
+    this.displayMessage("Please select your drink from the bar inventory");
+    //set on click listeners for bar
+    var orderedDrink = null;
+    this.inventoryUI.addEventListenersBarButtons(function(id){
+console.log('callback id', id)
+      orderedDrink = id;
+console.log('orderedDrink after callback',orderedDrink)
 
-    setTimeout(function(){
-      if (status === true ){
-        console.log('in order placed in interactionUI',this)
+      if(orderedDrink !== null){
+        var status = this.game.addDrinkToPlayer({name: "test", value: 10, alcoholLevel: 4}, function (response) {
+          console.log('Drink should now be added to player')
 
-        console.log(this.player.wallet)
-        this.player.subtractItemValue({name: "test", value: 10, alcoholLevel: 4});
-        this.player.increaseDrunkLevel({name: "test", value: 10, alcoholLevel: 4});
+          setTimeout(function(){
+            if (status === true ){
+              console.log('in order placed in interactionUI',this)
 
-        // this.game.removeDrinkFromBar({name: "test", value: 10}, function (response) {
-        //   console.log('Drink should now be removed from bar');
-        this.inventoryUI = new InventoryUI(this.player, this.bar);
-        this.statsUI = new StatsUI(this.player, this.bar);
+              console.log(this.player.wallet)
+              this.player.subtractItemValue({name: "test", value: 10, alcoholLevel: 4});
+              this.player.increaseDrunkLevel({name: "test", value: 10, alcoholLevel: 4});
 
-        this.displayMessage("You bought a drink!");
-      } 
-      else {
-        this.displayMessage("You don't have enough money to buy another drink, sort yourself out!");
-      };
+              // this.game.removeDrinkFromBar({name: "test", value: 10}, function (response) {
+                //   console.log('Drink should now be removed from bar');
+                this.inventoryUI = new InventoryUI(this.player, this.bar);
+                this.statsUI = new StatsUI(this.player, this.bar);
 
-      this.yesButton.remove();
-      this.noButton.remove();
-      this.flag = false;
+                this.displayMessage("You bought a drink!");
+              } 
+              else {
+                this.displayMessage("You don't have enough money to buy another drink, sort yourself out!");
+              };
 
-      }.bind(this), 2000, this.yesButton, this.noButton);
+              this.yesButton.remove();
+              this.noButton.remove();
+              this.flag = false;
+
+            }.bind(this), 2000, this.yesButton, this.noButton);
+
+        })
+      }
+      //remove on click listeners for bar ?
+
+    }.bind(this)); 
   },
 
   orderNotPlaced: function(yesButton, noButton) {
