@@ -43,50 +43,59 @@ InventoryUI.prototype = {
     var playerItemsFiltered = this.filterToUniqList(playerItemsWithCount)
 
     for (var item of playerItemsFiltered){
-      if (item.name === "Peroni"){
+      if (item.name === "Beer"){
       var td = document.createElement('td')
-      var imagePeroniButton = document.createElement('button')
-      imagePeroniButton.innerHTML = "<img src = https://images-na.ssl-images-amazon.com/images/I/71wvhFzpnrL._SX385_.jpg>"
+      var imageBeerButton = document.createElement('button')
+      imageBeerButton.innerHTML = "<img src = /public/img/edited_images/beer.png>";
 
-        td.appendChild(imagePeroniButton);
+        td.appendChild(imageBeerButton);
         tablePicture.appendChild(td);
 
         }
-      else if (item.name === "Amstel"){
+      else if (item.name === "Wine"){
       var td = document.createElement('td')
-      var imageAmstelButton = document.createElement('button')
-      imageAmstelButton.innerHTML = "<img src = http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/298x308/9df78eab33525d08d6e5fb8d27136e95/pimages/Amstel330ml.jpg>";
+      var imageWineButton = document.createElement('button')
+      imageWineButton.innerHTML = "<img src = /public/img/edited_images/wine.jpg>"
 
-        td.appendChild(imageAmstelButton);
+        td.appendChild(imageWineButton);
         tablePicture.appendChild(td);
 
         } 
-        else if (item.name === "Guinness"){
+        else if (item.name === "Coke"){
         var td = document.createElement('td')
-        var imageGuinnessButton = document.createElement('button')
-        imageGuinnessButton.innerHTML = "<img src = http://3.bp.blogspot.com/-DOthabqw9gQ/UtG_OpxcyFI/AAAAAAAAAEQ/yVjnr0-nO58/s1600/Guinness+single+glass.jpg>";
+        var imageCokeButton = document.createElement('button')
+        imageCokeButton.innerHTML = "<img src = /public/img/edited_images/coke.jpg>";
 
-          td.appendChild(imageGuinnessButton);
+          td.appendChild(imageCokeButton);
           tablePicture.appendChild(td);
 
         }  
         else if (item.name === "Apple Juice"){
         var td = document.createElement('td')
         var imageAppleJuiceButton = document.createElement('button')
-        imageAppleJuiceButton.innerHTML = "<img src = http://www.foodsafetynews.com/files/2013/07/applejuice_406.jpg>";
+        imageAppleJuiceButton.innerHTML = "<img src = /public/img/edited_images/applejuice.jpg>"
 
           td.appendChild(imageAppleJuiceButton);
           tablePicture.appendChild(td);
 
           } 
-        else if (item.name === "Cocktail"){
+        else if (item.name === "Long Island Iced Tea"){
         var td = document.createElement('td')
-        var imageCocktailButton = document.createElement('button')
-        imageCocktailButton.innerHTML = "<img src =http://az659704.vo.msecnd.net/v1/image/c_lpad,w_1500,h_1500/v1400600701/cocktail_manhattan-1.png>";
+        var imageLongIslandIcedTeaButton = document.createElement('button')
+        imageLongIslandIcedTeaButton.innerHTML = "<img src = /public/img/edited_images/longislandicedtea.png>";
 
-        td.appendChild(imageCocktailButton);
+        td.appendChild(imageLongIslandIcedTeaButton);
         tablePicture.appendChild(td);
       }
+        else if (item.name === "Pina Colada"){
+        var td = document.createElement('td')
+        var imagePinaColadaButton = document.createElement('button')
+        imagePinaColadaButton.innerHTML = "<img src = /public/img/edited_images/pinacolada.png>";
+
+        td.appendChild(imagePinaColadaButton);
+        tablePicture.appendChild(td);
+      }
+
     }
   },
 
