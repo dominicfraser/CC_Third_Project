@@ -1,47 +1,173 @@
 var Game = require('./game.js');
 var InventoryUI = require('./inventoryUI.js');
+var StatsUI = require('./statsUI.js');
 
 var InteractionUI = function (player, bar) {
   this.player = player;
   this.bar = bar;
 
+  this.flag = false;
+
   this.game = new Game(this.player, this.bar);
   this.inventoryUI = new InventoryUI(this.player, this.bar);
 
-  console.log('inside main interactionUI', this)
+  this.yesButton = document.createElement('button');
+  this.yesButton.innerHTML = "Yes";
+
+  this.noButton = document.createElement('button');
+  this.noButton.innerHTML = "No";
 };
 
 InteractionUI.prototype = {
+
+  askToPlayPiano: function(){
+    this.displayMessage("Shall we turn up the funk in here?");
+    var interactionArea = document.getElementById('middle');
+
+    if(this.flag == false){
+      interactionArea.appendChild(this.yesButton);
+      interactionArea.appendChild(this.noButton);
+
+      yesClick = this.yesButton.addEventListener('click', this.playTheMusic.bind(this));
+      noClick = this.noButton.addEventListener('click', function(){
+        this.dontPlayTheMusic(this.yesButton, this.noButton)
+      }.bind(this));
+
+      this.flag = true;
+    }
+  },
+
+  dontPlayTheMusic: function(yesButton, noButton){
+    messageDisplay = document.getElementById("interaction-message");
+    messageDisplay.innerHTML = "*Silence...*";
+
+    setTimeout(function(){
+      this.displayMessage("");
+      this.yesButton.remove();
+      this.noButton.remove();
+      this.flag = false;
+    }.bind(this), 2000, yesButton, noButton);
+  },
+
+  playTheMusic: function(){
+
+    messageDisplay = document.getElementById("interaction-message");
+    this.displayMessage("Let's get it poppin'")
+
+    document.getElementById("audio").play();
+
+    setTimeout(function(){
+      this.displayMessage("");
+      this.yesButton.remove();
+      this.noButton.remove();
+      this.flag = false;
+    }.bind(this), 2000, yesButton, noButton);
+
+  },
+
   askForDrink: function(){
     this.displayMessage("Would you like a drink?");
     var interactionArea = document.getElementById('middle');
 
-    var yesButton = document.createElement('button');
-    yesButton.innerHTML = "Yes";
+    if(this.flag == false){
+      interactionArea.appendChild(this.yesButton);
+      interactionArea.appendChild(this.noButton);
 
-    var noButton = document.createElement('button');
-    noButton.innerHTML = "No";
+      yesClick = this.yesButton.addEventListener('click', this.orderPlaced.bind(this));
+      noClick = this.noButton.addEventListener('click', function(){
+        this.orderNotPlaced(this.yesButton, this.noButton)
+      }.bind(this));
 
-    interactionArea.appendChild(yesButton);
-    interactionArea.appendChild(noButton);
-
-    yesClick = yesButton.addEventListener('click', this.orderPlaced.bind(this));
-    noClick = noButton.addEventListener('click', this.orderNotPlaced.bind(this));
+      this.flag = true;
+    }
   },
 
   orderPlaced: function() {
-    console.log('in order placed in interactionUI',this)
-    this.game.addDrinkToPlayer({name: "test", value: 10}, function (response) {
-      console.log('addDrinkToPlayer response data', response)
-    })
+    var status = this.game.addDrinkToPlayer({name: "test", value: 10, alcoholLevel: 4}, function (response) {
+        console.log('Drink should now be added to player')
+      })
 
-    this.inventoryUI = new InventoryUI(this.player, this.bar);
+    setTimeout(function(){
+      if (status === true ){
+        console.log('in order placed in interactionUI',this)
+
+        console.log(this.player.wallet)
+        this.player.subtractItemValue({name: "test", value: 10, alcoholLevel: 4});
+        this.player.increaseDrunkLevel({name: "test", value: 10, alcoholLevel: 4});
+
+        // this.game.removeDrinkFromBar({name: "test", value: 10}, function (response) {
+        //   console.log('Drink should now be removed from bar');
+        this.inventoryUI = new InventoryUI(this.player, this.bar);
+        this.statsUI = new StatsUI(this.player, this.bar);
+
+        this.displayMessage("You bought a drink!");
+      } 
+      else {
+        this.displayMessage("You don't have enough money to buy another drink, sort yourself out!");
+      };
+
+      this.yesButton.remove();
+      this.noButton.remove();
+      this.flag = false;
+
+      }.bind(this), 2000, this.yesButton, this.noButton);
   },
 
-  orderNotPlaced: function() {
+  orderNotPlaced: function(yesButton, noButton) {
     messageDisplay = document.getElementById("interaction-message");
     messageDisplay.innerHTML = "What a loser...";
-    //ADD TIMER?
+
+    setTimeout(function(){
+      this.displayMessage("");
+      this.yesButton.remove();
+      this.noButton.remove();
+      this.flag = false;
+    }.bind(this), 2000, yesButton, noButton);
+  },
+
+  speakToMan: function(){
+    this.displayMessage("Hello there, would you like some money?");
+    var interactionArea = document.getElementById('middle');
+
+    if(this.flag == false){
+      interactionArea.appendChild(this.yesButton);
+      interactionArea.appendChild(this.noButton);
+    }
+
+    yesClick = this.yesButton.addEventListener('click', this.acceptMan.bind(this));
+    noClick = this.noButton.addEventListener('click', function(){
+      this.rejectMan(this.yesButton, this.noButton)
+    }.bind(this));
+
+    this.flag = true;
+  },
+
+  rejectMan: function(yesButton, noButton){
+    messageDisplay = document.getElementById("interaction-message");
+    messageDisplay.innerHTML = "What an idiot...";
+
+    setTimeout(function(){
+      this.displayMessage("");
+      this.yesButton.remove();
+      this.noButton.remove();
+      this.flag = false;
+    }.bind(this), 2000, yesButton, noButton);
+  },
+
+  acceptMan: function(){
+    this.player.acceptMoneyFromMan(20);
+
+    messageDisplay = document.getElementById("interaction-message");
+    this.displayMessage("Aha! Here's 20 big ones! Go forth and quench thy thirst.")
+    this.statsUI = new StatsUI(this.player, this.bar);
+
+
+    setTimeout(function(){
+      this.displayMessage("");
+      this.yesButton.remove();
+      this.noButton.remove();
+      this.flag = false;
+    }.bind(this), 2000, yesButton, noButton);
   },
 
   displayMessage: function(message){
@@ -49,10 +175,8 @@ InteractionUI.prototype = {
     messageDisplay.innerHTML = message;
   },
 
+
 };
 
-// this.game.removeDrinkFromPlayer(testItem, function (response) {
-//   console.log('removeDrinkFromPlayer response data', response)
-// })
 
 module.exports = InteractionUI;
