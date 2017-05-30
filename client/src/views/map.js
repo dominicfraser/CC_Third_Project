@@ -19,15 +19,22 @@ console.log('inside main map', this)
 
   context = getPlayerCanvasContext();
   mainContext = getMainCanvasContext();
+
+  // var playerLeft = document.createElement('img');
+  // playerLeft.src = "../build/public/img/edited_images/f1girl.png";
+
+  var playerBegin = document.createElement('img');
+  playerBegin.src = "../build/public/img/edited_images/f1girl.png"
+  var playerHeight = 45;
+  var playerWidth = playerHeight;
   
   context.beginPath();
-  context.moveTo(0,0);
-  currentPosition = [0,0];
+  context.moveTo(350,500);
+  currentPosition = [350,500];
   window.addEventListener('keydown', movePlayer);
-
+  
   window.addEventListener('keydown', this.placeOrder.bind(this));
 
-  
   loadCanvas();
 //////////////to test coords
   var canvas = document.getElementById("player-canvas");
@@ -55,7 +62,6 @@ Map.prototype = {
       this.interactionUI.askForDrink();
     };  
       console.log('inside place order', this)
-
   },
 
 };
@@ -145,6 +151,12 @@ var getPlayerCanvasContext = function(){
   return context;
 }
 
+var moveSprite = function(playerDirection, xInc, yInc){
+  var playerImage = this.playerBegin;
+  context.drawImage(playerImage, this.currentPosition[0]+xInc, this.currentPosition[1]+yInc, this.playerWidth, this.playerHeight)
+  this.currentPosition[0] += xInc;
+  this.currentPosition[1] += yInc;
+}
 
 var movePlayer = function(e){
   var context  = getPlayerCanvasContext();
