@@ -34,15 +34,20 @@ section {
 
 #middle {
   width: 60%;
-
+  background-image: url("/public/img/edited_images/chalk_background.png");
+  color: white;
+  font-family: 'Bungee Outline', cursive;
 }
 
 #stats {
   width: 19%;
   text-align: center;
   background-image: url("/public/img/edited_images/corkboard.jpg")
+}
 
-
+#main-title {
+  text-align: center;
+  font-size: 30px;
 }
 
 #interaction-message{
@@ -61,13 +66,13 @@ section {
 #money-chart, #bar-inv-chart {
   height: 150px;
   background-image: url("/public/img/edited_images/corkboard.jpg");
-  opacity: 0.75;
+  /*opacity: 0.75;*/
 }
 
 #player-drunk-level {
   height: 250px;
   background-image: url("/public/img/edited_images/corkboard.jpg");
-  opacity: 0.75;
+  /*opacity: 0.75;*/
 }
 
 table {

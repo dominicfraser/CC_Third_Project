@@ -5,7 +5,7 @@ var DrunkChart = function(drunkLevel){
       chart: {
         type: "pie",
         renderTo: container,
-        backgroundColor: '#453535'
+        backgroundColor: "rgba(69, 53, 53, 0.3)"
       },
       title: {
         text: ""

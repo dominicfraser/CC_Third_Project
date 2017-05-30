@@ -8,11 +8,10 @@ var MoneyChart = function (playerWallet){
     chart: {
       type: "bar",
       renderTo: container,
-      backgroundColor: '#453535',
-      fillOpacity: '0.1'
+      backgroundColor: "rgba(69, 53, 53, 0.3)",
     },
     title: {
-      text: ""
+      text: "",
     },
     series: [
     {
@@ -22,7 +21,7 @@ var MoneyChart = function (playerWallet){
     }
     ],
     xAxis: {
-      categories: ["£"]
+      categories: ["£"],
     },
     yAxis: {
       title: {
