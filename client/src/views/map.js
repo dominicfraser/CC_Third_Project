@@ -14,11 +14,13 @@ var Map = function () {
   this.statsUI = new StatsUI(this.player, this.bar);
   this.interactionUI = new InteractionUI(this.player, this.bar);
 
-
 console.log('inside main map', this)
 
-  context = getPlayerCanvasContext();
-  mainContext = getMainCanvasContext();
+  this.context = this.getPlayerCanvasContext();
+  this.mainContext = this.getMainCanvasContext();
+
+  this.backdrop = document.createElement('img');
+  this.backdrop.src = "/public/img/edited_images/backdrop_empty.png";
 
   // var playerLeft = document.createElement('img');
   // playerLeft.src = "../build/public/img/edited_images/f1girl.png";
@@ -27,14 +29,14 @@ console.log('inside main map', this)
   this.playerBegin.src = "/public/img/edited_images/f1girl.png"
   this.playerHeight = 500;
   this.playerWidth = 700;
-  
+
   this.currentPosition = [350,450];
 
   window.addEventListener('keydown', this.movePlayer.bind(this));
   
   window.addEventListener('keydown', this.placeOrder.bind(this));
 
-  loadCanvas();
+  this.loadCanvas();
 //////////////to test coords
   var canvas = document.getElementById("player-canvas");
 
@@ -49,7 +51,7 @@ console.log('inside main map', this)
         var mousePos = getMousePos(canvas, evt);
         console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
       }, false);
-};  
+  };  
 //////////// delete after use
 //END MAIN MAP 
 
@@ -64,16 +66,16 @@ Map.prototype = {
   },
 
   drawBar: function() {
-    context.drawImage(backdrop, 0, 0, 700, 500);
+    this.mainContext.drawImage(this.backdrop, 0, 0, 700, 500);
   },
 
   moveSprite: function(playerDirectionImage, xInc, yInc){
+    this.drawBar();
     context.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
-    // this.drawBar();
   },
 
   movePlayer: function(e){
-    var context  = getPlayerCanvasContext();
+    var context  = this.getPlayerCanvasContext();
     var positionX = this.currentPosition[0];
     var positionY = this.currentPosition[1];
 
@@ -135,83 +137,81 @@ Map.prototype = {
     else { return; }
   },
 
+  loadCanvas: function() {
+    var backdrop = document.createElement('img');
+    backdrop.src = "/public/img/edited_images/backdrop_empty.png";
+
+    var tableSet = document.createElement('img');
+    tableSet.src = "/public/img/edited_images/table_set.png";
+
+    var sofaSetBottom = document.createElement('img');
+    sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
+
+    var sofaSetTop = document.createElement('img');
+    sofaSetTop.src = "/public/img/edited_images/sofa_set.png";
+
+    var bartender = document.createElement('img');
+    bartender.src = "/public/img/edited_images/f1bartender.png";
+
+    var stage = document.createElement('img');
+    stage.src = "/public/img/edited_images/stage.png";
+
+    var piano = document.createElement('img');
+    piano.src = "/public/img/edited_images/piano.png";
+
+    var guy = document.createElement('img');
+    guy.src = "/public/img/edited_images/f1guy.png";
+
+
+    context = this.getPlayerCanvasContext();
+    mainContext = this.getMainCanvasContext();
+
+    backdrop.onload = function() {
+      mainContext.drawImage(this, 0, 0, 700, 500); 
+    };
+
+    tableSet.onload = function() {
+      context.drawImage(this, -200, 110, 700, 500);
+    };
+
+    sofaSetTop.onload = function() {
+      context.drawImage(this, 200, -30, 700, 500);
+    };
+
+    sofaSetBottom.onload = function() {
+      context.drawImage(this, 200, 140, 700, 500);
+    };
+
+    bartender.onload = function() {
+      context.drawImage(this, -190, -40, 700, 500);
+    };
+
+    stage.onload = function() {
+      context.drawImage(this, 254, -140, 700, 500);
+    };
+
+    piano.onload = function() {
+      context.drawImage(this, 50, -160, 700, 500);
+    };
+
+    guy.onload = function() {
+      context.drawImage(this, 100, -30, 700, 500);
+    };
+  },
+
+  getMainCanvasContext: function(){
+    var canvas = document.getElementById("main-canvas");
+    var context = canvas.getContext("2d");
+    return context;
+  },
+
+  getPlayerCanvasContext: function(){
+    var canvas = document.getElementById("player-canvas");
+    var context = canvas.getContext("2d");
+    return context;
+  },
 
 };
-
-
-var loadCanvas = function() {
-  var backdrop = document.createElement('img');
-  backdrop.src = "/public/img/edited_images/backdrop_empty.png";
-
-  var tableSet = document.createElement('img');
-  tableSet.src = "/public/img/edited_images/table_set.png";
-
-  var sofaSetBottom = document.createElement('img');
-  sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
-
-  var sofaSetTop = document.createElement('img');
-  sofaSetTop.src = "/public/img/edited_images/sofa_set.png";
-
-  var bartender = document.createElement('img');
-  bartender.src = "/public/img/edited_images/f1bartender.png";
-
-  var stage = document.createElement('img');
-  stage.src = "/public/img/edited_images/stage.png";
-
-  var piano = document.createElement('img');
-  piano.src = "/public/img/edited_images/piano.png";
-
-  var guy = document.createElement('img');
-  guy.src = "/public/img/edited_images/f1guy.png";
-
-
-  context = getPlayerCanvasContext();
-  mainContext = getMainCanvasContext();
-
-  backdrop.onload = function() {
-    mainContext.drawImage(this, 0, 0, 700, 500); 
-  };
-
-  tableSet.onload = function() {
-    context.drawImage(this, -200, 110, 700, 500);
-  };
-
-  sofaSetTop.onload = function() {
-    context.drawImage(this, 200, -30, 700, 500);
-  };
-
-  sofaSetBottom.onload = function() {
-    context.drawImage(this, 200, 140, 700, 500);
-  };
-
-  bartender.onload = function() {
-    context.drawImage(this, -190, -40, 700, 500);
-  };
-
-  stage.onload = function() {
-    context.drawImage(this, 254, -140, 700, 500);
-  };
-
-  piano.onload = function() {
-    context.drawImage(this, 50, -160, 700, 500);
-  };
-
-  guy.onload = function() {
-    context.drawImage(this, 100, -30, 700, 500);
-  };
-};
-
-var getMainCanvasContext = function(){
-  var canvas = document.getElementById("main-canvas");
-  var context = canvas.getContext("2d");
-  return context;
-}
-
-var getPlayerCanvasContext = function(){
-  var canvas = document.getElementById("player-canvas");
-  var context = canvas.getContext("2d");
-  return context;
-}
 
 
 module.exports = Map;
