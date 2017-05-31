@@ -109,9 +109,11 @@ Map.prototype = {
   interactionsFunctions: function(e){
     var positionX = this.currentPosition[0];
     var positionY = this.currentPosition[1];
+    document.activeElement.blur();
     if (e.key === "Enter"){
-      if(((positionX >= 370 && positionX <= 430) && (positionY >= 145 && positionY <= 145)))
+      if(((positionX >= 370 && positionX <= 430) && (positionY === 140)))
       {
+
         this.interactionUI.askToPlayPiano();
       }
       else if(((positionX >= 10 && positionX <= 230) && (positionY >= 290 && positionY <= 290)) 
