@@ -11,7 +11,6 @@ var InventoryUI = function(player, bar){
     this.renderPlayerItemsCountDropdown(playerItems);
   }.bind(this));
   
-
   modelsContainer.allBarItems(function(barItems){
     this.renderBarItemsCountDropdown(barItems);
     this.renderBarItemsImages(barItems);
@@ -158,7 +157,6 @@ InventoryUI.prototype = {
   },
 
   addEventListenersBarButtons: function(callback){
-console.log('inside addEventListenersBarButtons')
     var barTable = document.getElementById("bar-inventory-table");
     var rowNumber = -1; 
     var buttonNames = [];
@@ -167,16 +165,35 @@ console.log('inside addEventListenersBarButtons')
         rowNumber += 1;
         var cellIndex = rowNumber;
         buttonNames.push(cellIndex)
-
         buttonNames[cellIndex] = td.children[0]
        }  
     }
     buttonNames.forEach(function(button){
-
-      button.addEventListener('click', function(){
+      button.onclick = function(event){
 console.log('button click', button.value)
-        callback(button.value)
-      })
+        callback(button.value);
+      }
+    });
+  },
+  removeEventListenersBarButtons: function(callback){
+console.log('in remove event listener')
+    var barTable = document.getElementById("bar-inventory-table");
+    var rowNumber = -1; 
+    var buttonNames = [];
+    for (var i = 0, row; row = barTable.rows[i]; i++) { 
+       for (var d = 0, td; td = row.cells[d]; d++) {
+        rowNumber += 1;
+        var cellIndex = rowNumber;
+        buttonNames.push(cellIndex);
+        buttonNames[cellIndex] = td.children[0]
+       }  
+    }
+console.log('all buttons?',buttonNames)
+    buttonNames.forEach(function(button){
+          button.onclick = function(event){
+    console.log('button click remove', button.value)
+            callback("Please order a drink from the bar");
+          }
     });
   },
 

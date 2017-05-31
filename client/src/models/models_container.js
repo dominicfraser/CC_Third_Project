@@ -60,7 +60,6 @@ ModelsContainer.prototype = {
             }
         }
       callback(itemToFind);
-      
     }.bind(this));
   },
 };
