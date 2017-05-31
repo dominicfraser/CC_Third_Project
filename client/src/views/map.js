@@ -41,6 +41,8 @@ console.log('inside main map', this)
   window.addEventListener('keydown', this.placeOrder.bind(this));
   window.addEventListener('keydown', this.interactWithMan.bind(this));
   window.addEventListener('keydown', this.playMusic.bind(this));
+  window.addEventListener('keydown', this.behindBar.bind(this));
+
 
   this.loadCanvas();
 //////////////to test coords
@@ -61,6 +63,17 @@ console.log('inside main map', this)
   };                          //END MAIN MAP 
 
 Map.prototype = {
+
+  behindBar: function(e){
+    var positionX = this.currentPosition[0];
+    var positionY = this.currentPosition[1];
+      if (e.key === "ArrowLeft"){
+        if((positionX >= 240 && positionX <= 240) && (positionY >= 95 && positionY <= 145))
+      {
+       this.interactionUI.cantGoBehindBar();
+     } else{return;}
+    }
+   },
 
   playMusic: function(e){
     var positionX = this.currentPosition[0];
@@ -88,7 +101,6 @@ Map.prototype = {
       } else {return;}
     }
   },
-
 
 
 

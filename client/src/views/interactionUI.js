@@ -20,6 +20,32 @@ var InteractionUI = function (player, bar) {
 
 InteractionUI.prototype = {
 
+  cantGoBehindBar:function(){
+    this.displayMessage("Hey! Customers can't come behind the bar. You better scram before I get the bouncer, punk. Do you REALLY want me to..?")
+    var interactionArea = document.getElementById('middle');
+
+    if(this.flag == false){
+      interactionArea.appendChild(this.noButton);
+      this.noButton.innerText = "NO!!!"
+      noClick = this.noButton.addEventListener('click', function(){
+        this.noBehindBar(this.noButton)
+      }.bind(this));
+
+      this.flag = true;
+    }
+  },
+
+  noBehindBar: function(noButton){
+    messageDisplay = document.getElementById("interaction-message");
+    messageDisplay.innerHTML = "Last chance, punk...";
+
+    setTimeout(function(){
+      this.displayMessage("");
+      this.noButton.remove();
+      this.flag = false;
+    }.bind(this), 2000, noButton);
+  },
+
   askToPlayPiano: function(){
     this.displayMessage("Shall we turn up the funk in here?");
     var interactionArea = document.getElementById('middle');
