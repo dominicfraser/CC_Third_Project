@@ -32,6 +32,16 @@ console.log('inside main map', this)
 
   this.playerBegin = document.createElement('img');
   this.playerBegin.src = "/public/img/edited_images/f1girl.png"
+
+  this.playerLeft = document.createElement('img');
+  this.playerLeft.src = "/public/img/edited_images/l1girl.png"
+
+  this.playerRight = document.createElement('img');
+  this.playerRight.src = "/public/img/edited_images/r1girl.png"
+
+  this.playerUp = document.createElement('img');
+  this.playerUp.src = "/public/img/edited_images/b1girl.png"
+
   this.playerHeight = 500;
   this.playerWidth = 700;
 
@@ -152,7 +162,7 @@ console.log('current y', this.currentPosition[1])
         return;
       }
       else {
-        this.moveSprite(this.playerBegin, 5, 0)
+        this.moveSprite(this.playerRight, 5, 0)
         this.currentPosition[0] = positionX+5
       }
     }
@@ -180,7 +190,7 @@ console.log('current y', this.currentPosition[1])
           return;
         }
 
-        this.moveSprite(this.playerBegin, -5, 0)
+        this.moveSprite(this.playerLeft, -5, 0)
         this.currentPosition[0] = positionX-5
       }
     
@@ -214,7 +224,7 @@ console.log('current y', this.currentPosition[1])
         else if (hitStage){
           return;
         }
-        this.moveSprite(this.playerBegin, 0, -5)
+        this.moveSprite(this.playerUp, 0, -5)
         this.currentPosition[1] = positionY-5
     }
     
