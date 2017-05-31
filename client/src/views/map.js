@@ -70,6 +70,7 @@ Map.prototype = {
 
   drawBar: function() {
     this.mainContext.drawImage(this.backdrop, 0, 0, 700, 500);
+    this.context.drawImage(this.guy, 100, -30, 700, 500);
   },
 
   moveSprite: function(playerDirectionImage, xInc, yInc){
