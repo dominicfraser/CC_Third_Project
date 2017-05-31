@@ -238,6 +238,12 @@ console.log('current y', this.currentPosition[1])
     var guy = document.createElement('img');
     guy.src = "/public/img/edited_images/f1guy.png";
 
+    var stageGuy = document.createElement('img');
+    stageGuy.src = "/public/img/edited_images/stage_guy.png";  
+
+    var stageGirl = document.createElement('img');
+    stageGirl.src = "/public/img/edited_images/stage_girl.png";    
+
     context = this.getPlayerCanvasContext();
     mainContext = this.getMainCanvasContext();
 
@@ -263,6 +269,14 @@ console.log('current y', this.currentPosition[1])
 
     stage.onload = function() {
       context.drawImage(this, 254, -140, 700, 500);
+    };
+
+    stageGuy.onload = function() {
+      context.drawImage(this, 230, -160, 700, 500);
+    };
+
+    stageGirl.onload = function() {
+      context.drawImage(this, 270, -160, 700, 500);
     };
 
     piano.onload = function() {

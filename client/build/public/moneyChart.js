@@ -11,7 +11,7 @@ var MoneyChart = function (playerWallet){
       backgroundColor: "rgba(69, 53, 53, 0.3)",
     },
     title: {
-      text: "",
+      text: ""
     },
     series: [
     {
@@ -22,12 +22,25 @@ var MoneyChart = function (playerWallet){
     ],
     xAxis: {
       categories: ["£"],
+      labels: {
+          style:{
+            color: "white"
+        }
+      }
     },
     yAxis: {
       title: {
-        text: "Your Money"
+        text: "Your Money",
+        style: {
+          color: "white"
+        }
       },
-      min: 0
+      min: 0,
+      labels: {
+          style:{
+            color: "white"
+        }
+      }
     },
     legend: {
       enabled: false

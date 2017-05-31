@@ -24,9 +24,17 @@ var BarInventoryChart = function (barInventory){
     },
     yAxis: {
       title: {
-        text: "Bar Drinks Remaining"
+        text: "Bar Drinks Remaining",
+        style: {
+          color: "white"
+        }
       },
-      min: 0
+      min: 0,
+      labels: {
+          style:{
+            color: "white"
+        }
+      }
     },
     legend: {
       enabled: false
