@@ -51,7 +51,10 @@ section {
 #inventory {
   width: 19%;
   text-align: center;
-  background-image: url("/public/img/edited_images/corkboard.jpg")
+  background-image: url("/public/img/edited_images/corkboard.jpg");
+  font-family: 'Quantico', serif;
+  font-size: 10px;
+  color: white;
   }
 
 #middle {
@@ -93,6 +96,11 @@ section {
 
 table {
   background: rgba(69, 53, 53, 0.3);
+}
+
+#player-inventory-table td{
+  font-family: 'Quantico', serif
+  font-size: 16px;
 }
 
 #player-inventory-picture td img {
