@@ -10,6 +10,10 @@ var InteractionUI = function (player, bar) {
 
   this.game = new Game(this.player, this.bar);
   this.inventoryUI = new InventoryUI(this.player, this.bar);
+  // this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
+  //   this.displayMessage(message);
+  // }.bind(this));
+
 
   this.yesButton = document.createElement('button');
   this.yesButton.innerHTML = "Yes";
@@ -39,13 +43,13 @@ InteractionUI.prototype = {
     this.displayMessage("Please select your drink from the bar inventory");
  //set on click listeners for bar
     var orderedDrinkId = null;
-    this.inventoryUI.addEventListenersBarButtons(function(id){
+    this.inventoryUI.addOnClickBarButtonsToBuyDrink(function(id){
       orderedDrinkId = id;
 
       if(orderedDrinkId !== null){
         this.game.findBarDrinkById(orderedDrinkId, function(itemOrdered){
           
-          this.inventoryUI.removeEventListenersBarButtons(function(message){
+          this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
             this.displayMessage(message);
           }.bind(this));
 

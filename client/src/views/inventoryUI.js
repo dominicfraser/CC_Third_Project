@@ -156,7 +156,7 @@ InventoryUI.prototype = {
     }
   },
 
-  addEventListenersBarButtons: function(callback){
+  addOnClickBarButtonsToBuyDrink: function(callback){
     var barTable = document.getElementById("bar-inventory-table");
     var rowNumber = -1; 
     var buttonNames = [];
@@ -175,7 +175,7 @@ console.log('button click', button.value)
       }
     });
   },
-  removeEventListenersBarButtons: function(callback){
+  addOnClickBarButtonsTellGoToBar: function(callback){
 console.log('in remove event listener')
     var barTable = document.getElementById("bar-inventory-table");
     var rowNumber = -1; 

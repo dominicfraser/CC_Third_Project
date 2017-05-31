@@ -5,7 +5,6 @@ var Game = function (player, bar) {
   this.bar = bar;
 //DB Querys
   this.modelsContainer = new ModelsContainer;
-
 };
 
 Game.prototype = {
