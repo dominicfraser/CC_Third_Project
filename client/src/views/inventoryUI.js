@@ -16,10 +16,8 @@ InventoryUI.prototype = {
     this.modelsContainer.allPlayerItems(function(playerItems){
       this.renderPlayerItemsImages(playerItems);
       this.renderPlayerItemsCountDropdown(playerItems);
-console.log('onComplete before calling', onComplete )
 
       onComplete();
-
     }.bind(this));
     
     this.modelsContainer.allBarItems(function(barItems){
@@ -232,11 +230,6 @@ console.log('all buttons?',buttonNames)
   addOnClickPlayerButtonsToDrink: function(callback){
     var playerButtons = document.getElementsByClassName("player-drink-button");
     var playerButtonsArray = Array.from(playerButtons);
-console.log('playerButtons: ', playerButtons)
-// console.log('Array.from(playerButtons): ', Array.from(playerButtons))
-
-// console.log('addOnClickPlayerButtonsToDrink has been loaded')
-// console.log('list of player buttons', buttonNames);
     playerButtonsArray.forEach(function(button){
           button.onclick = function(event){
 console.log('onclick has been assigned to button')

@@ -27,6 +27,8 @@ playerRouter.post('/', function(req, res) {
   var item = new Item({
     name: req.body.name,
     value: req.body.value,
+    id: req.body.id,
+    alcoholLevel: req.body.alcoholLevel
   });
   query.addToPlayer(item, function (results) {
     res.json(results)
