@@ -43,10 +43,8 @@ Game.prototype = {
   },
 
   findBarDrinkById: function(id, callback){
-console.log('findBarDrinkById id',id)
-console.log('this is a callback? in GAME',callback)
 
-    callback(this.modelsContainer.findSpecificBarItem(id));
+      this.modelsContainer.findSpecificBarItem(id, callback);
   },
 
 };

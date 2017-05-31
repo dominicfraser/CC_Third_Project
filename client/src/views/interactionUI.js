@@ -45,36 +45,39 @@ console.log('callback id', id)
 console.log('orderedDrinkId after callback',orderedDrinkId)
 
       if(orderedDrinkId !== null){
-        var itemOrdered = null;
-        this.game.findBarDrinkById(orderedDrinkId, function(itemToFind){
-          itemOrdered = itemToFind;
-        })
-
-console.log('item ordered in interactionUI', itemOrdered)
-
-        var status = this.game.addDrinkToPlayer({name: "test", value: 10, alcoholLevel: 4}, function (errorMessage, updatedData) {
-console.log('Drink should now be added to player')
+        this.game.findBarDrinkById(orderedDrinkId, function(itemOrdered){
+console.log('item ordered in interactionUI in findBarDrinkById', itemOrdered)
+        
+          this.game.addDrinkToPlayer(itemOrdered, function (errorMessage, updatedData) {
+  console.log('Drink should now be added to player')
 
             if(errorMessage){
               this.displayMessage(errorMessage);
             }
             else {
-              this.player.subtractItemValue({name: "test", value: 10, alcoholLevel: 4});
-              this.player.increaseDrunkLevel({name: "test", value: 10, alcoholLevel: 4});
+              this.player.subtractItemValue(itemOrdered);
+              this.player.increaseDrunkLevel(itemOrdered);
 
-              // this.game.removeDrinkFromBar({id: "592d72654cfcf4a239eead0e"}, function (response) {
-              //     console.log('Drink should now be removed from bar'); })
+              this.game.removeDrinkFromBar(itemOrdered, function (newBarList) {
+                console.log('Drink should now be removed from bar'); 
 
-              this.inventoryUI = new InventoryUI(this.player, this.bar);
-              this.statsUI = new StatsUI(this.player, this.bar);
+                // this.bar.addMoney(itemOrdered)
+                //this.bar.inventoryLevel = newBarList.length
 
-              this.displayMessage("You bought a drink!");
+                this.inventoryUI = new InventoryUI(this.player, this.bar);
+                this.statsUI = new StatsUI(this.player, this.bar);
+
+                this.displayMessage("You bought a drink!");
+              }.bind(this))
+
+              
             }
             this.yesButton.remove();
             this.noButton.remove();
             this.flag = false;
+          }.bind(this))
         }.bind(this))
-      
+        
       }
     }.bind(this)); 
   },
