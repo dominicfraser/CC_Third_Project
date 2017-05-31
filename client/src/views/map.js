@@ -14,6 +14,8 @@ var Map = function () {
   this.statsUI = new StatsUI(this.player, this.bar);
   this.interactionUI = new InteractionUI(this.player, this.bar);
 
+  this.homePagePassedFlag = false;
+
 console.log('inside main map', this)
 
   this.context = this.getPlayerCanvasContext();
@@ -281,7 +283,10 @@ console.log('current y', this.currentPosition[1])
   },
 
   loadCanvas: function(e) {
-    if (e.key === "Enter"){
+    if (e.key === "Enter" && this.homePagePassedFlag === false){
+
+      this.homePagePassedFlag = true;
+      this.interactionUI.displayMessage("Welcome to Thursday nights at CodeClan!");
 
       mainContext.clearRect(0, 0, 700, 500);
 
@@ -290,9 +295,6 @@ console.log('current y', this.currentPosition[1])
 
       var tableSet = document.createElement('img');
       tableSet.src = "/public/img/edited_images/table_set.png";
-
-      var player = document.createElement('img');
-      player.src = "/public/img/edited_images/f1girl2.png";
 
       var sofaSetBottom = document.createElement('img');
       sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
@@ -316,7 +318,12 @@ console.log('current y', this.currentPosition[1])
       stageGuy.src = "/public/img/edited_images/stage_guy.png";  
 
       var stageGirl = document.createElement('img');
-      stageGirl.src = "/public/img/edited_images/stage_girl.png";    
+      stageGirl.src = "/public/img/edited_images/stage_girl.png";  
+
+      if (this.homePagePassedFlag = true){
+        var player = document.createElement('img');
+        player.src = "/public/img/edited_images/f1girl2.png";
+      } 
 
       context = this.getPlayerCanvasContext();
       mainContext = this.getMainCanvasContext();
