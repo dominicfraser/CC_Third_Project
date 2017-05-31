@@ -34,6 +34,4 @@ playerRouter.post('/', function(req, res) {
 });
 
 
-
-
 module.exports = playerRouter;
