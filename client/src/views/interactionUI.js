@@ -80,7 +80,7 @@ InteractionUI.prototype = {
     this.yesButton.innerHTML = "Yes";
     this.noButton = document.createElement('button');
     this.noButton.innerHTML = "No";
-    
+
     this.displayMessage("Shall we turn up the funk in here?");
     var interactionArea = document.getElementById('middle');
 
@@ -142,6 +142,11 @@ InteractionUI.prototype = {
 
 //interact at bar
   askForDrink: function(){
+    this.yesButton = document.createElement('button');
+    this.yesButton.innerHTML = "Yes";
+    this.noButton = document.createElement('button');
+    this.noButton.innerHTML = "No";
+
     this.displayMessage("Would you like a drink?");
     var interactionArea = document.getElementById('middle');
     console.log('in askForDrink in interactionUI')
@@ -218,24 +223,41 @@ console.log('Trying to remove drink from bar');
 
 //interact with man
   speakToMan: function(){
+    this.yesButton = document.createElement('button');
+    this.yesButton.innerHTML = "Yes";
+    this.noButton = document.createElement('button');
+    this.noButton.innerHTML = "No";
+
     this.displayMessage("Hello there, would you like some money?");
     var interactionArea = document.getElementById('middle');
 
     if(this.flag == false){
       interactionArea.appendChild(this.yesButton);
+      this.yesButton.innerText = "Heads";
       interactionArea.appendChild(this.noButton);
+      this.noButton.innerText = "Tails";
     }
 
     yesClick = this.yesButton.addEventListener('click', this.acceptMan.bind(this));
-    noClick = this.noButton.addEventListener('click', function(){
-      this.rejectMan(this.yesButton, this.noButton)
-    }.bind(this));
+    noClick = this.noButton.addEventListener('click', this.rejectMan.bind(this));
 
     this.flag = true;
   },
-  rejectMan: function(yesButton, noButton){
-    messageDisplay = document.getElementById("interaction-message");
-    messageDisplay.innerHTML = "What an idiot...";
+  
+  coinFlip: function() {
+      return (Math.floor(Math.random() * 2) == 0) ? "heads" : "tails";
+  },
+
+  rejectMan: function(){
+    var coinResult = this.coinFlip();
+    console.log(coinResult);
+    if (coinResult === "heads"){
+      messageDisplay = document.getElementById("interaction-message");
+      messageDisplay.innerHTML = "What an idiot...";
+    } else {
+      this.displayMessage("Aha! Here's 20 big ones! Go forth and quench thy thirst.")
+      this.player.acceptMoneyFromMan(20);
+    }
 
     setTimeout(function(){
       this.displayMessage("");
@@ -244,12 +266,20 @@ console.log('Trying to remove drink from bar');
       this.flag = false;
     }.bind(this), 2000, this.yesButton, this.noButton);
   },
+
   acceptMan: function(){
+    var coinResult = this.coinFlip();
+    console.log(coinResult);
+    if (coinResult === "heads"){
     this.player.acceptMoneyFromMan(20);
 
     messageDisplay = document.getElementById("interaction-message");
     this.displayMessage("Aha! Here's 20 big ones! Go forth and quench thy thirst.")
     this.statsUI = new StatsUI(this.player, this.bar);
+  } else {
+    messageDisplay = document.getElementById("interaction-message");
+    messageDisplay.innerHTML = "What an idiot...";
+  }
 
     setTimeout(function(){
       this.displayMessage("");
