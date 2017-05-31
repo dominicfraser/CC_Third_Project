@@ -69,7 +69,6 @@ console.log('inside main map', this)
   window.addEventListener('keydown', this.movePlayer.bind(this));
   window.addEventListener('keydown', this.interactionsFunctions.bind(this));
 
-
   this.loadWelcomeScreen();
   window.addEventListener('keypress', this.loadCanvas.bind(this));
 
