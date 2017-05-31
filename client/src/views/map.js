@@ -38,9 +38,9 @@ console.log('inside main map', this)
   this.currentPosition = [350,450];
 
   window.addEventListener('keydown', this.movePlayer.bind(this));
-  window.addEventListener('keydown', this.placeOrder.bind(this));
-  window.addEventListener('keydown', this.interactWithMan.bind(this));
-  window.addEventListener('keydown', this.playMusic.bind(this));
+  window.addEventListener('keydown', this.interactionsFunctions.bind(this));
+
+
 
   this.loadCanvas();
 //////////////to test coords
@@ -62,49 +62,35 @@ console.log('inside main map', this)
 
 Map.prototype = {
 
-  playMusic: function(e){
+  interactionsFunctions: function(e){
     var positionX = this.currentPosition[0];
     var positionY = this.currentPosition[1];
-     if (e.key === "m"){
+    if (e.key === "Enter"){
+
       if(((positionX >= 370 && positionX <= 430) && (positionY >= 145 && positionY <= 145)))
       {
-       this.interactionUI.askToPlayPiano();
-     } else{return;}
-    }
-  },
-
-  // PIANO
-   // (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345)
-
-  placeOrder: function(e){
-    var positionX = this.currentPosition[0];
-    var positionY = this.currentPosition[1];
-    if( e.key === "o") {
-      if( ((positionX >= 10 && positionX <= 230) && (positionY >= 290 && positionY <= 290)) 
+        this.interactionUI.askToPlayPiano();
+      }
+      else if(((positionX >= 10 && positionX <= 230) && (positionY >= 290 && positionY <= 290)) 
         || 
-        ((positionX >= 240 && positionX <= 240) && (positionY >= 160 && positionY <= 280)) )
+        ((positionX >= 240 && positionX <= 240) && (positionY >= 160 && positionY <= 280)))
       {
         this.interactionUI.askForDrink();
-      } else {return;}
-    }
-  },
-
-
-
-
-  interactWithMan: function(e){
-    var positionX = this.currentPosition[0];
-    var positionY = this.currentPosition[1];
-    if(e.key === "p"){
-      if((positionX >= 400 && positionX <= 490) && (positionY >= 170 && positionY <= 290)) 
+      }
+      else if(((positionX >= 400 && positionX <= 490) && (positionY >= 170 && positionY <= 290))) 
       {
-        this.interactionUI.speakToMan();
-      } else {return;}
-    }
+       this.interactionUI.speakToMan();
+     }
+    } 
+    else if (e.key === "ArrowLeft"){
+        if(((positionX <= 240) && (positionY >= 95 && positionY <= 145)))
+        {
+          this.interactionUI.cantGoBehindBar();
+        }
+      } 
+    else {return}
+    
   },
-
-  // AROUND THE MAN
-   // (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410)
 
   drawUpperCanvas: function(){
       context.drawImage(this.tableSet, -200, 180, 700, 500);
