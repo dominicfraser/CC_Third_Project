@@ -1,6 +1,6 @@
 var RequestHelper = function() {
 
-}
+};
 
 RequestHelper.prototype = {
   makeGetRequest: function (url, callback) {
@@ -37,6 +37,6 @@ RequestHelper.prototype = {
     })
     request.send(payload);
   }
-}
+};
 
 module.exports = RequestHelper;
