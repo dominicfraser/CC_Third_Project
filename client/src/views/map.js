@@ -14,6 +14,8 @@ var Map = function () {
   this.statsUI = new StatsUI(this.player, this.bar);
   this.interactionUI = new InteractionUI(this.player, this.bar);
 
+  this.homePagePassedFlag = false;
+
 console.log('inside main map', this)
 
   this.context = this.getPlayerCanvasContext();
@@ -21,14 +23,33 @@ console.log('inside main map', this)
 //canvas image setup
   this.backdrop = document.createElement('img');
   this.backdrop.src = "/public/img/edited_images/backdrop_empty.png";
+
+  this.guy = document.createElement('img');
+  this.guy.src = "/public/img/edited_images/f1guy.png";
+
   this.tableSet = document.createElement('img');
   this.tableSet.src = "/public/img/edited_images/table_set.png";
 
+  this.piano = document.createElement('img');
+  this.piano.src = "/public/img/edited_images/piano.png";
+
+  this.stage = document.createElement('img');
+  this.stage.src = "/public/img/edited_images/stage.png";
+
+  this.stageGuy = document.createElement('img');
+  this.stageGuy.src = "/public/img/edited_images/stage_guy.png"; 
+
+  this.stageGirl = document.createElement('img');
+  this.stageGirl.src = "/public/img/edited_images/stage_girl.png";     
+
+  this.sofaSetBottom = document.createElement('img');
+  this.sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
+
+  this.sofaSetTop = document.createElement('img');
+  this.sofaSetTop.src = "/public/img/edited_images/sofa_set.png";
+
   this.player = document.createElement('img');
   this.player.src = "/public/img/edited_images/f1girl2.png";
-
-  // var playerLeft = document.createElement('img');
-  // playerLeft.src = "../build/public/img/edited_images/f1girl.png";
 
   this.playerBegin = document.createElement('img');
   this.playerBegin.src = "/public/img/edited_images/f1girl.png"
@@ -49,7 +70,6 @@ console.log('inside main map', this)
 
   window.addEventListener('keydown', this.movePlayer.bind(this));
   window.addEventListener('keydown', this.interactionsFunctions.bind(this));
-
 
   this.loadWelcomeScreen();
   window.addEventListener('keypress', this.loadCanvas.bind(this));
@@ -90,7 +110,6 @@ Map.prototype = {
     var positionX = this.currentPosition[0];
     var positionY = this.currentPosition[1];
     if (e.key === "Enter"){
-
       if(((positionX >= 370 && positionX <= 430) && (positionY >= 145 && positionY <= 145)))
       {
         this.interactionUI.askToPlayPiano();
@@ -113,11 +132,17 @@ Map.prototype = {
         }
       }
     else {return}
-    
   },
 
   drawUpperCanvas: function(){
       context.drawImage(this.tableSet, -200, 180, 700, 500);
+      context.drawImage(this.guy, 100, -30, 700, 500);
+      context.drawImage(this.piano, 50, -160, 700, 500);
+      context.drawImage(this.stage, 254, -140, 700, 500);
+      context.drawImage(this.stageGuy, 230, -160, 700, 500);
+      context.drawImage(this.stageGirl, 270, -160, 700, 500);
+      context.drawImage(this.sofaSetTop, 300, 35, 700, 500);
+      context.drawImage(this.sofaSetBottom, 300, 170, 700, 500);
   },
 
   moveSprite: function(playerDirectionImage, xInc, yInc){
@@ -135,11 +160,11 @@ console.log('current y', this.currentPosition[1])
 
     if (e.key === "ArrowRight"){
       var hitRightBorder = ((positionX + 5) >= 700);
-      var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
+      var hitGuy = (positionY <= 260 && positionY >= 215) && (positionX === 425);
       var hitChairsTable = (positionY <= 495 && positionY >= 385) && (positionX === 115);
-      var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345);
-      var hitStage = (positionY <= 160 && positionY >= 85) && (positionX <= 700 && positionX >= 485);
-      var hitSofas = (positionY <= 500 && positionY >= 200) && (positionX <= 700 && positionX >= 600);
+      var hitPiano = (positionY <= 135 && positionY >= 45) && (positionX === 350);
+      var hitStage = (positionY <= 155 && positionY >= 85) && (positionX === 490);
+      var hitSofas = (positionY <= 500 && positionY >= 235) && (positionX === 600);
 
       if (hitRightBorder){
       }
@@ -169,10 +194,10 @@ console.log('current y', this.currentPosition[1])
     
     else if(e.key === "ArrowLeft"){
         var hitLeftBorder = ((positionX - 5) <= 5)
-        var hitRightSideOfBar = (positionY <= 280 && positionY >= 0) && (positionX <= 240 && positionX >= 240);
-        var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
-        var hitChairsTable = (positionY <= 490 && positionY >= 390) && (positionX === 185);
-        var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345);
+        var hitRightSideOfBar = (positionY <= 275 && positionY >= 0) && (positionX <= 240 && positionX >= 240);
+        var hitGuy = (positionY <= 260 && positionY >= 215) && (positionX === 475);
+        var hitChairsTable = (positionY <= 495 && positionY >= 385) && (positionX === 185);
+        var hitPiano = (positionY <= 135 && positionY >= 45) && (positionX === 445);
 
         if (hitLeftBorder){
           return;
@@ -197,11 +222,11 @@ console.log('current y', this.currentPosition[1])
     else if(e.key === "ArrowUp"){
         var hitTopBorder = ((positionY - 5) <= 0)
         var hitWallBorder = (positionX <= 700 && positionX >= 0) && (positionY <= 90 && positionY >= 90);
-        var hitBottomOfBar = (positionX >= 0 && positionX <= 240) && (positionY <= 290 && positionY >= 235);
-        var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
+        var hitBottomOfBar = (positionX >= 0 && positionX <= 235) && (positionY <= 290 && positionY >= 235);
+        var hitGuy = (positionY === 265) && (positionX <= 470 && positionX >= 430);
         var hitChairsTable = (positionY === 480) && (positionX <= 190 && positionX >=115);
-        var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345);
-        var hitStage = (positionY <= 160 && positionY >= 85) && (positionX <= 700 && positionX >= 485);
+        var hitPiano = (positionY === 140) && (positionX <= 440 && positionX >= 355);
+        var hitStage = (positionY === 160) && (positionX <= 700 && positionX >= 495);
 
         if (hitTopBorder){
           return;
@@ -215,9 +240,9 @@ console.log('current y', this.currentPosition[1])
         else if (hitGuy){
           return;
         }
-        // else if (hitChairsTable){
-        //   return;
-        // }
+// else if (hitChairsTable){
+//   return;
+// }
         else if (hitPiano){
           return;
         }
@@ -229,10 +254,12 @@ console.log('current y', this.currentPosition[1])
     }
     
     else if(e.key === "ArrowDown"){
-      var hitBottomBorder = ((positionY + 5) >= 485)
-      var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
-      var hitChairsTable = (positionY === 385) && (positionX <= 180 && positionX >=120);
-      var hitSofas = (positionY <= 500 && positionY >= 200) && (positionX <= 700 && positionX >= 600);
+        var hitBottomBorder = ((positionY + 5) >= 500)
+        var hitGuy = (positionY === 210) && (positionX <= 470 && positionX >= 430);
+        var hitSofas = (positionY === 205) && (positionX <= 700 && positionX >= 605);
+        var hitBottomBorder = ((positionY + 5) >= 485)
+        var hitChairsTable = (positionY === 385) && (positionX <= 180 && positionX >=120);
+        var hitSofas = (positionY === 230) && (positionX <= 700 && positionX >= 605);
 
       if (hitBottomBorder){
         return;
@@ -255,7 +282,10 @@ console.log('current y', this.currentPosition[1])
   },
 
   loadCanvas: function(e) {
-    if (e.key === "Enter"){
+    if (e.key === "Enter" && this.homePagePassedFlag === false){
+
+      this.homePagePassedFlag = true;
+      this.interactionUI.displayMessage("Welcome to Thursday nights at CodeClan!");
 
       mainContext.clearRect(0, 0, 700, 500);
 
@@ -264,9 +294,6 @@ console.log('current y', this.currentPosition[1])
 
       var tableSet = document.createElement('img');
       tableSet.src = "/public/img/edited_images/table_set.png";
-
-      var player = document.createElement('img');
-      player.src = "/public/img/edited_images/f1girl2.png";
 
       var sofaSetBottom = document.createElement('img');
       sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
@@ -290,7 +317,12 @@ console.log('current y', this.currentPosition[1])
       stageGuy.src = "/public/img/edited_images/stage_guy.png";  
 
       var stageGirl = document.createElement('img');
-      stageGirl.src = "/public/img/edited_images/stage_girl.png";    
+      stageGirl.src = "/public/img/edited_images/stage_girl.png";  
+
+      if (this.homePagePassedFlag = true){
+        var player = document.createElement('img');
+        player.src = "/public/img/edited_images/f1girl2.png";
+      } 
 
       context = this.getPlayerCanvasContext();
       mainContext = this.getMainCanvasContext();
