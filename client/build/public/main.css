@@ -114,6 +114,7 @@ td button img {
 
 #player-inventory-table, #bar-inventory-table {
   width: 100%;
+  min-height: 60px;
 }
 
 button {
