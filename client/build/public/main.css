@@ -98,10 +98,6 @@ table {
   background: rgba(69, 53, 53, 0.3);
 }
 
-#player-inventory-table td{
-  font-family: 'Quantico', serif
-  font-size: 16px;
-}
 
 #player-inventory-picture td img {
     height: 30px;

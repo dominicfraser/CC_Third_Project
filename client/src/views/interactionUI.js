@@ -14,11 +14,6 @@ var InteractionUI = function (player, bar) {
   //   this.displayMessage(message);
   // }.bind(this));
 
-
-  this.yesButton = document.createElement('button');
-  this.yesButton.innerHTML = "Yes";
-  this.noButton = document.createElement('button');
-  this.noButton.innerHTML = "No";
 };
 
 InteractionUI.prototype = {
@@ -76,6 +71,11 @@ InteractionUI.prototype = {
   },
 
   askToPlayPiano: function(){
+    this.yesButton = document.createElement('button');
+    this.yesButton.innerHTML = "Yes";
+    this.noButton = document.createElement('button');
+    this.noButton.innerHTML = "No";
+    
     this.displayMessage("Shall we turn up the funk in here?");
     var interactionArea = document.getElementById('middle');
 
@@ -105,6 +105,7 @@ InteractionUI.prototype = {
   },
 
   playTheMusic: function(){
+    console.log("playing piano")
 
     messageDisplay = document.getElementById("interaction-message");
     this.displayMessage("Let's get it poppin'")
@@ -116,7 +117,7 @@ InteractionUI.prototype = {
       this.yesButton.remove();
       this.noButton.remove();
       this.flag = false;
-    }.bind(this), 2000, yesButton, noButton);
+    }.bind(this), 2000, this.yesButton, this.noButton);
 
   },
 

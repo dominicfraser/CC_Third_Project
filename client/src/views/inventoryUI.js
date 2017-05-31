@@ -44,32 +44,43 @@ InventoryUI.prototype = {
       if (item.name === "Beer"){
         var imageBeerButton = document.createElement('button')
         var imageBeerP = document.createElement('p')
-        this.setupPlayerTableCellButton(imageBeerButton, imageBeerP, item.name, item.count, "<img src = /public/img/edited_images/beer.png>");
+        var imageBeerCount = document.createElement('p')
+        this.setupPlayerTableCellButton(imageBeerButton, imageBeerP, item.name, item.count, imageBeerCount, "<img src = /public/img/edited_images/beer.png>");
       }
       else if (item.name === "Wine"){
         var imageWineButton = document.createElement('button')
         var imageWineP = document.createElement('p')
-        this.setupPlayerTableCellButton(imageWineButton, imageWineP, item.name, item.count, "<img src = /public/img/edited_images/wine.png>");
+        var imageWineCount = document.createElement('p')
+        this.setupPlayerTableCellButton(imageWineButton, imageWineP, item.name, item.count, imageWineCount, "<img src = /public/img/edited_images/wine.png>");
       } 
       else if (item.name === "Coke"){
         var imageCokeButton = document.createElement('button')
         var imageCokeP = document.createElement('p')
-        this.setupPlayerTableCellButton(imageCokeButton, imageCokeP, item.name, item.count, "<img src = /public/img/edited_images/coke.png>");
+        var imageCokeCount = document.createElement('p')
+
+        this.setupPlayerTableCellButton(imageCokeButton, imageCokeP, item.name, item.count, imageCokeCount, "<img src = /public/img/edited_images/coke.png>");
       }  
       else if (item.name === "Apple Juice"){
         var imageAppleJuiceButton = document.createElement('button')
         var imageAppleJuiceP = document.createElement('p')
-        this.setupPlayerTableCellButton(imageAppleJuiceButton, imageAppleJuiceP, item.name, item.count, "<img src = /public/img/edited_images/apple_juice.png>");
+        var imageAppleJuiceCount = document.createElement('p')
+
+        this.setupPlayerTableCellButton(imageAppleJuiceButton, imageAppleJuiceP, item.name, item.count, imageAppleJuiceCount, "<img src = /public/img/edited_images/apple_juice.png>");
       } 
       else if (item.name === "Long Island Iced Tea"){
         var imageLongIslandIcedTeaButton = document.createElement('button')
         var imageLongIslandIcedTeaP = document.createElement('p')
-        this.setupPlayerTableCellButton(imageLongIslandIcedTeaButton, imageLongIslandIcedTeaP, item.name, item.count, "<img src = /public/img/edited_images/long_island.png>");
+        var imageLongIslandIcedTeaCount = document.createElement('p')
+
+        this.setupPlayerTableCellButton(imageLongIslandIcedTeaButton, imageLongIslandIcedTeaP, item.name, item.count, imageLongIslandIcedTeaCount,  "<img src = /public/img/edited_images/long_island.png>");
       }
       else if (item.name === "Pina Colada"){
         var imagePinaColadaButton = document.createElement('button')
         var imagePinaColadaP = document.createElement('p')
-        this.setupPlayerTableCellButton(imagePinaColadaButton, imagePinaColadaP, item.name, item.count, "<img src = /public/img/edited_images/pina_colada.png>");
+        var imagePinaColadaCount = document.createElement('p')
+
+
+        this.setupPlayerTableCellButton(imagePinaColadaButton, imagePinaColadaP, item.name, item.count, imagePinaColadaCount, "<img src = /public/img/edited_images/pina_colada.png>");
       }
     }
   },
@@ -232,13 +243,15 @@ console.log('all buttons?',buttonNames)
     })      
     return filtered
   },
-  setupPlayerTableCellButton: function(button, p, info, number, src){
+  setupPlayerTableCellButton: function(button, p, info, number, p2, src){
     var playerTablePicture = document.getElementById("player-inventory-picture")
     var td = document.createElement('td');
-    p.innerText = info + number;
+    p.innerText = info;
     button.innerHTML = src;
-    td.appendChild(p)
+    p2.innerText = "["+number+"]";
+    td.appendChild(p);
     td.appendChild(button);
+    td.appendChild(p2);
     playerTablePicture.appendChild(td);
   },
 
