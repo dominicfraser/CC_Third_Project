@@ -113,7 +113,6 @@ InventoryUI.prototype = {
         }
       } 
 
-      
       else {
         columnPositionCounter = 0;
         rowInUse = document.createElement('tr')
@@ -144,8 +143,7 @@ InventoryUI.prototype = {
         else {
         var td = document.createElement('td')
         this.setupBarTableCellButton(imageDrinkButton, "<img src = http://icons.iconarchive.com/icons/iconshock/brilliant-food/256/beer-icon.png>", rowInUse)
-        }
-        
+        } 
       }
     }
   },
@@ -200,6 +198,7 @@ InventoryUI.prototype = {
     var barTablePicture = document.getElementById("bar-inventory-table")
     var td = document.createElement('td');
     button.innerHTML = src;
+    td.className += ('bar-inventory-image');
 
     td.appendChild(button);
     rowInUse.appendChild(td);
