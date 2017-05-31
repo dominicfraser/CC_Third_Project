@@ -11,7 +11,6 @@ var InventoryUI = function(player, bar){
     this.renderPlayerItemsCountDropdown(playerItems);
   }.bind(this));
   
-
   modelsContainer.allBarItems(function(barItems){
     this.renderBarItemsCountDropdown(barItems);
     this.renderBarItemsImages(barItems);
@@ -44,58 +43,29 @@ InventoryUI.prototype = {
 
     for (var item of playerItemsFiltered){
       if (item.name === "Beer"){
-      var td = document.createElement('td')
-      var imageBeerButton = document.createElement('button')
-      imageBeerButton.innerHTML = "<img src = /public/img/edited_images/beer.png>";
-
-        td.appendChild(imageBeerButton);
-        tablePicture.appendChild(td);
-
-        }
+        var imageBeerButton = document.createElement('button')
+        this.setupPlayerTableCellButton(imageBeerButton, "<img src = /public/img/edited_images/beer.png>");
+      }
       else if (item.name === "Wine"){
-      var td = document.createElement('td')
-      var imageWineButton = document.createElement('button')
-      imageWineButton.innerHTML = "<img src = /public/img/edited_images/wine.png>"
-
-        td.appendChild(imageWineButton);
-        tablePicture.appendChild(td);
-
-        } 
-        else if (item.name === "Coke"){
-        var td = document.createElement('td')
+        var imageWineButton = document.createElement('button')
+        this.setupPlayerTableCellButton(imageWineButton, "<img src = /public/img/edited_images/wine.png>");
+      } 
+      else if (item.name === "Coke"){
         var imageCokeButton = document.createElement('button')
-        imageCokeButton.innerHTML = "<img src = /public/img/edited_images/coke.png>";
-
-          td.appendChild(imageCokeButton);
-          tablePicture.appendChild(td);
-
-        }  
-        else if (item.name === "Apple Juice"){
-        var td = document.createElement('td')
+        this.setupPlayerTableCellButton(imageCokeButton, "<img src = /public/img/edited_images/coke.png>");
+      }  
+      else if (item.name === "Apple Juice"){
         var imageAppleJuiceButton = document.createElement('button')
-        imageAppleJuiceButton.innerHTML = "<img src = /public/img/edited_images/apple_juice.png>"
-
-          td.appendChild(imageAppleJuiceButton);
-          tablePicture.appendChild(td);
-
-          } 
-        else if (item.name === "Long Island Iced Tea"){
-        var td = document.createElement('td')
+        this.setupPlayerTableCellButton(imageAppleJuiceButton, "<img src = /public/img/edited_images/apple_juice.png>");
+      } 
+      else if (item.name === "Long Island Iced Tea"){
         var imageLongIslandIcedTeaButton = document.createElement('button')
-        imageLongIslandIcedTeaButton.innerHTML = "<img src = /public/img/edited_images/long_island.png>";
-
-        td.appendChild(imageLongIslandIcedTeaButton);
-        tablePicture.appendChild(td);
+        this.setupPlayerTableCellButton(imageLongIslandIcedTeaButton, "<img src = /public/img/edited_images/long_island.png>");
       }
-        else if (item.name === "Pina Colada"){
-        var td = document.createElement('td')
+      else if (item.name === "Pina Colada"){
         var imagePinaColadaButton = document.createElement('button')
-        imagePinaColadaButton.innerHTML = "<img src = /public/img/edited_images/pina_colada.png>";
-
-        td.appendChild(imagePinaColadaButton);
-        tablePicture.appendChild(td);
+        this.setupPlayerTableCellButton(imagePinaColadaButton, "<img src = /public/img/edited_images/pina_colada.png>");
       }
-
     }
   },
 
@@ -116,8 +86,6 @@ InventoryUI.prototype = {
         var td = document.createElement('td')
         var imageDrinkButton = document.createElement('button')
         imageDrinkButton.innerHTML = "<img src = http://icons.iconarchive.com/icons/iconshock/brilliant-food/256/beer-icon.png>"
-        // td.setAttribute("style","width:30px")
-        // td.setAttribute("style","height:30px")
 
         td.appendChild(imageDrinkButton);
         rowInUse.appendChild(td);  
@@ -158,7 +126,6 @@ InventoryUI.prototype = {
     }
     return items;
   },
-
   countItems: function (allItems, item) {
     counter = 0
     for (var i = 0; i < allItems.length; i++){
@@ -167,7 +134,6 @@ InventoryUI.prototype = {
     }
     return counter;
   },
-
   filterToUniqList: function(itemList){
     var itemNames = itemList.map(function (item) {
       return item.name
@@ -177,6 +143,13 @@ InventoryUI.prototype = {
       return itemNames.indexOf(item.name) == index
     })      
     return filtered
+  },
+  setupPlayerTableCellButton: function(button, src){
+    var tablePicture = document.getElementById("player-inventory-picture")
+    var td = document.createElement('td');
+    button.innerHTML = src;
+    td.appendChild(button);
+    tablePicture.appendChild(td);
   },
 };
 
