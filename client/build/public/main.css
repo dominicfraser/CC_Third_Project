@@ -6,7 +6,7 @@ body {
 
 canvas { 
   position: absolute;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   display: inline-block;
   margin-left: 26px;
 }
