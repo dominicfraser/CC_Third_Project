@@ -122,7 +122,7 @@ Map.prototype = {
 
   moveSprite: function(playerDirectionImage, xInc, yInc){
     this.player.innerHTML = "";
-    context.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 40)
+    context.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 44)
     context.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
     this.drawUpperCanvas();
 console.log('current x', this.currentPosition[0])
