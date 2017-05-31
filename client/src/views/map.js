@@ -104,9 +104,9 @@ Map.prototype = {
       context.drawImage(this.tableSet, -200, 180, 700, 500);
       context.drawImage(this.guy, 100, -30, 700, 500);
       context.drawImage(this.piano, 50, -160, 700, 500);
-      // context.drawImage(this, 254, -140, 700, 500);
-      // context.drawImage(this, 300, 35, 700, 500);
-      // context.drawImage(this, 300, 170, 700, 500);
+      context.drawImage(this.stage, 254, -140, 700, 500);
+      context.drawImage(this.sofaSetTop, 300, 35, 700, 500);
+      context.drawImage(this.sofaSetBottom, 300, 170, 700, 500);
   },
 
   moveSprite: function(playerDirectionImage, xInc, yInc){
@@ -127,7 +127,7 @@ console.log('current y', this.currentPosition[1])
       var hitGuy = (positionY <= 260 && positionY >= 215) && (positionX === 425);
       var hitChairsTable = (positionY <= 495 && positionY >= 385) && (positionX === 115);
       var hitPiano = (positionY <= 135 && positionY >= 45) && (positionX === 350);
-      var hitStage = (positionY <= 155 && positionY >= 85) && (positionX === 485);
+      var hitStage = (positionY <= 155 && positionY >= 85) && (positionX === 490);
       var hitSofas = (positionY <= 500 && positionY >= 235) && (positionX === 600);
 
       if (hitRightBorder){
@@ -190,7 +190,7 @@ console.log('current y', this.currentPosition[1])
         var hitGuy = (positionY === 265) && (positionX <= 470 && positionX >= 430);
         var hitChairsTable = (positionY === 480) && (positionX <= 190 && positionX >=115);
         var hitPiano = (positionY === 140) && (positionX <= 440 && positionX >= 355);
-        var hitStage = (positionY === 160) && (positionX <= 700 && positionX >= 490);
+        var hitStage = (positionY === 160) && (positionX <= 700 && positionX >= 495);
 
         if (hitTopBorder){
           return;
