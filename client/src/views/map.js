@@ -108,7 +108,7 @@ console.log('current y', this.currentPosition[1])
 
     if (e.key === "ArrowRight"){
       var hitRightBorder = ((positionX + 5) >= 700);
-      var hitGuy = (positionY <= 210 && positionY >= 180) && (positionX === 470);
+      var hitGuy = (positionY <= 250 && positionY >= 215) && (positionX === 430);
       var hitChairsTable = (positionY <= 495 && positionY >= 385) && (positionX === 115);
       var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345);
       var hitStage = (positionY <= 160 && positionY >= 85) && (positionX <= 700 && positionX >= 485);
@@ -143,7 +143,7 @@ console.log('current y', this.currentPosition[1])
     else if(e.key === "ArrowLeft"){
         var hitLeftBorder = ((positionX - 5) <= 5)
         var hitRightSideOfBar = (positionY <= 280 && positionY >= 0) && (positionX <= 240 && positionX >= 240);
-        var hitGuy = (positionY <= 210 && positionY >= 180) && (positionX === 470);
+        var hitGuy = (positionY <= 250 && positionY >= 215) && (positionX === 470);
         var hitChairsTable = (positionY <= 490 && positionY >= 390) && (positionX === 185);
         var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345);
 
@@ -171,7 +171,7 @@ console.log('current y', this.currentPosition[1])
         var hitTopBorder = ((positionY - 5) <= 0)
         var hitWallBorder = (positionX <= 700 && positionX >= 0) && (positionY <= 90 && positionY >= 90);
         var hitBottomOfBar = (positionX >= 0 && positionX <= 240) && (positionY <= 290 && positionY >= 235);
-        var hitGuy = (positionY === 280) && (positionX <= 470 && positionX >= 410);
+        var hitGuy = (positionY === 270) && (positionX <= 470 && positionX >= 410);
         var hitChairsTable = (positionY === 480) && (positionX <= 190 && positionX >=115);
         var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345);
         var hitStage = (positionY <= 160 && positionY >= 85) && (positionX <= 700 && positionX >= 485);
@@ -203,7 +203,7 @@ console.log('current y', this.currentPosition[1])
     
     else if(e.key === "ArrowDown"){
         var hitBottomBorder = ((positionY + 5) >= 500)
-        var hitGuy = (positionY === 210) && (positionX <= 470 && positionX >= 410);
+        var hitGuy = (positionY === 200) && (positionX <= 470 && positionX >= 410);
         var hitSofas = (positionY <= 500 && positionY >= 200) && (positionX <= 700 && positionX >= 600);
         var hitBottomBorder = ((positionY + 5) >= 485)
         var hitChairsTable = (positionY === 385) && (positionX <= 180 && positionX >=120);
