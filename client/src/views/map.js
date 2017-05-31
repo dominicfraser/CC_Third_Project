@@ -34,6 +34,12 @@ console.log('inside main map', this)
   this.stage = document.createElement('img');
   this.stage.src = "/public/img/edited_images/stage.png";
 
+  this.stageGuy = document.createElement('img');
+  this.stageGuy.src = "/public/img/edited_images/stage_guy.png"; 
+
+  this.stageGirl = document.createElement('img');
+  this.stageGirl.src = "/public/img/edited_images/stage_girl.png";     
+
   this.sofaSetBottom = document.createElement('img');
   this.sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
 
@@ -117,6 +123,8 @@ Map.prototype = {
       context.drawImage(this.guy, 100, -30, 700, 500);
       context.drawImage(this.piano, 50, -160, 700, 500);
       context.drawImage(this.stage, 254, -140, 700, 500);
+      context.drawImage(this.stageGuy, 230, -160, 700, 500);
+      context.drawImage(this.stageGirl, 270, -160, 700, 500);
       context.drawImage(this.sofaSetTop, 300, 35, 700, 500);
       context.drawImage(this.sofaSetBottom, 300, 170, 700, 500);
   },
@@ -170,7 +178,7 @@ console.log('current y', this.currentPosition[1])
     
     else if(e.key === "ArrowLeft"){
         var hitLeftBorder = ((positionX - 5) <= 5)
-        var hitRightSideOfBar = (positionY <= 280 && positionY >= 0) && (positionX <= 240 && positionX >= 240);
+        var hitRightSideOfBar = (positionY <= 275 && positionY >= 0) && (positionX <= 240 && positionX >= 240);
         var hitGuy = (positionY <= 260 && positionY >= 215) && (positionX === 475);
         var hitChairsTable = (positionY <= 495 && positionY >= 385) && (positionX === 185);
         var hitPiano = (positionY <= 135 && positionY >= 45) && (positionX === 445);
@@ -198,7 +206,7 @@ console.log('current y', this.currentPosition[1])
     else if(e.key === "ArrowUp"){
         var hitTopBorder = ((positionY - 5) <= 0)
         var hitWallBorder = (positionX <= 700 && positionX >= 0) && (positionY <= 90 && positionY >= 90);
-        var hitBottomOfBar = (positionX >= 0 && positionX <= 240) && (positionY <= 290 && positionY >= 235);
+        var hitBottomOfBar = (positionX >= 0 && positionX <= 235) && (positionY <= 290 && positionY >= 235);
         var hitGuy = (positionY === 265) && (positionX <= 470 && positionX >= 430);
         var hitChairsTable = (positionY === 480) && (positionX <= 190 && positionX >=115);
         var hitPiano = (positionY === 140) && (positionX <= 440 && positionX >= 355);
