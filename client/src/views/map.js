@@ -68,17 +68,33 @@ Map.prototype = {
      };
   },
 
+  // PIANO
+   // (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345)
+
   placeOrder: function(e){
-    if (e.key === "o"){
-      this.interactionUI.askForDrink();
-    };  
+    var positionX = this.currentPosition[0];
+    var positionY = this.currentPosition[1];
+    if( e.key === "o") {
+      if( ((positionX >= 10 && positionX <= 230) && (positionY >= 290 && positionY <= 290)) 
+        || 
+        ((positionX >= 240 && positionX <= 240) && (positionY >= 160 && positionY <= 280)) )
+      {
+        this.interactionUI.askForDrink();
+      } else {return;}
+    }
   },
+
+
+
 
   interactWithMan: function(e){
     if(e.key === "p"){
       this.interactionUI.speakToMan();
     }
   },
+
+  // AROUND THE MAN
+   // (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410)
 
   drawUpperCanvas: function(){
       context.drawImage(this.tableSet, -200, 180, 700, 500);
