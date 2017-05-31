@@ -18,7 +18,7 @@ console.log('inside main map', this)
 
   this.context = this.getPlayerCanvasContext();
   this.mainContext = this.getMainCanvasContext();
-
+//canvas image setup
   this.backdrop = document.createElement('img');
   this.backdrop.src = "/public/img/edited_images/backdrop_empty.png";
 
@@ -43,20 +43,26 @@ console.log('inside main map', this)
   this.player = document.createElement('img');
   this.player.src = "/public/img/edited_images/f1girl2.png"
 
-  // var playerLeft = document.createElement('img');
-  // playerLeft.src = "../build/public/img/edited_images/f1girl.png";
-
   this.playerBegin = document.createElement('img');
   this.playerBegin.src = "/public/img/edited_images/f1girl.png"
+
+  this.playerLeft = document.createElement('img');
+  this.playerLeft.src = "/public/img/edited_images/l1girl.png"
+
+  this.playerRight = document.createElement('img');
+  this.playerRight.src = "/public/img/edited_images/r1girl.png"
+
+  this.playerUp = document.createElement('img');
+  this.playerUp.src = "/public/img/edited_images/b1girl.png"
+
   this.playerHeight = 500;
   this.playerWidth = 700;
 
   this.currentPosition = [350,450];
 
   window.addEventListener('keydown', this.movePlayer.bind(this));
-  window.addEventListener('keydown', this.placeOrder.bind(this));
-  window.addEventListener('keydown', this.interactWithMan.bind(this));
-  window.addEventListener('keydown', this.playMusic.bind(this));
+  window.addEventListener('keydown', this.interactionsFunctions.bind(this));
+
 
   this.loadCanvas();
 //////////////to test coords
@@ -78,26 +84,32 @@ console.log('inside main map', this)
 
 Map.prototype = {
 
-  playMusic: function(e){
-     if (e.key === "m"){
-       this.interactionUI.askToPlayPiano();
-     };
-  },
-
-  placeOrder: function(e){
-    if (e.key === "o"){
-      this.interactionUI.askForDrink();
-    };  
-  },
-
-  drawBar: function() {
-    this.mainContext.drawImage(this.backdrop, 0, 0, 700, 500);
-  },
-
-  interactWithMan: function(e){
-    if(e.key === "p"){
-      this.interactionUI.speakToMan();
-    }
+  interactionsFunctions: function(e){
+    var positionX = this.currentPosition[0];
+    var positionY = this.currentPosition[1];
+    if (e.key === "Enter"){
+      if(((positionX >= 370 && positionX <= 430) && (positionY >= 145 && positionY <= 145)))
+      {
+        this.interactionUI.askToPlayPiano();
+      }
+      else if(((positionX >= 10 && positionX <= 230) && (positionY >= 290 && positionY <= 290)) 
+        || 
+        ((positionX >= 240 && positionX <= 240) && (positionY >= 160 && positionY <= 280)))
+      {
+        this.interactionUI.askForDrink();
+      }
+      else if(((positionX >= 400 && positionX <= 490) && (positionY >= 170 && positionY <= 290))) 
+      {
+       this.interactionUI.speakToMan();
+     }
+    } 
+    else if (e.key === "ArrowLeft"){
+        if(((positionX <= 240) && (positionY >= 95 && positionY <= 145)))
+        {
+          this.interactionUI.cantGoBehindBar();
+        }
+      }
+    else {return}
   },
 
   drawUpperCanvas: function(){
@@ -111,7 +123,7 @@ Map.prototype = {
 
   moveSprite: function(playerDirectionImage, xInc, yInc){
     this.player.innerHTML = "";
-    context.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 40)
+    context.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 44)
     context.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
     this.drawUpperCanvas();
 console.log('current x', this.currentPosition[0])
@@ -151,7 +163,7 @@ console.log('current y', this.currentPosition[1])
         return;
       }
       else {
-        this.moveSprite(this.playerBegin, 5, 0)
+        this.moveSprite(this.playerRight, 5, 0)
         this.currentPosition[0] = positionX+5
       }
     }
@@ -179,7 +191,7 @@ console.log('current y', this.currentPosition[1])
           return;
         }
 
-        this.moveSprite(this.playerBegin, -5, 0)
+        this.moveSprite(this.playerLeft, -5, 0)
         this.currentPosition[0] = positionX-5
       }
     
@@ -213,7 +225,7 @@ console.log('current y', this.currentPosition[1])
         else if (hitStage){
           return;
         }
-        this.moveSprite(this.playerBegin, 0, -5)
+        this.moveSprite(this.playerUp, 0, -5)
         this.currentPosition[1] = positionY-5
     }
     
@@ -246,7 +258,6 @@ console.log('current y', this.currentPosition[1])
   },
 
   loadCanvas: function() {
-
     var sofaSetBottom = document.createElement('img');
     sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
 
@@ -264,6 +275,12 @@ console.log('current y', this.currentPosition[1])
 
     var guy = document.createElement('img');
     guy.src = "/public/img/edited_images/f1guy.png";
+
+    var stageGuy = document.createElement('img');
+    stageGuy.src = "/public/img/edited_images/stage_guy.png";  
+
+    var stageGirl = document.createElement('img');
+    stageGirl.src = "/public/img/edited_images/stage_girl.png";    
 
     context = this.getPlayerCanvasContext();
     mainContext = this.getMainCanvasContext();
@@ -290,6 +307,14 @@ console.log('current y', this.currentPosition[1])
 
     stage.onload = function() {
       context.drawImage(this, 254, -140, 700, 500);
+    };
+
+    stageGuy.onload = function() {
+      context.drawImage(this, 230, -160, 700, 500);
+    };
+
+    stageGirl.onload = function() {
+      context.drawImage(this, 270, -160, 700, 500);
     };
 
     piano.onload = function() {

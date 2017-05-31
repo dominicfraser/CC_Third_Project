@@ -40,7 +40,6 @@ InventoryUI.prototype = {
 
     var playerItemsWithCount = this.addCounts(playerItems)
     var playerItemsFiltered = this.filterToUniqList(playerItemsWithCount)
-
     for (var item of playerItemsFiltered){
       if (item.name === "Beer"){
         var imageBeerButton = document.createElement('button')
@@ -83,25 +82,67 @@ InventoryUI.prototype = {
       columnPositionCounter += 1
 
       if (columnPositionCounter <= 3){
+        if (item.name === "Beer"){
+            var imageBeerButton = document.createElement('button')
+            this.setupBarTableCellButton(imageBeerButton, "<img src = /public/img/edited_images/beer.png>",rowInUse);
+        }
+        else if (item.name === "Wine"){
+          var imageWineButton = document.createElement('button')
+          this.setupBarTableCellButton(imageWineButton, "<img src = /public/img/edited_images/wine.png>", rowInUse);
+        } 
+        else if (item.name === "Coke"){
+          var imageCokeButton = document.createElement('button')
+          this.setupBarTableCellButton(imageCokeButton, "<img src = /public/img/edited_images/coke.png>", rowInUse);
+        }  
+        else if (item.name === "Apple Juice"){
+          var imageAppleJuiceButton = document.createElement('button')
+          this.setupBarTableCellButton(imageAppleJuiceButton, "<img src = /public/img/edited_images/apple_juice.png>", rowInUse);
+        } 
+        else if (item.name === "Long Island Iced Tea"){
+          var imageLongIslandIcedTeaButton = document.createElement('button')
+          this.setupBarTableCellButton(imageLongIslandIcedTeaButton, "<img src = /public/img/edited_images/long_island.png>", rowInUse);
+        }
+        else if (item.name === "Pina Colada"){
+          var imagePinaColadaButton = document.createElement('button')
+          this.setupBarTableCellButton(imagePinaColadaButton, "<img src = /public/img/edited_images/pina_colada.png>", rowInUse);
+        }
+        else {
         var td = document.createElement('td')
-        var imageDrinkButton = document.createElement('button')
-        imageDrinkButton.innerHTML = "<img src = http://icons.iconarchive.com/icons/iconshock/brilliant-food/256/beer-icon.png>"
-
-        td.appendChild(imageDrinkButton);
-        rowInUse.appendChild(td);  
-        barTable.appendChild(rowInUse);
+        this.setupBarTableCellButton(imageDrinkButton, "<img src = http://icons.iconarchive.com/icons/iconshock/brilliant-food/256/beer-icon.png>", rowInUse)
+        }
       } 
+
       else {
         columnPositionCounter = 0;
         rowInUse = document.createElement('tr')
-
+        if (item.name === "Beer"){
+            var imageBeerButton = document.createElement('button')
+            this.setupBarTableCellButton(imageBeerButton, "<img src = /public/img/edited_images/beer.png>",rowInUse);
+        }
+        else if (item.name === "Wine"){
+          var imageWineButton = document.createElement('button')
+          this.setupBarTableCellButton(imageWineButton, "<img src = /public/img/edited_images/wine.png>", rowInUse);
+        } 
+        else if (item.name === "Coke"){
+          var imageCokeButton = document.createElement('button')
+          this.setupBarTableCellButton(imageCokeButton, "<img src = /public/img/edited_images/coke.png>", rowInUse);
+        }  
+        else if (item.name === "Apple Juice"){
+          var imageAppleJuiceButton = document.createElement('button')
+          this.setupBarTableCellButton(imageAppleJuiceButton, "<img src = /public/img/edited_images/apple_juice.png>", rowInUse);
+        } 
+        else if (item.name === "Long Island Iced Tea"){
+          var imageLongIslandIcedTeaButton = document.createElement('button')
+          this.setupBarTableCellButton(imageLongIslandIcedTeaButton, "<img src = /public/img/edited_images/long_island.png>", rowInUse);
+        }
+        else if (item.name === "Pina Colada"){
+          var imagePinaColadaButton = document.createElement('button')
+          this.setupBarTableCellButton(imagePinaColadaButton, "<img src = /public/img/edited_images/pina_colada.png>", rowInUse);
+        }
+        else {
         var td = document.createElement('td')
-        var imageDrinkButton = document.createElement('button')
-        imageDrinkButton.innerHTML = "<img src = http://icons.iconarchive.com/icons/iconshock/brilliant-food/256/beer-icon.png>"
-
-        td.appendChild(imageDrinkButton);
-        rowInUse.appendChild(td);  
-        barTable.appendChild(rowInUse);
+        this.setupBarTableCellButton(imageDrinkButton, "<img src = http://icons.iconarchive.com/icons/iconshock/brilliant-food/256/beer-icon.png>", rowInUse)
+        } 
       }
     }
   },
@@ -118,6 +159,47 @@ InventoryUI.prototype = {
       option.value = item.id;
       select.appendChild(option);
     }
+  },
+
+  addOnClickBarButtonsToBuyDrink: function(callback){
+    var barTable = document.getElementById("bar-inventory-table");
+    var rowNumber = -1; 
+    var buttonNames = [];
+    for (var i = 0, row; row = barTable.rows[i]; i++) { 
+       for (var d = 0, td; td = row.cells[d]; d++) {
+        rowNumber += 1;
+        var cellIndex = rowNumber;
+        buttonNames.push(cellIndex)
+        buttonNames[cellIndex] = td.children[0]
+       }  
+    }
+    buttonNames.forEach(function(button){
+      button.onclick = function(event){
+console.log('button click', button.value)
+        callback(button.value);
+      }
+    });
+  },
+  addOnClickBarButtonsTellGoToBar: function(callback){
+console.log('in remove event listener')
+    var barTable = document.getElementById("bar-inventory-table");
+    var rowNumber = -1; 
+    var buttonNames = [];
+    for (var i = 0, row; row = barTable.rows[i]; i++) { 
+       for (var d = 0, td; td = row.cells[d]; d++) {
+        rowNumber += 1;
+        var cellIndex = rowNumber;
+        buttonNames.push(cellIndex);
+        buttonNames[cellIndex] = td.children[0]
+       }  
+    }
+console.log('all buttons?',buttonNames)
+    buttonNames.forEach(function(button){
+          button.onclick = function(event){
+    console.log('button click remove', button.value)
+            callback("Please order a drink from the bar");
+          }
+    });
   },
 
   addCounts: function (items) {
@@ -145,11 +227,22 @@ InventoryUI.prototype = {
     return filtered
   },
   setupPlayerTableCellButton: function(button, src){
-    var tablePicture = document.getElementById("player-inventory-picture")
+    var playerTablePicture = document.getElementById("player-inventory-picture")
     var td = document.createElement('td');
     button.innerHTML = src;
     td.appendChild(button);
-    tablePicture.appendChild(td);
+    playerTablePicture.appendChild(td);
+  },
+
+  setupBarTableCellButton: function(button, src, rowInUse){
+    var barTablePicture = document.getElementById("bar-inventory-table")
+    var td = document.createElement('td');
+    button.innerHTML = src;
+    td.className += ('bar-inventory-image');
+
+    td.appendChild(button);
+    rowInUse.appendChild(td);
+    barTablePicture.appendChild(rowInUse);
   },
 };
 
