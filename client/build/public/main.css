@@ -11,6 +11,29 @@ canvas {
   margin-left: 26px;
 }
 
+p {
+  text-align: center;
+}
+
+h1 {
+  font-size: 35px;
+  margin-top: 0.4em;
+  margin-bottom: 0.3em;
+}
+
+h4 {
+  font-size: 25px;
+}
+
+#middle button {
+  background-color: white;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 8px;
+  font-family: 'Bungee Inline', serif;
+  width: 60px;
+}
+
 #main-canvas {
   z-index: 1;
 }
@@ -22,7 +45,7 @@ canvas {
 section {
   height: 100%;
   vertical-align: top;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   display: inline-block;
 }
 
@@ -34,15 +57,21 @@ section {
 
 #middle {
   width: 60%;
-
+  background-image: url("/public/img/edited_images/chalk_background.png");
+  color: white;
+  font-family: 'Bungee Outline', cursive;
 }
 
 #stats {
   width: 19%;
   text-align: center;
   background-image: url("/public/img/edited_images/corkboard.jpg")
+}
 
-
+#main-title {
+  text-align: center;
+  font-size: 40px;
+  font-family: "Hesster Mofet DIRTY_TRIAL";
 }
 
 #interaction-message{
@@ -51,28 +80,21 @@ section {
 
 #middle-canvas {
   height: 78%;
-  border: 1px solid blue;
-}
-
-#middle-interaction {
-  border: 1px solid blue;
 }
 
 #money-chart, #bar-inv-chart {
   height: 150px;
   background-image: url("/public/img/edited_images/corkboard.jpg");
-  opacity: 0.75;
-
 }
 
 #player-drunk-level {
   height: 250px;
   background-image: url("/public/img/edited_images/corkboard.jpg");
-  opacity: 0.75;
 }
 
 table {
-  border: 1px solid black;
+  /*border: 1px solid black;*/
+  background: rgba(69, 53, 53, 0.3);
 }
 
 #player-inventory-picture td img {
@@ -81,14 +103,25 @@ table {
 }
 
 td button img {
-    width: auto;
+  width: auto;
     height: auto;
 }
 
-#bar-inventory-table tr td img {
+#bar-inventory-table td img {
     height: 30px;
     width: 30px;
 }
 
+button {
+  border-radius: 50%;
+  border: 0;
+  background: transparent;
+}
 
+.board {
+  background-image: url("/public/img/edited_images/chalk_background.png");
+  font-family: "Hesster Mofet DIRTY_TRIAL";
+  color: white;
+  padding: 10px;
+}
 

@@ -33,6 +33,4 @@ barRouter.post('/', function(req, res) {
 });
 
 
-
-
 module.exports = barRouter;

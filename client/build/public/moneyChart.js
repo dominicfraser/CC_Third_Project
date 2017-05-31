@@ -7,7 +7,8 @@ var MoneyChart = function (playerWallet){
   var chart = new Highcharts.Chart({
     chart: {
       type: "bar",
-      renderTo: container
+      renderTo: container,
+      backgroundColor: "rgba(69, 53, 53, 0.3)",
     },
     title: {
       text: ""
@@ -20,13 +21,26 @@ var MoneyChart = function (playerWallet){
     }
     ],
     xAxis: {
-      categories: ["£"]
+      categories: ["£"],
+      labels: {
+          style:{
+            color: "white"
+        }
+      }
     },
     yAxis: {
       title: {
-        text: "Your Money"
+        text: "Your Money",
+        style: {
+          color: "white"
+        }
       },
-      min: 0
+      min: 0,
+      labels: {
+          style:{
+            color: "white"
+        }
+      }
     },
     legend: {
       enabled: false
