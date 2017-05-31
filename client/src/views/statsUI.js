@@ -16,7 +16,6 @@ var StatsUI = function(player, bar){
   var barInventoryCount = modelsContainer.allBarItems(function(barInventory){
      var barInventoryChart = new BarInventoryChart(barInventory.length);
     });
-
 };
 
 StatsUI.prototype = {
