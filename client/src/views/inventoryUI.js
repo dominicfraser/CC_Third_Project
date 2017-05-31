@@ -1,24 +1,34 @@
 var ModelsContainer = require('../models/models_container')
+var Game = require('./game.js');
 
 var InventoryUI = function(player, bar){
   this.player = player;
   this.bar = bar;
   
-  var modelsContainer = new ModelsContainer;
+  this.modelsContainer = new ModelsContainer;
 
-  modelsContainer.allPlayerItems(function(playerItems){
-    this.renderPlayerItemsImages(playerItems);
-    this.renderPlayerItemsCountDropdown(playerItems);
-  }.bind(this));
-  
-  modelsContainer.allBarItems(function(barItems){
-    this.renderBarItemsCountDropdown(barItems);
-    this.renderBarItemsImages(barItems);
-  }.bind(this)); 
+  this.game = new Game(this.player, this.bar);
 
 };
 
 InventoryUI.prototype = {
+  renderAll: function(onComplete){
+    this.modelsContainer.allPlayerItems(function(playerItems){
+      this.renderPlayerItemsImages(playerItems);
+      this.renderPlayerItemsCountDropdown(playerItems);
+console.log('onComplete before calling', onComplete )
+
+      onComplete();
+
+    }.bind(this));
+    
+    this.modelsContainer.allBarItems(function(barItems){
+      this.renderBarItemsCountDropdown(barItems);
+      this.renderBarItemsImages(barItems);
+    }.bind(this)); 
+
+  },
+
   renderPlayerItemsCountDropdown: function(playerItems){
         var select = document.getElementById("player-inventory-dropdown");
         select.innerHTML = "";
@@ -201,6 +211,21 @@ console.log('all buttons?',buttonNames)
           }
     });
   },
+  addOnClickPlayerButtonsToDrink: function(callback){
+    var playerButtons = document.getElementsByClassName("player-drink-button");
+    var playerButtonsArray = Array.from(playerButtons);
+console.log('playerButtons: ', playerButtons)
+// console.log('Array.from(playerButtons): ', Array.from(playerButtons))
+
+// console.log('addOnClickPlayerButtonsToDrink has been loaded')
+// console.log('list of player buttons', buttonNames);
+    playerButtonsArray.forEach(function(button){
+          button.onclick = function(event){
+console.log('onclick has been assigned to button')
+            callback(button.value);
+          }
+    }.bind(this));
+  },
 
   addCounts: function (items) {
     for (item of items) {
@@ -231,6 +256,7 @@ console.log('all buttons?',buttonNames)
     var td = document.createElement('td');
     button.innerHTML = src;
     button.value = item.id;
+    button.className = "player-drink-button"
     td.appendChild(button);
     playerTablePicture.appendChild(td);
   },

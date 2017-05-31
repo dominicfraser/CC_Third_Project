@@ -18,10 +18,14 @@ var InteractionUI = function (player, bar) {
   this.yesButton.innerHTML = "Yes";
   this.noButton = document.createElement('button');
   this.noButton.innerHTML = "No";
+
+  this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this));
+
 };
 
 InteractionUI.prototype = {
-   
+
+//try to go behind bar   
   cantGoBehindBar:function(){
     this.displayMessage("Hey! Customers can't come behind the bar. You better scram before I get the bouncer, punk. Do you REALLY want me to..?")
     var interactionArea = document.getElementById('middle');
@@ -36,7 +40,6 @@ InteractionUI.prototype = {
         this.flag = true;
       }
     },  
-
   noBehindBar: function(noButton){
       messageDisplay = document.getElementById("interaction-message");
       messageDisplay.innerHTML = "Last chance, punk...";
@@ -47,7 +50,6 @@ InteractionUI.prototype = {
         this.flag = false;
       }.bind(this), 2000, this.noButton);
     },
-
   cantGoBehindBar:function(){
     this.displayMessage("Hey! Customers can't come behind the bar. You better scram before I get the bouncer, punk. Do you REALLY want me to..?")
     var interactionArea = document.getElementById('middle');
@@ -62,7 +64,6 @@ InteractionUI.prototype = {
       this.flag = true;
     }
   },
-
   noBehindBar: function(noButton){
     messageDisplay = document.getElementById("interaction-message");
     messageDisplay.innerHTML = "Last chance, punk...";
@@ -74,6 +75,7 @@ InteractionUI.prototype = {
     }.bind(this), 2000, this.noButton);
   },
 
+//interact at the piano
   askToPlayPiano: function(){
     this.displayMessage("Shall we turn up the funk in here?");
     var interactionArea = document.getElementById('middle');
@@ -90,7 +92,6 @@ InteractionUI.prototype = {
       this.flag = true;
     }
   },
-
   dontPlayTheMusic: function(yesButton, noButton){
     messageDisplay = document.getElementById("interaction-message");
     messageDisplay.innerHTML = "*Silence...*";
@@ -102,7 +103,6 @@ InteractionUI.prototype = {
       this.flag = false;
     }.bind(this), 2000, this.yesButton, this.noButton);
   },
-
   playTheMusic: function(){
     messageDisplay = document.getElementById("interaction-message");
     this.displayMessage("Let's get it poppin'")
@@ -118,6 +118,24 @@ InteractionUI.prototype = {
 
   },
 
+//drink a drink
+  playerDrinkDrinkSetUp: function(id){
+
+    this.inventoryUI.addOnClickPlayerButtonsToDrink(function(id){
+      this.game.findPlayerDrinkById(id, function(itemOrdered){
+        this.game.removeDrinkFromPlayer(itemOrdered, function(updatedPlayerInventory){
+                this.player.increaseDrunkLevel(itemOrdered);
+                this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this));
+                this.statsUI = new StatsUI(this.player, this.bar);
+
+                this.displayMessage("You drank a drink!");
+        }.bind(this))
+
+      }.bind(this))
+    }.bind(this))
+  },
+
+//interact at bar
   askForDrink: function(){
     this.displayMessage("Would you like a drink?");
     var interactionArea = document.getElementById('middle');
@@ -134,42 +152,41 @@ InteractionUI.prototype = {
       this.flag = true;
     }
   },
-
   orderPlaced: function() {
     this.displayMessage("Please select your drink from the bar inventory");
  //set on click listeners for bar
     var orderedDrinkId = null;
     this.inventoryUI.addOnClickBarButtonsToBuyDrink(function(id){
       orderedDrinkId = id;
-
+//got drink id from button clicked
       if(orderedDrinkId !== null){
         this.game.findBarDrinkById(orderedDrinkId, function(itemOrdered){
-          
+//found drink item object from it          
           this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
             this.displayMessage(message);
           }.bind(this));
-
+//replaced onClick so that you can't double order
           this.game.addDrinkToPlayer(itemOrdered, function (errorMessage, updatedData) {
 console.log('Trying to add drink to player')
-
+//makes request to db to add drink to player
             if(errorMessage){
               this.displayMessage(errorMessage);
             }
             else {
               this.player.subtractItemValue(itemOrdered);
-              this.player.increaseDrunkLevel(itemOrdered);
-
+              // this.player.increaseDrunkLevel(itemOrdered);
+//removes the drink from the bar
               this.game.removeDrinkFromBar(itemOrdered, function (newBarList) {
 console.log('Trying to remove drink from bar'); 
 
                 this.bar.addItemValue(itemOrdered)
-
-                this.inventoryUI = new InventoryUI(this.player, this.bar);
+//updates UIs
+                this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this));
                 this.statsUI = new StatsUI(this.player, this.bar);
 
                 this.displayMessage("You bought a drink!");
               }.bind(this))
-
+//removes buttons
             }
             setTimeout(function(){
               this.displayMessage("");
@@ -182,7 +199,6 @@ console.log('Trying to remove drink from bar');
       }
     }.bind(this)); 
   },
-
   orderNotPlaced: function(yesButton, noButton) {
     messageDisplay = document.getElementById("interaction-message");
     messageDisplay.innerHTML = "Alright, then go sit over there with Dominic...";
@@ -195,6 +211,7 @@ console.log('Trying to remove drink from bar');
     }.bind(this), 2000, this.yesButton, this.noButton);
   },
 
+//interact with man
   speakToMan: function(){
     this.displayMessage("Hello there, would you like some money?");
     var interactionArea = document.getElementById('middle');
@@ -211,7 +228,6 @@ console.log('Trying to remove drink from bar');
 
     this.flag = true;
   },
-
   rejectMan: function(yesButton, noButton){
     messageDisplay = document.getElementById("interaction-message");
     messageDisplay.innerHTML = "What an idiot...";
@@ -223,7 +239,6 @@ console.log('Trying to remove drink from bar');
       this.flag = false;
     }.bind(this), 2000, this.yesButton, this.noButton);
   },
-
   acceptMan: function(){
     this.player.acceptMoneyFromMan(20);
 
