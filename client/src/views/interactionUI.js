@@ -105,6 +105,7 @@ InteractionUI.prototype = {
   },
 
   playTheMusic: function(){
+    console.log("playing piano")
     messageDisplay = document.getElementById("interaction-message");
     this.displayMessage("Let's get it poppin'")
 
