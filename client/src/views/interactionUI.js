@@ -31,9 +31,9 @@ InteractionUI.prototype = {
 
       if(this.flag == false){
         interactionArea.appendChild(this.noButton);
-        this.noButton.innerText = "NO!!!"
+        this.noButton.innerText = "NO!!!";
         noClick = this.noButton.addEventListener('click', function(){
-          this.noBehindBar(this.noButton)
+          this.noBehindBar(this.noButton);
         }.bind(this));
   
         this.flag = true;
@@ -50,14 +50,14 @@ InteractionUI.prototype = {
       }.bind(this), 2000, this.noButton);
     },
   cantGoBehindBar:function(){
-    this.displayMessage("Hey! Customers can't come behind the bar. You better scram before I get the bouncer, punk. Do you REALLY want me to..?")
+    this.displayMessage("Hey! Customers can't come behind the bar. You better scram before I get the bouncer, punk. Do you REALLY want me to..?");
     var interactionArea = document.getElementById('middle');
 
     if(this.flag == false){
       interactionArea.appendChild(this.noButton);
       this.noButton.innerText = "NO!!!"
       noClick = this.noButton.addEventListener('click', function(){
-        this.noBehindBar(this.noButton)
+        this.noBehindBar(this.noButton);
       }.bind(this));
 
       this.flag = true;
@@ -90,7 +90,7 @@ InteractionUI.prototype = {
 
       yesClick = this.yesButton.addEventListener('click', this.playTheMusic.bind(this));
       noClick = this.noButton.addEventListener('click', function(){
-        this.dontPlayTheMusic(this.yesButton, this.noButton)
+        this.dontPlayTheMusic(this.yesButton, this.noButton);
       }.bind(this));
 
       this.flag = true;
@@ -108,9 +108,8 @@ InteractionUI.prototype = {
     }.bind(this), 2000, this.yesButton, this.noButton);
   },
   playTheMusic: function(){
-    console.log("playing piano")
     messageDisplay = document.getElementById("interaction-message");
-    this.displayMessage("Let's get it poppin'")
+    this.displayMessage("Let's get it poppin'");
 
     document.getElementById("audio").play();
 
@@ -125,7 +124,6 @@ InteractionUI.prototype = {
 
 //drink a drink
   playerDrinkDrinkSetUp: function(id){
-
     this.inventoryUI.addOnClickPlayerButtonsToDrink(function(id){
       this.game.findPlayerDrinkById(id, function(itemOrdered){
         this.game.removeDrinkFromPlayer(itemOrdered, function(updatedPlayerInventory){
@@ -149,14 +147,14 @@ InteractionUI.prototype = {
 
     this.displayMessage("Would you like a drink?");
     var interactionArea = document.getElementById('middle');
-    console.log('in askForDrink in interactionUI')
+
     if(this.flag == false){
       interactionArea.appendChild(this.yesButton);
       interactionArea.appendChild(this.noButton);
 
       yesClick = this.yesButton.addEventListener('click', this.orderPlaced.bind(this));
       noClick = this.noButton.addEventListener('click', function(){
-        this.orderNotPlaced(this.yesButton, this.noButton)
+        this.orderNotPlaced(this.yesButton, this.noButton);
       }.bind(this));
 
       this.flag = true;
@@ -188,7 +186,7 @@ console.log('Trying to add drink to player')
               this.game.removeDrinkFromBar(itemOrdered, function (newBarList) {
 console.log('Trying to remove drink from bar'); 
 
-                this.bar.addItemValue(itemOrdered)
+                this.bar.addItemValue(itemOrdered);
 //updates UIs
                 this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this));
                 this.statsUI = new StatsUI(this.player, this.bar);
@@ -254,7 +252,7 @@ console.log('Trying to remove drink from bar');
       messageDisplay = document.getElementById("interaction-message");
       messageDisplay.innerHTML = "What an idiot...";
     } else {
-      this.displayMessage("Aha! Here's 20 big ones! Go forth and quench thy thirst.")
+      this.displayMessage("Aha! Here's 20 big ones! Go forth and quench thy thirst.");
       this.player.acceptMoneyFromMan(20);
     }
 
@@ -273,7 +271,7 @@ console.log('Trying to remove drink from bar');
     this.player.acceptMoneyFromMan(20);
 
     messageDisplay = document.getElementById("interaction-message");
-    this.displayMessage("Aha! Here's 20 big ones! Go forth and quench thy thirst.")
+    this.displayMessage("Aha! Here's 20 big ones! Go forth and quench thy thirst.");
     this.statsUI = new StatsUI(this.player, this.bar);
   } else {
     messageDisplay = document.getElementById("interaction-message");
