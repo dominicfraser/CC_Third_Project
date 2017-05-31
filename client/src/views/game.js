@@ -12,29 +12,23 @@ Game.prototype = {
 
   addDrinkToPlayer: function(drink, callback){
 
-    var outerStatus = this.modelsContainer.allPlayerItems(function(playerItems){
-    var handsFull = false;
-    var amountInHands = playerItems.length;
+    this.modelsContainer.allPlayerItems(function(playerItems){
+      var handsFull = false;
+      var amountInHands = playerItems.length;
 
-    if(amountInHands >= 3){
-      handsFull = true
-    };
+      if(amountInHands >= 3){
+        handsFull = true;
+      };
 
-    var innerStatus = "not set";
-    if (drink.value <= this.player.wallet && handsFull === false){
-      this.modelsContainer.addPlayerItem(drink, callback);
-      innerStatus = true
-    } 
-    else {
-      innerStatus = false
-    }
-    return innerStatus
-
-    }.bind(this));
-
-console.log('status in GAME', outerStatus)
-      
-    return outerStatus
+      if (drink.value <= this.player.wallet && handsFull === false){
+        this.modelsContainer.addPlayerItem(drink, function(updatedData){
+          callback(null, updatedData);
+        });
+      } 
+      else {
+        callback("You don't have enough money to buy another drink, sort yourself out! // or hands are full");
+      }
+    }.bind(this));     
   },
   
   removeDrinkFromPlayer: function(drink, callback){

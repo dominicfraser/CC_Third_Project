@@ -52,36 +52,29 @@ console.log('orderedDrinkId after callback',orderedDrinkId)
 
 console.log('item ordered in interactionUI', itemOrdered)
 
-        // if(itemOrdered !== null && itemOrdered !== undefined){
-          //remove above when fixed wait time in findSpecificBarItem??
-        var status = this.game.addDrinkToPlayer({name: "test", value: 10, alcoholLevel: 4}, function (response) {
+        var status = this.game.addDrinkToPlayer({name: "test", value: 10, alcoholLevel: 4}, function (errorMessage, updatedData) {
 console.log('Drink should now be added to player')
-        })
-        setTimeout(function(){
-          if (status === true ){
-console.log('in order placed in interactionUI',this)
 
-console.log('in setTimeout', this.player)
-            this.player.subtractItemValue({name: "test", value: 10, alcoholLevel: 4});
-            this.player.increaseDrunkLevel({name: "test", value: 10, alcoholLevel: 4});
+            if(errorMessage){
+              this.displayMessage(errorMessage);
+            }
+            else {
+              this.player.subtractItemValue({name: "test", value: 10, alcoholLevel: 4});
+              this.player.increaseDrunkLevel({name: "test", value: 10, alcoholLevel: 4});
 
-            // this.game.removeDrinkFromBar({id: "592d72654cfcf4a239eead0e"}, function (response) {
-            //     console.log('Drink should now be removed from bar'); })
+              // this.game.removeDrinkFromBar({id: "592d72654cfcf4a239eead0e"}, function (response) {
+              //     console.log('Drink should now be removed from bar'); })
+
               this.inventoryUI = new InventoryUI(this.player, this.bar);
               this.statsUI = new StatsUI(this.player, this.bar);
 
               this.displayMessage("You bought a drink!");
-            } 
-            else {
-              this.displayMessage("You don't have enough money to buy another drink, sort yourself out! // or hands are full");
-            };
-
+            }
             this.yesButton.remove();
             this.noButton.remove();
             this.flag = false;
-
-        }.bind(this), 2000, this.yesButton, this.noButton);
-      // }
+        }.bind(this))
+      
       }
     }.bind(this)); 
   },
