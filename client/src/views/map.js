@@ -41,7 +41,6 @@ console.log('inside main map', this)
   window.addEventListener('keydown', this.interactionsFunctions.bind(this));
 
 
-
   this.loadCanvas();
 //////////////to test coords
   var canvas = document.getElementById("player-canvas");
@@ -87,7 +86,7 @@ Map.prototype = {
         {
           this.interactionUI.cantGoBehindBar();
         }
-      } 
+      }
     else {return}
     
   },
