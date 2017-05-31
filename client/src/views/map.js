@@ -21,6 +21,9 @@ console.log('inside main map', this)
 
   this.backdrop = document.createElement('img');
   this.backdrop.src = "/public/img/edited_images/backdrop_empty.png";
+  this.guy = document.createElement('img');
+  this.guy.src = "/public/img/edited_images/f1guy.png";
+
 
   // var playerLeft = document.createElement('img');
   // playerLeft.src = "../build/public/img/edited_images/f1girl.png";
@@ -82,7 +85,7 @@ Map.prototype = {
 
     if (e.key === "ArrowRight"){
       var hitRightBorder = ((positionX + 5) >= 700);
-      var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
+      var hitGuy = (positionY <= 210 && positionY >= 180) && (positionX === 470);
       var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115);
       var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345);
       var hitStage = (positionY <= 160 && positionY >= 85) && (positionX <= 700 && positionX >= 485);
@@ -117,7 +120,7 @@ Map.prototype = {
     else if(e.key === "ArrowLeft"){
         var hitLeftBorder = ((positionX - 5) <= 0)
         var hitRightSideOfBar = (positionY <= 280 && positionY >= 0) && (positionX <= 240 && positionX >= 240);
-        var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
+        var hitGuy = (positionY <= 210 && positionY >= 180) && (positionX === 470);
         var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115);
         var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345);
 
@@ -145,7 +148,7 @@ Map.prototype = {
         var hitTopBorder = ((positionY - 5) <= 0)
         var hitWallBorder = (positionX <= 700 && positionX >= 0) && (positionY <= 90 && positionY >= 90);
         var hitBottomOfBar = (positionX >= 0 && positionX <= 240) && (positionY <= 290 && positionY >= 235);
-        var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
+        var hitGuy = (positionY === 280) && (positionX <= 470 && positionX >= 410);
         var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115);
         var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345);
         var hitStage = (positionY <= 160 && positionY >= 85) && (positionX <= 700 && positionX >= 485);
@@ -177,7 +180,7 @@ Map.prototype = {
     
     else if(e.key === "ArrowDown"){
         var hitBottomBorder = ((positionY + 5) >= 500)
-        var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
+        var hitGuy = (positionY === 210) && (positionX <= 470 && positionX >= 410);
         var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX <= 190 && positionX >=115);
         var hitSofas = (positionY <= 500 && positionY >= 200) && (positionX <= 700 && positionX >= 600);
 
