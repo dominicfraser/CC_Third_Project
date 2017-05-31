@@ -17,7 +17,6 @@ Game.prototype = {
      if(amountInHands >= 3){
         handsFull = true;
       };
-
      if (drink.value <= this.player.wallet && handsFull === false){
         this.modelsContainer.addPlayerItem(drink, function(updatedData){
           callback(null, updatedData);

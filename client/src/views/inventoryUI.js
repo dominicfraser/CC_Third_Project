@@ -15,33 +15,15 @@ InventoryUI.prototype = {
   renderAll: function(onComplete){
     this.modelsContainer.allPlayerItems(function(playerItems){
       this.renderPlayerItemsImages(playerItems);
-      this.renderPlayerItemsCountDropdown(playerItems);
-
       onComplete();
     }.bind(this));
     
     this.modelsContainer.allBarItems(function(barItems){
-      this.renderBarItemsCountDropdown(barItems);
       this.renderBarItemsImages(barItems);
     }.bind(this)); 
 
   },
 
-  // renderPlayerItemsCountDropdown: function(playerItems){
-  //       var select = document.getElementById("player-inventory-dropdown");
-  //       select.innerHTML = "";
-
-  //       var playerItemsWithCount = this.addCounts(playerItems)
-  //       var playerItemsFiltered = this.filterToUniqList(playerItemsWithCount)
-
-  //       for (var item of playerItemsFiltered){
-  //         var option = document.createElement('option');
-  //         option.innerText = item.name + ' (' + item.count + ')';
-  //         option.value = item.id;
-  //         // option.value = JSON.stringify(item);
-  //         select.appendChild(option);
-  //       }
-  //     },
   renderPlayerItemsImages: function(playerItems){
    var tablePicture = document.getElementById("player-inventory-picture")
    tablePicture.innerHTML = ""
@@ -196,20 +178,6 @@ InventoryUI.prototype = {
       }
     }
   },
-  renderBarItemsCountDropdown: function(barItems){
-    var select = document.getElementById("bar-inventory-dropdown");
-    select.innerHTML = "";
-
-    var barItemsWithCount = this.addCounts(barItems)
-    var barItemsFiltered = this.filterToUniqList(barItemsWithCount)
-
-    for (var item of barItemsFiltered){
-      var option = document.createElement("option");
-      option.innerText = item.name + ' (' + item.count + ')';
-      option.value = item.id;
-      select.appendChild(option);
-    }
-  },
 
   addOnClickBarButtonsToBuyDrink: function(callback){
     var barTable = document.getElementById("bar-inventory-table");
@@ -220,9 +188,10 @@ InventoryUI.prototype = {
         rowNumber += 1;
         var cellIndex = rowNumber;
         buttonNames.push(cellIndex)
-        buttonNames[cellIndex] = td.children[0]
+        buttonNames[cellIndex] = td.children[1]
        }  
     }
+console.log('buttonNames', buttonNames)    
     buttonNames.forEach(function(button){
       button.onclick = function(event){
 console.log('button click', button.value)
@@ -240,7 +209,7 @@ console.log('in remove event listener')
         rowNumber += 1;
         var cellIndex = rowNumber;
         buttonNames.push(cellIndex);
-        buttonNames[cellIndex] = td.children[0]
+        buttonNames[cellIndex] = td.children[1]
        }  
     }
 console.log('all buttons?',buttonNames)
