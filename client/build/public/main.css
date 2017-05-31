@@ -45,7 +45,6 @@ h4 {
 section {
   height: 100%;
   vertical-align: top;
-  /*border: 1px solid black;*/
   display: inline-block;
 }
 
@@ -71,7 +70,8 @@ section {
 #main-title {
   text-align: center;
   font-size: 40px;
-  font-family: "Hesster Mofet DIRTY_TRIAL";
+  font-family: "Hesster Mofet";
+    /*font-family: "Hesster Mofet DIRTY_TRIAL";*/
 }
 
 #interaction-message{
@@ -93,7 +93,6 @@ section {
 }
 
 table {
-  /*border: 1px solid black;*/
   background: rgba(69, 53, 53, 0.3);
 }
 
@@ -125,3 +124,7 @@ button {
   padding: 10px;
 }
 
+@font-face {
+      font-family: "Hesster Mofet";
+      src: url(./img/fonts/hesster-mofet.mofet-dirty-trial.ttf) format("truetype");
+  } 
