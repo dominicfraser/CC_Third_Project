@@ -29,6 +29,17 @@ ModelsContainer.prototype = {
     var itemData = JSON.stringify(itemToRemove);
     this.requestHelper.makeDeleteRequest('http://localhost:3000/api/player_inventory/' + id, callback);
   },
+  findSpecificPlayerItem: function(id, callback){
+    this.requestHelper.makeGetRequest("http://localhost:3000/api/player_inventory", function(results){
+      var playerItems = this.populatePlayerItems(results);
+        for(item of playerItems){
+           if(item.id == id){
+                var itemToFind = item;
+            }
+        }
+      callback(itemToFind);
+    }.bind(this));
+  },
 
   allBarItems: function(callback){
     this.requestHelper.makeGetRequest("http://localhost:3000/api/bar_inventory", function(results){

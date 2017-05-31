@@ -33,10 +33,17 @@ Game.prototype = {
       }
     }.bind(this));    
   },
+
+  playerDrinkId: function(id){
+    this.modelsContainer.playerDrinkDrink(id);
+  },
   
  removeDrinkFromPlayer: function(drink, callback){
     this.modelsContainer.removePlayerItem(drink, callback);
   },
+  findPlayerDrinkById: function(id, callback){
+      this.modelsContainer.findSpecificPlayerItem(id, callback);
+   },
 
  addDrinkToBar: function(drink, callback){
     this.modelsContainer.addBarItem(drink, callback);

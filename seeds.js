@@ -7,16 +7,16 @@ db.player_inventory.insert([
     value: 4,
     alcoholLevel: 4
   },
-  // {
-  //   name: "Wine",
-  //   value: 5,
-  //   alcoholLevel: 6
-  // },
-  // {
-  //   name: "Apple Juice",
-  //   value: 2,
-  //   alcoholLevel: -2
-  // },
+  {
+    name: "Wine",
+    value: 5,
+    alcoholLevel: 6
+  },
+  {
+    name: "Apple Juice",
+    value: 2,
+    alcoholLevel: -2
+  }
   // {
   //   name: "Coke",
   //   value: 3,
