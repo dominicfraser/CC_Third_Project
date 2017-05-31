@@ -40,7 +40,6 @@ InventoryUI.prototype = {
 
     var playerItemsWithCount = this.addCounts(playerItems)
     var playerItemsFiltered = this.filterToUniqList(playerItemsWithCount)
-
     for (var item of playerItemsFiltered){
       if (item.name === "Beer"){
         var imageBeerButton = document.createElement('button')
@@ -160,6 +159,47 @@ InventoryUI.prototype = {
       option.value = item.id;
       select.appendChild(option);
     }
+  },
+
+  addOnClickBarButtonsToBuyDrink: function(callback){
+    var barTable = document.getElementById("bar-inventory-table");
+    var rowNumber = -1; 
+    var buttonNames = [];
+    for (var i = 0, row; row = barTable.rows[i]; i++) { 
+       for (var d = 0, td; td = row.cells[d]; d++) {
+        rowNumber += 1;
+        var cellIndex = rowNumber;
+        buttonNames.push(cellIndex)
+        buttonNames[cellIndex] = td.children[0]
+       }  
+    }
+    buttonNames.forEach(function(button){
+      button.onclick = function(event){
+console.log('button click', button.value)
+        callback(button.value);
+      }
+    });
+  },
+  addOnClickBarButtonsTellGoToBar: function(callback){
+console.log('in remove event listener')
+    var barTable = document.getElementById("bar-inventory-table");
+    var rowNumber = -1; 
+    var buttonNames = [];
+    for (var i = 0, row; row = barTable.rows[i]; i++) { 
+       for (var d = 0, td; td = row.cells[d]; d++) {
+        rowNumber += 1;
+        var cellIndex = rowNumber;
+        buttonNames.push(cellIndex);
+        buttonNames[cellIndex] = td.children[0]
+       }  
+    }
+console.log('all buttons?',buttonNames)
+    buttonNames.forEach(function(button){
+          button.onclick = function(event){
+    console.log('button click remove', button.value)
+            callback("Please order a drink from the bar");
+          }
+    });
   },
 
   addCounts: function (items) {

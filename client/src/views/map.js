@@ -18,7 +18,7 @@ console.log('inside main map', this)
 
   this.context = this.getPlayerCanvasContext();
   this.mainContext = this.getMainCanvasContext();
-
+//canvas image setup
   this.backdrop = document.createElement('img');
   this.backdrop.src = "/public/img/edited_images/backdrop_empty.png";
   this.tableSet = document.createElement('img');
@@ -230,7 +230,6 @@ console.log('current y', this.currentPosition[1])
   },
 
   loadCanvas: function() {
-
     var sofaSetBottom = document.createElement('img');
     sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
 

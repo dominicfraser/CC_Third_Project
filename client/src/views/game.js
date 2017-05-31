@@ -3,39 +3,50 @@ var ModelsContainer = require('../models/models_container');
 var Game = function (player, bar) {
   this.player = player;
   this.bar = bar;
-//DB Querys 
+//DB Querys
   this.modelsContainer = new ModelsContainer;
-
 };
 
 Game.prototype = {
 
-  addDrinkToPlayer: function(drink, callback){
-      // if(modelsContainer.allPlayerItems >= 3){
-      //   return
-      // }
-      //   else{
-      // }
+ addDrinkToPlayer: function(drink, callback){
+   this.modelsContainer.allPlayerItems(function(playerItems){
+      var handsFull = false;
+      var amountInHands = playerItems.length;
 
-      if (drink.value <= this.player.wallet){
-        this.modelsContainer.addPlayerItem(drink, callback);
-        return true
-      } 
-      else {
-        return false
+     if(amountInHands >= 3){
+        handsFull = true;
+      };
+
+     if (drink.value <= this.player.wallet && handsFull === false){
+        this.modelsContainer.addPlayerItem(drink, function(updatedData){
+          callback(null, updatedData);
+        });
       }
-
+      else {
+        if (drink.value > this.player.wallet){
+          callback("You don't have enough money to buy another drink, sort yourself out!");
+        }
+        else {
+        callback("Soz boo, your hands are full!");
+      }
+      }
+    }.bind(this));    
   },
   
-  removeDrinkFromPlayer: function(drink, callback){
+ removeDrinkFromPlayer: function(drink, callback){
     this.modelsContainer.removePlayerItem(drink, callback);
   },
 
-  addDrinkToBar: function(drink, callback){
+ addDrinkToBar: function(drink, callback){
     this.modelsContainer.addBarItem(drink, callback);
   },
   removeDrinkFromBar: function(drink, callback){
     this.modelsContainer.removeBarItem(drink, callback);
+  },
+
+ findBarDrinkById: function(id, callback){
+     this.modelsContainer.findSpecificBarItem(id, callback);
   },
 
 };

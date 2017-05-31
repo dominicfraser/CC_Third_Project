@@ -10,10 +10,13 @@ var InteractionUI = function (player, bar) {
 
   this.game = new Game(this.player, this.bar);
   this.inventoryUI = new InventoryUI(this.player, this.bar);
+  // this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
+  //   this.displayMessage(message);
+  // }.bind(this));
+
 
   this.yesButton = document.createElement('button');
   this.yesButton.innerHTML = "Yes";
-
   this.noButton = document.createElement('button');
   this.noButton.innerHTML = "No";
 };
@@ -120,7 +123,7 @@ InteractionUI.prototype = {
   askForDrink: function(){
     this.displayMessage("Would you like a drink?");
     var interactionArea = document.getElementById('middle');
-
+    console.log('in askForDrink in interactionUI')
     if(this.flag == false){
       interactionArea.appendChild(this.yesButton);
       interactionArea.appendChild(this.noButton);
@@ -135,34 +138,48 @@ InteractionUI.prototype = {
   },
 
   orderPlaced: function() {
-    var status = this.game.addDrinkToPlayer({name: "test", value: 10, alcoholLevel: 4}, function (response) {
-        console.log('Drink should now be added to player')
-      })
+    this.displayMessage("Please select your drink from the bar inventory");
+ //set on click listeners for bar
+    var orderedDrinkId = null;
+    this.inventoryUI.addOnClickBarButtonsToBuyDrink(function(id){
+      orderedDrinkId = id;
 
-    setTimeout(function(){
-      if (status === true ){
-        console.log('in order placed in interactionUI',this)
+      if(orderedDrinkId !== null){
+        this.game.findBarDrinkById(orderedDrinkId, function(itemOrdered){
+          
+          this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
+            this.displayMessage(message);
+          }.bind(this));
 
-        console.log(this.player.wallet)
-        this.player.subtractItemValue({name: "test", value: 10, alcoholLevel: 4});
-        this.player.increaseDrunkLevel({name: "test", value: 10, alcoholLevel: 4});
+          this.game.addDrinkToPlayer(itemOrdered, function (errorMessage, updatedData) {
+console.log('Trying to add drink to player')
 
-        // this.game.removeDrinkFromBar({name: "test", value: 10}, function (response) {
-        //   console.log('Drink should now be removed from bar');
-        this.inventoryUI = new InventoryUI(this.player, this.bar);
-        this.statsUI = new StatsUI(this.player, this.bar);
+            if(errorMessage){
+              this.displayMessage(errorMessage);
+            }
+            else {
+              this.player.subtractItemValue(itemOrdered);
+              this.player.increaseDrunkLevel(itemOrdered);
 
-        this.displayMessage("You bought a drink!");
-      } 
-      else {
-        this.displayMessage("You don't have enough money to buy another drink, sort yourself out!");
-      };
+              this.game.removeDrinkFromBar(itemOrdered, function (newBarList) {
+console.log('Trying to remove drink from bar'); 
 
-      this.yesButton.remove();
-      this.noButton.remove();
-      this.flag = false;
+                this.bar.addItemValue(itemOrdered)
 
-      }.bind(this), 2000, this.yesButton, this.noButton);
+                this.inventoryUI = new InventoryUI(this.player, this.bar);
+                this.statsUI = new StatsUI(this.player, this.bar);
+
+                this.displayMessage("You bought a drink!");
+              }.bind(this))
+
+            }
+            this.yesButton.remove();
+            this.noButton.remove();
+            this.flag = false;
+          }.bind(this))
+        }.bind(this))  
+      }
+    }.bind(this)); 
   },
 
   orderNotPlaced: function(yesButton, noButton) {
@@ -226,7 +243,6 @@ InteractionUI.prototype = {
     messageDisplay = document.getElementById("interaction-message");
     messageDisplay.innerHTML = message;
   },
-
 
 };
 
