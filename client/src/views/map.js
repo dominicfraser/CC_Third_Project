@@ -32,6 +32,16 @@ console.log('inside main map', this)
 
   this.playerBegin = document.createElement('img');
   this.playerBegin.src = "/public/img/edited_images/f1girl.png"
+
+  this.playerLeft = document.createElement('img');
+  this.playerLeft.src = "/public/img/edited_images/l1girl.png"
+
+  this.playerRight = document.createElement('img');
+  this.playerRight.src = "/public/img/edited_images/r1girl.png"
+
+  this.playerUp = document.createElement('img');
+  this.playerUp.src = "/public/img/edited_images/b1girl.png"
+
   this.playerHeight = 500;
   this.playerWidth = 700;
 
@@ -97,7 +107,7 @@ Map.prototype = {
 
   moveSprite: function(playerDirectionImage, xInc, yInc){
     this.player.innerHTML = "";
-    context.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 40)
+    context.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 44)
     context.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
     this.drawUpperCanvas();
 console.log('current x', this.currentPosition[0])
@@ -137,7 +147,7 @@ console.log('current y', this.currentPosition[1])
         return;
       }
       else {
-        this.moveSprite(this.playerBegin, 5, 0)
+        this.moveSprite(this.playerRight, 5, 0)
         this.currentPosition[0] = positionX+5
       }
     }
@@ -165,7 +175,7 @@ console.log('current y', this.currentPosition[1])
           return;
         }
 
-        this.moveSprite(this.playerBegin, -5, 0)
+        this.moveSprite(this.playerLeft, -5, 0)
         this.currentPosition[0] = positionX-5
       }
     
@@ -199,7 +209,7 @@ console.log('current y', this.currentPosition[1])
         else if (hitStage){
           return;
         }
-        this.moveSprite(this.playerBegin, 0, -5)
+        this.moveSprite(this.playerUp, 0, -5)
         this.currentPosition[1] = positionY-5
     }
     
