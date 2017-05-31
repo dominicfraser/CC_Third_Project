@@ -14,7 +14,6 @@ var InteractionUI = function (player, bar) {
   //   this.displayMessage(message);
   // }.bind(this));
 
-
   this.yesButton = document.createElement('button');
   this.yesButton.innerHTML = "Yes";
   this.noButton = document.createElement('button');
@@ -105,7 +104,6 @@ InteractionUI.prototype = {
   },
 
   playTheMusic: function(){
-
     messageDisplay = document.getElementById("interaction-message");
     this.displayMessage("Let's get it poppin'")
 
@@ -229,7 +227,6 @@ console.log('Trying to remove drink from bar');
     messageDisplay = document.getElementById("interaction-message");
     this.displayMessage("Aha! Here's 20 big ones! Go forth and quench thy thirst.")
     this.statsUI = new StatsUI(this.player, this.bar);
-
 
     setTimeout(function(){
       this.displayMessage("");
