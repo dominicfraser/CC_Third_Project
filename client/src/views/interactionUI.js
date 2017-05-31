@@ -184,7 +184,6 @@ console.log('Trying to add drink to player')
             }
             else {
               this.player.subtractItemValue(itemOrdered);
-              // this.player.increaseDrunkLevel(itemOrdered);
 //removes the drink from the bar
               this.game.removeDrinkFromBar(itemOrdered, function (newBarList) {
 console.log('Trying to remove drink from bar'); 

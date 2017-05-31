@@ -15,8 +15,7 @@ InventoryUI.prototype = {
   renderAll: function(onComplete){
     this.modelsContainer.allPlayerItems(function(playerItems){
       this.renderPlayerItemsImages(playerItems);
-      this.renderPlayerItemsCountDropdown(playerItems);
-
+      // this.renderPlayerItemsCountDropdown(playerItems);
       onComplete();
     }.bind(this));
     
@@ -220,9 +219,10 @@ InventoryUI.prototype = {
         rowNumber += 1;
         var cellIndex = rowNumber;
         buttonNames.push(cellIndex)
-        buttonNames[cellIndex] = td.children[0]
+        buttonNames[cellIndex] = td.children[1]
        }  
     }
+console.log('buttonNames', buttonNames)    
     buttonNames.forEach(function(button){
       button.onclick = function(event){
 console.log('button click', button.value)
