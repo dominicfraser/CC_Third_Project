@@ -21,6 +21,9 @@ console.log('inside main map', this)
 
   this.backdrop = document.createElement('img');
   this.backdrop.src = "/public/img/edited_images/backdrop_empty.png";
+  this.tableSet = document.createElement('img');
+  this.tableSet.src = "/public/img/edited_images/table_set.png";
+
   this.player = document.createElement('img');
   this.player.src = "/public/img/edited_images/f1girl2.png"
 
@@ -77,12 +80,17 @@ Map.prototype = {
     }
   },
 
+  drawUpperCanvas: function(){
+      context.drawImage(this.tableSet, -200, 180, 700, 500);
+  },
+
   moveSprite: function(playerDirectionImage, xInc, yInc){
     this.player.innerHTML = "";
     context.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 40)
     context.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
-console.log('x', this.currentPosition[0])
-console.log('y', this.currentPosition[1])
+    this.drawUpperCanvas();
+console.log('current x', this.currentPosition[0])
+console.log('current y', this.currentPosition[1])
   },
 
   movePlayer: function(e){
@@ -92,7 +100,7 @@ console.log('y', this.currentPosition[1])
     if (e.key === "ArrowRight"){
       var hitRightBorder = ((positionX + 5) >= 700);
       var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
-      var hitChairsTable = (positionY <= 495 && positionY >= 355) && (positionX === 105);
+      var hitChairsTable = (positionY <= 495 && positionY >= 385) && (positionX === 115);
       var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345);
       var hitStage = (positionY <= 160 && positionY >= 85) && (positionX <= 700 && positionX >= 485);
       var hitSofas = (positionY <= 500 && positionY >= 200) && (positionX <= 700 && positionX >= 600);
@@ -127,7 +135,7 @@ console.log('y', this.currentPosition[1])
         var hitLeftBorder = ((positionX - 5) <= 5)
         var hitRightSideOfBar = (positionY <= 280 && positionY >= 0) && (positionX <= 240 && positionX >= 240);
         var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
-        var hitChairsTable = (positionY <= 490 && positionY >= 370) && (positionX === 185);
+        var hitChairsTable = (positionY <= 490 && positionY >= 390) && (positionX === 185);
         var hitPiano = (positionY <= 145 && positionY >= 45) && (positionX <= 450 && positionX >= 345);
 
         if (hitLeftBorder){
@@ -171,9 +179,9 @@ console.log('y', this.currentPosition[1])
         else if (hitGuy){
           return;
         }
-        else if (hitChairsTable){
-          return;
-        }
+        // else if (hitChairsTable){
+        //   return;
+        // }
         else if (hitPiano){
           return;
         }
@@ -187,7 +195,7 @@ console.log('y', this.currentPosition[1])
     else if(e.key === "ArrowDown"){
       var hitBottomBorder = ((positionY + 5) >= 485)
       var hitGuy = (positionY <= 280 && positionY >= 180) && (positionX <= 470 && positionX >= 410);
-      var hitChairsTable = (positionY === 365) && (positionX <= 190 && positionX >=110);
+      var hitChairsTable = (positionY === 385) && (positionX <= 180 && positionX >=120);
       var hitSofas = (positionY <= 500 && positionY >= 200) && (positionX <= 700 && positionX >= 600);
 
       if (hitBottomBorder){
@@ -211,9 +219,6 @@ console.log('y', this.currentPosition[1])
   },
 
   loadCanvas: function() {
-
-    var tableSet = document.createElement('img');
-    tableSet.src = "/public/img/edited_images/table_set.png";
 
     var sofaSetBottom = document.createElement('img');
     sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
@@ -240,7 +245,7 @@ console.log('y', this.currentPosition[1])
       mainContext.drawImage(this, 0, 0, 700, 500); 
     };
 
-    tableSet.onload = function() {
+    this.tableSet.onload = function() {
       context.drawImage(this, -200, 180, 700, 500);
     };
 
