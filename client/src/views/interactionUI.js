@@ -45,7 +45,7 @@ InteractionUI.prototype = {
         this.displayMessage("");
         this.noButton.remove();
         this.flag = false;
-      }.bind(this), 2000, noButton);
+      }.bind(this), 2000, this.noButton);
     },
 
   cantGoBehindBar:function(){
@@ -71,7 +71,7 @@ InteractionUI.prototype = {
       this.displayMessage("");
       this.noButton.remove();
       this.flag = false;
-    }.bind(this), 2000, noButton);
+    }.bind(this), 2000, this.noButton);
   },
 
   askToPlayPiano: function(){
@@ -100,7 +100,7 @@ InteractionUI.prototype = {
       this.yesButton.remove();
       this.noButton.remove();
       this.flag = false;
-    }.bind(this), 2000, yesButton, noButton);
+    }.bind(this), 2000, this.yesButton, this.noButton);
   },
 
   playTheMusic: function(){
@@ -114,7 +114,7 @@ InteractionUI.prototype = {
       this.yesButton.remove();
       this.noButton.remove();
       this.flag = false;
-    }.bind(this), 2000, yesButton, noButton);
+    }.bind(this), 2000, this.yesButton, this.noButton);
 
   },
 
@@ -171,9 +171,12 @@ console.log('Trying to remove drink from bar');
               }.bind(this))
 
             }
-            this.yesButton.remove();
-            this.noButton.remove();
-            this.flag = false;
+            setTimeout(function(){
+              this.displayMessage("");
+              this.yesButton.remove();
+              this.noButton.remove();
+              this.flag = false;
+            }.bind(this), 2000, this.yesButton, this.noButton);
           }.bind(this))
         }.bind(this))  
       }
@@ -189,7 +192,7 @@ console.log('Trying to remove drink from bar');
       this.yesButton.remove();
       this.noButton.remove();
       this.flag = false;
-    }.bind(this), 2000, yesButton, noButton);
+    }.bind(this), 2000, this.yesButton, this.noButton);
   },
 
   speakToMan: function(){
@@ -218,7 +221,7 @@ console.log('Trying to remove drink from bar');
       this.yesButton.remove();
       this.noButton.remove();
       this.flag = false;
-    }.bind(this), 2000, yesButton, noButton);
+    }.bind(this), 2000, this.yesButton, this.noButton);
   },
 
   acceptMan: function(){
@@ -233,7 +236,7 @@ console.log('Trying to remove drink from bar');
       this.yesButton.remove();
       this.noButton.remove();
       this.flag = false;
-    }.bind(this), 2000, yesButton, noButton);
+    }.bind(this), 2000, this.yesButton, this.noButton);
   },
 
   displayMessage: function(message){
