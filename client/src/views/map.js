@@ -93,8 +93,13 @@ Map.prototype = {
 
 
   interactWithMan: function(e){
+    var positionX = this.currentPosition[0];
+    var positionY = this.currentPosition[1];
     if(e.key === "p"){
-      this.interactionUI.speakToMan();
+      if((positionX >= 400 && positionX <= 490) && (positionY >= 170 && positionY <= 290)) 
+      {
+        this.interactionUI.speakToMan();
+      } else {return;}
     }
   },
 
