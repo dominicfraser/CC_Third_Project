@@ -63,9 +63,14 @@ console.log('inside main map', this)
 Map.prototype = {
 
   playMusic: function(e){
+    var positionX = this.currentPosition[0];
+    var positionY = this.currentPosition[1];
      if (e.key === "m"){
+      if(((positionX >= 370 && positionX <= 430) && (positionY >= 150 && positionY <= 150)))
+      {
        this.interactionUI.askToPlayPiano();
-     };
+     } else{return;}
+    }
   },
 
   // PIANO
