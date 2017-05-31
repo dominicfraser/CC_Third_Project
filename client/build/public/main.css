@@ -71,7 +71,6 @@ section {
   text-align: center;
   font-size: 40px;
   font-family: "Hesster Mofet";
-    /*font-family: "Hesster Mofet DIRTY_TRIAL";*/
 }
 
 #interaction-message{
@@ -119,7 +118,7 @@ button {
 
 .board {
   background-image: url("/public/img/edited_images/chalk_background.png");
-  font-family: "Hesster Mofet DIRTY_TRIAL";
+  font-family: "Hesster Mofet";
   color: white;
   padding: 10px;
 }
