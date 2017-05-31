@@ -26,7 +26,12 @@ Game.prototype = {
         });
       } 
       else {
-        callback("You don't have enough money to buy another drink, sort yourself out! // or hands are full");
+        if (drink.value > this.player.wallet){
+          callback("You don't have enough money to buy another drink, sort yourself out!");
+        }
+        else {
+        callback("Soz boo, your hands are full!");
+      }
       }
     }.bind(this));     
   },
