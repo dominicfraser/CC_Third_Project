@@ -74,21 +74,6 @@ console.log('inside main map', this)
   this.loadWelcomeScreen();
   window.addEventListener('keypress', this.loadCanvas.bind(this));
 
-//////////////to test coords
-  var canvas = document.getElementById("player-canvas");
-
-    function getMousePos(canvas, evt) {
-        var rect = canvas.getBoundingClientRect();
-        return {
-          x: evt.clientX - rect.left,
-          y: evt.clientY - rect.top
-        };
-      }
-      canvas.addEventListener('click', function(evt) {
-        var mousePos = getMousePos(canvas, evt);
-        console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
-      }, false);
-//////////// delete after use
   };                          //END MAIN MAP 
 
 Map.prototype = {
@@ -152,8 +137,8 @@ Map.prototype = {
     context.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 44)
     context.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
     this.drawUpperCanvas();
-console.log('current x', this.currentPosition[0])
-console.log('current y', this.currentPosition[1])
+// console.log('current x', this.currentPosition[0])
+// console.log('current y', this.currentPosition[1])
   },
 
   movePlayer: function(e){

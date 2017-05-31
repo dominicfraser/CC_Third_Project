@@ -6,7 +6,6 @@ body {
 
 canvas { 
   position: absolute;
-  /*border: 1px solid black;*/
   display: inline-block;
   margin-left: 26px;
 }
@@ -25,6 +24,12 @@ h4 {
   font-size: 25px;
 }
 
+#main-title {
+  text-align: center;
+  font-size: 40px;
+  font-family: "Hesster Mofet";
+}
+
 #middle button {
   background-color: white;
   text-align: center;
@@ -40,6 +45,14 @@ h4 {
 
 #player-canvas {
   z-index: 10;
+}
+
+#middle-canvas {
+  height: 78%;
+}
+
+#interaction-message{
+  font-family: 'Quantico', serif;
 }
 
 section {
@@ -70,20 +83,6 @@ section {
   background-image: url("/public/img/edited_images/corkboard.jpg")
 }
 
-#main-title {
-  text-align: center;
-  font-size: 40px;
-  font-family: "Hesster Mofet";
-}
-
-#interaction-message{
-  font-family: 'Quantico', serif;
-}
-
-#middle-canvas {
-  height: 78%;
-}
-
 #money-chart, #bar-inv-chart {
   height: 150px;
   background-image: url("/public/img/edited_images/corkboard.jpg");
@@ -98,7 +97,6 @@ table {
   background: rgba(69, 53, 53, 0.3);
 }
 
-
 #player-inventory-picture td img {
     height: 30px;
     width: 30px;
@@ -112,6 +110,10 @@ td button img {
 #bar-inventory-table td img {
     height: 30px;
     width: 30px;
+}
+
+#player-inventory-table, #bar-inventory-table {
+  width: 100%;
 }
 
 button {
