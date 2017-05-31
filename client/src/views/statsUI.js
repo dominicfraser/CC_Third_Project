@@ -3,7 +3,6 @@ var MoneyChart = require('../../build/public/moneyChart.js');
 var BarInventoryChart = require('../../build/public/barInventoryChart.js');
 var DrunkLevelChart = require('../../build/public/drunkChart.js');
 
-
 var StatsUI = function(player, bar){
   this.player = player;
   this.bar = bar;
@@ -15,12 +14,12 @@ var StatsUI = function(player, bar){
   var drunkLevelChart = new DrunkLevelChart(this.player.drunkLevel);
   
   var barInventoryCount = modelsContainer.allBarItems(function(barInventory){
-     var barInventoryChart = new BarInventoryChart(barInventory.length)
+     var barInventoryChart = new BarInventoryChart(barInventory.length);
     });
 
 };
 
-  StatsUI.prototype = {
+StatsUI.prototype = {
   
 };
 

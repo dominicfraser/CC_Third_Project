@@ -11,46 +11,42 @@
   <script src="http://code.highcharts.com/highcharts.js"></script>
 </head>
 <body>
-<audio id="audio" src="/public/img/edited_images/piano.mp3"></audio>
+  <audio id="audio" src="/public/img/edited_images/piano.mp3"></audio>
 
-  <section id="inventory"> 
-    <h1 class="board">Inventory</h1>
-    <div>
-    <h4 class="board">Player Inventory</h4>
-      <table id="player-inventory-table" style="width:100%">
-        <tr  id="player-inventory-picture"> 
-        </tr>
-      </table>
-      <select id="player-inventory-dropdown">
-        <option></option>
-      </select>
-    </div> 
-    <h4 class="board">Bar Inventory</h4>
-      <table id="bar-inventory-table" style="width:100%">
-      </table>
-    <select id="bar-inventory-dropdown"></select>
-  </section>
+    <section id="inventory"> 
+      <h1 class="board">Inventory</h1>
+      <div>
+      <h4 class="board">Player Inventory</h4>
+        <table id="player-inventory-table">
+          <tr  id="player-inventory-picture"> 
+          </tr>
+        </table>
+      </div> 
+      <h4 class="board">Bar Inventory</h4>
+        <table id="bar-inventory-table">
+        </table>
+    </section>
 
 
-  <section id="middle">
-    <div id="middle-canvas">
-      <h1 id="main-title">Chanter</h1>
-      <canvas id="main-canvas" width="700px" height="500px"></canvas>
-      <canvas id="player-canvas" width="700px" height="500px"></canvas>
-    </div>
-    <div id="middle-interaction">
-      <h2></h2>
-      <p id="interaction-message">Welcome to Thursday nights at CodeClan!</p>
-    </div>
-  </section>
-  
+    <section id="middle">
+      <div id="middle-canvas">
+        <h1 id="main-title">Chanter</h1>
+        <canvas id="main-canvas" width="700px" height="500px"></canvas>
+        <canvas id="player-canvas" width="700px" height="500px"></canvas>
+      </div>
+      <div id="middle-interaction">
+        <h2></h2>
+        <p id="interaction-message">Welcome to Thursday nights at CodeClan!</p>
+      </div>
+    </section>
+    
 
-  <section id="stats">
-    <h1 class="board">Stats</h1>
-    <div id="money-chart"></div>
-    <div id="player-drunk-level"></div>
-    <div id="bar-inv-chart"></div>
-  </section>
+    <section id="stats">
+      <h1 class="board">Stats</h1>
+      <div id="money-chart"></div>
+      <div id="player-drunk-level"></div>
+      <div id="bar-inv-chart"></div>
+    </section>
 
 </body>
 </html>

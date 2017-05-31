@@ -184,7 +184,6 @@ console.log('Trying to add drink to player')
             }
             else {
               this.player.subtractItemValue(itemOrdered);
-              // this.player.increaseDrunkLevel(itemOrdered);
 //removes the drink from the bar
               this.game.removeDrinkFromBar(itemOrdered, function (newBarList) {
 console.log('Trying to remove drink from bar'); 
@@ -238,8 +237,8 @@ console.log('Trying to remove drink from bar');
       this.noButton.innerText = "Tails";
     }
 
-    yesClick = this.yesButton.addEventListener('click', this.acceptMan.bind(this));
-    noClick = this.noButton.addEventListener('click', this.rejectMan.bind(this));
+    yesClick = this.yesButton.addEventListener('click', this.chooseHeads.bind(this));
+    noClick = this.noButton.addEventListener('click', this.chooseTails.bind(this));
 
     this.flag = true;
   },
@@ -248,7 +247,7 @@ console.log('Trying to remove drink from bar');
       return (Math.floor(Math.random() * 2) == 0) ? "heads" : "tails";
   },
 
-  rejectMan: function(){
+  chooseTails: function(){
     var coinResult = this.coinFlip();
     console.log(coinResult);
     if (coinResult === "heads"){
@@ -267,7 +266,7 @@ console.log('Trying to remove drink from bar');
     }.bind(this), 2000, this.yesButton, this.noButton);
   },
 
-  acceptMan: function(){
+  chooseHeads: function(){
     var coinResult = this.coinFlip();
     console.log(coinResult);
     if (coinResult === "heads"){
@@ -295,6 +294,5 @@ console.log('Trying to remove drink from bar');
   },
 
 };
-
 
 module.exports = InteractionUI;
