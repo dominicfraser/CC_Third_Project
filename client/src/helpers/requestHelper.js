@@ -36,7 +36,7 @@ RequestHelper.prototype = {
       callback(resultsObject);
     })
     request.send(payload);
-  }
+  },
 };
 
 module.exports = RequestHelper;

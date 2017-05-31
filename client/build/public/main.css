@@ -12,10 +12,11 @@ canvas {
 
 p {
   text-align: center;
+  margin: auto;
 }
 
 h1 {
-  font-size: 35px;
+  font-size: 40px;
   margin-top: 0.4em;
   margin-bottom: 0.3em;
 }
@@ -97,19 +98,10 @@ table {
   background: rgba(69, 53, 53, 0.3);
 }
 
-#player-inventory-picture td img {
-    height: 30px;
-    width: 30px;
-}
-
-td button img {
-  width: auto;
-    height: auto;
-}
 
 #bar-inventory-table td img {
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 37px;
 }
 
 #player-inventory-table, #bar-inventory-table {
@@ -121,6 +113,11 @@ button {
   border-radius: 50%;
   border: 0;
   background: transparent;
+}
+
+#player-inventory-picture td img {
+    height: 35px;
+    width: 37px;
 }
 
 .board {
