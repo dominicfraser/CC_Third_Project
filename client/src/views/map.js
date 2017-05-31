@@ -34,6 +34,12 @@ console.log('inside main map', this)
   this.stage = document.createElement('img');
   this.stage.src = "/public/img/edited_images/stage.png";
 
+  this.sofaSetBottom = document.createElement('img');
+  this.sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
+
+  this.sofaSetTop = document.createElement('img');
+  this.sofaSetTop.src = "/public/img/edited_images/sofa_set.png";
+
   this.player = document.createElement('img');
   this.player.src = "/public/img/edited_images/f1girl2.png"
 
@@ -99,6 +105,8 @@ Map.prototype = {
       context.drawImage(this.guy, 100, -30, 700, 500);
       context.drawImage(this.piano, 50, -160, 700, 500);
       // context.drawImage(this, 254, -140, 700, 500);
+      // context.drawImage(this, 300, 35, 700, 500);
+      // context.drawImage(this, 300, 170, 700, 500);
   },
 
   moveSprite: function(playerDirectionImage, xInc, yInc){
@@ -120,7 +128,7 @@ console.log('current y', this.currentPosition[1])
       var hitChairsTable = (positionY <= 495 && positionY >= 385) && (positionX === 115);
       var hitPiano = (positionY <= 135 && positionY >= 45) && (positionX === 350);
       var hitStage = (positionY <= 155 && positionY >= 85) && (positionX === 485);
-      var hitSofas = (positionY <= 500 && positionY >= 200) && (positionX <= 700 && positionX >= 600);
+      var hitSofas = (positionY <= 500 && positionY >= 235) && (positionX === 600);
 
       if (hitRightBorder){
       }
@@ -212,10 +220,10 @@ console.log('current y', this.currentPosition[1])
     else if(e.key === "ArrowDown"){
         var hitBottomBorder = ((positionY + 5) >= 500)
         var hitGuy = (positionY === 210) && (positionX <= 470 && positionX >= 430);
-        var hitSofas = (positionY <= 500 && positionY >= 200) && (positionX <= 700 && positionX >= 600);
+        var hitSofas = (positionY === 205) && (positionX <= 700 && positionX >= 605);
         var hitBottomBorder = ((positionY + 5) >= 485)
         var hitChairsTable = (positionY === 385) && (positionX <= 180 && positionX >=120);
-        var hitSofas = (positionY <= 500 && positionY >= 200) && (positionX <= 700 && positionX >= 600);
+        var hitSofas = (positionY === 230) && (positionX <= 700 && positionX >= 605);
 
       if (hitBottomBorder){
         return;
