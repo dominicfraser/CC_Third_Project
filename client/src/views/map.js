@@ -7,7 +7,7 @@ var Bar = require('../models/bar_model.js');
 var Item = require('../models/item_model.js');
 
 var Map = function () {
-  this.player = new Player({name: "Player1", wallet: 100});
+  this.player = new Player({name: "Player1", wallet: 30});
   this.bar = new Bar({name: "Chanter", cashDrawer: 1000});
   this.game = new Game(this.player, this.bar);
   this.inventoryUI = new InventoryUI(this.player, this.bar);
@@ -131,7 +131,7 @@ Map.prototype = {
   pauseMusic: function(e){
     if (e.key === "o"){
       this.interactionUI.stopMusic();
-      }
+    }
 },
 
   drawUpperCanvas: function(){
