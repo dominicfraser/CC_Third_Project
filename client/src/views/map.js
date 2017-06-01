@@ -289,11 +289,13 @@ Map.prototype = {
 
       if(this.interactionUI.winFlag === true){
         this.interactionUI.displayMessage("Here we go again!");
-        this.interactionUI.stopWinMusic();        
+        this.interactionUI.stopWinMusic();    
+        this.player.drunkLevel = 10;
+        this.statsUI.updateDrunkLevelChart(this.player);
       } else {
         this.interactionUI.displayMessage("Welcome to Thursday nights at CodeClan!");        
       }
-
+      
       this.interactionUI.winFlag = false
       this.homePagePassedFlag = true;
       this.currentPosition = [350,450];
