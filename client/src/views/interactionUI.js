@@ -92,6 +92,7 @@ InteractionUI.prototype = {
     }
   },
   dontPlayTheMusic: function(yesButton, noButton){
+    this.game.renderWinScreen();
     this.displayMessage("*Silence...*");
     this.yesButton.remove();
     this.noButton.remove();

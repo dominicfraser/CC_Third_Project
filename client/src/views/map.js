@@ -41,7 +41,6 @@ console.log('inside Map', this)
 
   this.stageGirl = document.createElement('img');
   this.stageGirl.src = "/public/img/edited_images/stage_girl.png";     
-
   this.sofaSetBottom = document.createElement('img');
   this.sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
 

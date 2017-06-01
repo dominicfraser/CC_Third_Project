@@ -55,6 +55,24 @@ Game.prototype = {
     this.modelsContainer.findSpecificBarItem(id, callback);
   },
 
+  renderWinScreen: function(){
+    var canvasPlayer = document.getElementById("player-canvas");
+    var playerContext = canvasPlayer.getContext("2d");
+    var canvasBar = document.getElementById("main-canvas");
+    var barContext = canvasBar.getContext("2d");
+
+    playerContext.clearRect(0, 0, 700, 500);
+    barContext.clearRect(0, 0, 700, 500);
+
+    var winScreen = document.createElement('img');
+    winScreen.src = "/public/img/winscreen.png";
+
+    winScreen.onload = function() {
+      playerContext.drawImage(this, 165, 90, 360, 300);
+    }
+
+
+  }
 };
 
 module.exports = Game;
