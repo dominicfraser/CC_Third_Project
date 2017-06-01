@@ -86,32 +86,28 @@ InventoryUI.prototype = {
   },
 
   addOnClickBarButtonsTellGoToBar: function(callback){
-console.log('in remove event listener')
-    var barTable = document.getElementById("bar-inventory-table");
-    var rowNumber = -1; 
-    var buttonNames = [];
-    for (var i = 0, row; row = barTable.rows[i]; i++) { 
-       for (var d = 0, td; td = row.cells[d]; d++) {
-        rowNumber += 1;
-        var cellIndex = rowNumber;
-        buttonNames.push(cellIndex);
-        buttonNames[cellIndex] = td.children[1]
-       }  
-    }
-console.log('all buttons?',buttonNames)
-    buttonNames.forEach(function(button){
-          button.onclick = function(event){
-console.log('button click remove', button.value)
+    var barButtons = document.getElementsByClassName("bar-drink-button");
+    var barButtonsArray = Array.from(barButtons);  
+    var myFunction = function(event){
             callback("Please order a drink from the bar");
-          }
+    }
+        
+console.log('addingOnClick to say GoToBar')
+console.log('barButtonsArray', barButtonsArray)
+    barButtonsArray.forEach(function(button){
+console.log('in forEach')
+          button.onclick = myFunction;
+console.log('button click to say GoToBar', button.value)
+          
     });
   },
+
   addOnClickBarButtonsToBuyDrink: function(callback){
     var barButtons = document.getElementsByClassName("bar-drink-button");
     var barButtonsArray = Array.from(barButtons);  
     barButtonsArray.forEach(function(button){
       button.onclick = function(event){
-console.log('button click', button.value)
+console.log('bar button click', button.value)
         callback(button.value);
       }
     });
@@ -121,7 +117,7 @@ console.log('button click', button.value)
     var playerButtonsArray = Array.from(playerButtons);
     playerButtonsArray.forEach(function(button){
           button.onclick = function(event){
-console.log('onclick has been assigned to button')
+console.log('onclick has been assigned to player button')
             callback(button.value);
           }
     }.bind(this));
