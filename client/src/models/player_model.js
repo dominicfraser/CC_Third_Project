@@ -9,7 +9,6 @@ Player.prototype = {
     this.wallet -= item.value;
   },
   increaseDrunkLevel: function(drink){
-console.log('sum',this.drunkLevel+drink.alcoholLevel)
     if((this.drunkLevel+drink.alcoholLevel) < 0){
       this.drunkLevel = 0;
     } else {

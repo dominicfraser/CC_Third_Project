@@ -10,18 +10,25 @@ var InteractionUI = function (player, bar) {
 
   this.game = new Game(this.player, this.bar);
   this.inventoryUI = new InventoryUI(this.player, this.bar);
-  // this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
-  //   this.displayMessage(message);
-  // }.bind(this));
+  
+
+
   this.yesButton = document.createElement('button');
   this.yesButton.innerHTML = "Yes";
   this.noButton = document.createElement('button');
   this.noButton.innerHTML = "No";
 
-  this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this));
+  this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this), this.barButtonDefaultSetup.bind(this));
 };
 
 InteractionUI.prototype = {
+
+  barButtonDefaultSetup: function(){
+      this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
+    console.log("added GTB, message: ", message)
+        this.displayMessage(message);
+      }.bind(this));
+    },
 
 //try to go behind bar   
   cantGoBehindBar:function(){
@@ -114,7 +121,7 @@ InteractionUI.prototype = {
       this.game.findPlayerDrinkById(id, function(itemOrdered){
         this.game.removeDrinkFromPlayer(itemOrdered, function(updatedPlayerInventory){
                 this.player.increaseDrunkLevel(itemOrdered);
-                this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this));
+                this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this), this.barButtonDefaultSetup.bind(this));
                 this.statsUI = new StatsUI(this.player, this.bar);
                 this.displayMessage("You drank a drink!");
 
@@ -160,16 +167,13 @@ InteractionUI.prototype = {
       if(orderedDrinkId !== null){
         this.game.findBarDrinkById(orderedDrinkId, function(itemOrdered){
 //found drink item object from it          
-          this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
-console.log("added GTB, message: ", message)
-            this.displayMessage(message);
-          }.bind(this));
-//replaced onClick so that you can't double order
           this.game.addDrinkToPlayer(itemOrdered, function (errorMessage, updatedData) {
 console.log('Trying to add drink to player')
 //makes request to db to add drink to player
             if(errorMessage){
               this.displayMessage(errorMessage);
+              this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this), this.barButtonDefaultSetup.bind(this));
+
             }
             else {
               this.player.subtractItemValue(itemOrdered);
@@ -179,13 +183,14 @@ console.log('Trying to remove drink from bar');
 
                 this.bar.addItemValue(itemOrdered);
 //updates UIs
-                this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this));
+                this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this), this.barButtonDefaultSetup.bind(this));
                 this.statsUI = new StatsUI(this.player, this.bar);
 
                 this.displayMessage("You bought a drink!");
               }.bind(this))
 //removes buttons
             }
+
             this.yesButton.remove();
             this.noButton.remove();
             this.flag = false;
