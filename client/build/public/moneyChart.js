@@ -34,7 +34,7 @@ var MoneyChart = function (playerWallet){
         }
       },
       min: 0,
-      max: 200,
+      max: 100,
       labels: {
           style:{
             color: "white"

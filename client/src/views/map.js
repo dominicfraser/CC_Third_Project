@@ -7,7 +7,7 @@ var Bar = require('../models/bar_model.js');
 var Item = require('../models/item_model.js');
 
 var Map = function () {
-  this.player = new Player({name: "Player1", wallet: 100});
+  this.player = new Player({name: "Player1", wallet: 30});
   this.bar = new Bar({name: "Chanter", cashDrawer: 1000});
   this.game = new Game(this.player, this.bar);
   this.inventoryUI = new InventoryUI(this.player, this.bar);
@@ -41,7 +41,6 @@ console.log('inside Map', this)
 
   this.stageGirl = document.createElement('img');
   this.stageGirl.src = "/public/img/edited_images/stage_girl.png";     
-
   this.sofaSetBottom = document.createElement('img');
   this.sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
 
@@ -103,7 +102,7 @@ Map.prototype = {
     var positionX = this.currentPosition[0];
     var positionY = this.currentPosition[1];
     document.activeElement.blur();
-    if (e.key === "Enter"){
+    if (e.key === "Enter" && this.interactionUI.winFlag === false){
       if(((positionX >= 370 && positionX <= 430) && (positionY === 140)))
       {
 
@@ -132,7 +131,7 @@ Map.prototype = {
   pauseMusic: function(e){
     if (e.key === "o"){
       this.interactionUI.stopMusic();
-      }
+    }
 },
 
   drawUpperCanvas: function(){
@@ -147,12 +146,14 @@ Map.prototype = {
   },
 
   moveSprite: function(playerDirectionImage, xInc, yInc){
-    this.player.innerHTML = "";
-    this.playerContext.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 44)
-    this.playerContext.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
-    this.drawUpperCanvas();
-// console.log('current x', this.currentPosition[0])
-// console.log('current y', this.currentPosition[1])
+    if (this.interactionUI.winFlag === false){
+      this.player.innerHTML = "";
+      this.playerContext.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 44)
+      this.playerContext.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
+      this.drawUpperCanvas();
+  // console.log('current x', this.currentPosition[0])
+  // console.log('current y', this.currentPosition[1])
+    }
   },
 
   movePlayer: function(e){
@@ -282,12 +283,23 @@ Map.prototype = {
     else { return; }
   },
 
-  loadCanvas: function(e) {
-    if (e.key === "Enter" && this.homePagePassedFlag === false){
 
+  loadCanvas: function(e) {
+    if ((e.key === "Enter" && this.homePagePassedFlag === false) || (e.key === "Enter" && this.interactionUI.winFlag === true)){
+
+      if(this.interactionUI.winFlag === true){
+        this.interactionUI.displayMessage("Here we go again!");
+        this.interactionUI.stopWinMusic();        
+      } else {
+        this.interactionUI.displayMessage("Welcome to Thursday nights at CodeClan!");        
+      }
+
+      this.interactionUI.winFlag = false
       this.homePagePassedFlag = true;
-      this.interactionUI.displayMessage("Welcome to Thursday nights at CodeClan!");
+      this.currentPosition = [350,450];
+
       this.mainContext.clearRect(0, 0, 700, 500);
+      this.playerContext.clearRect(0, 0, 700, 500);
 
       if (this.homePagePassedFlag = true){
         var player = document.createElement('img');
