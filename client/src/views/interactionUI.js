@@ -5,6 +5,7 @@ var StatsUI = require('./statsUI.js');
 var InteractionUI = function (player, bar) {
   this.player = player;
   this.bar = bar;
+  this.winFlag = false;
 
   this.flag = false;
 
@@ -132,6 +133,7 @@ InteractionUI.prototype = {
                   this.game.renderWinScreen();
                   this.winMusic();
                   this.displayMessage("Chanter Wins!");
+                  this.winFlag = true;
                 } else {
                   this.displayMessage("You drank a drink!");
                 }

@@ -146,12 +146,14 @@ Map.prototype = {
   },
 
   moveSprite: function(playerDirectionImage, xInc, yInc){
-    this.player.innerHTML = "";
-    this.playerContext.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 44)
-    this.playerContext.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
-    this.drawUpperCanvas();
-console.log('current x', this.currentPosition[0])
-console.log('current y', this.currentPosition[1])
+    if (this.interactionUI.winFlag === false){
+      this.player.innerHTML = "";
+      this.playerContext.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 44)
+      this.playerContext.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
+      this.drawUpperCanvas();
+  // console.log('current x', this.currentPosition[0])
+  // console.log('current y', this.currentPosition[1])
+    }
   },
 
   movePlayer: function(e){
