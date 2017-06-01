@@ -25,8 +25,10 @@ InteractionUI.prototype = {
 
   barButtonDefaultSetup: function(){
       this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
-    console.log("added GTB, message: ", message)
         this.displayMessage(message);
+        setTimeout(function(){
+          this.displayMessage("");
+        }.bind(this), 2000);
       }.bind(this));
     },
 
@@ -37,9 +39,8 @@ InteractionUI.prototype = {
 
     setTimeout(function(){
       this.displayMessage("");
-        this.flag = false;
-      }.bind(this), 2000,);
-
+      this.flag = false;
+    }.bind(this), 2000);
   },
 
 //try to go behind bar   
@@ -66,20 +67,6 @@ InteractionUI.prototype = {
         this.flag = false;
       }.bind(this), 2000, this.noButton);
     },
-  // cantGoBehindBar:function(){
-  //   this.displayMessage("Hey! Customers can't come behind the bar. You better scram before I get the bouncer, punk. Do you REALLY want me to..?");
-  //   var interactionArea = document.getElementById('middle-interaction');
-
-  //   if(this.flag == false){
-  //     interactionArea.appendChild(this.noButton);
-  //     this.noButton.innerText = "NO!!!"
-  //     noClick = this.noButton.addEventListener('click', function(){
-  //       this.noBehindBar(this.noButton);
-  //     }.bind(this));
-
-  //     this.flag = true;
-  //   }
-  // },
 
 //interact at the piano
   askToPlayPiano: function(){
@@ -215,7 +202,7 @@ console.log('Trying to remove drink from bar');
     }.bind(this)); 
   },
   orderNotPlaced: function(yesButton, noButton) {
-    this.displayMessage("Alright, then go sit over there with Dominic...");
+    this.displayMessage("Alright then, go sit over there with Dominic...");
 
     this.yesButton.remove();
     this.noButton.remove();
@@ -232,7 +219,7 @@ console.log('Trying to remove drink from bar');
     this.noButton = document.createElement('button');
     this.noButton.innerHTML = "No";
 
-    this.displayMessage("Hello there, would you like some money?");
+    this.displayMessage("I'll give you some money if you choose correctly!");
     var interactionArea = document.getElementById('middle-interaction');
 
     if(this.flag == false){

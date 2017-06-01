@@ -89,19 +89,12 @@ InventoryUI.prototype = {
   addOnClickBarButtonsTellGoToBar: function(callback){
     var barButtons = document.getElementsByClassName("bar-drink-button");
     var barButtonsArray = Array.from(barButtons);  
-    var myFunction = function(event){
-            callback("Please order a drink from the bar");
-    }
         
-console.log('addingOnClick to say GoToBar')
-console.log('barButtonsArray', barButtonsArray)
     barButtonsArray.forEach(function(button){
 console.log('in forEach')
           button.onclick = function(event){
-            callback("Please order a drink from the bar");
+            callback("Don't shout, please go to the bar to order a drink!");
           }
-// console.log('button click to say GoToBar', button.value)
-          
     });
   },
 
