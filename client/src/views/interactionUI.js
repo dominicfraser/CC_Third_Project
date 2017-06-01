@@ -5,6 +5,7 @@ var StatsUI = require('./statsUI.js');
 var InteractionUI = function (player, bar) {
   this.player = player;
   this.bar = bar;
+  this.winFlag = false;
 
   this.flag = false;
 
@@ -23,6 +24,11 @@ var InteractionUI = function (player, bar) {
 
 InteractionUI.prototype = {
 
+  winMusic: function(){
+    var music = document.getElementById("winAudio");
+    music.play();
+  },
+
   barButtonDefaultSetup: function(){
       this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
         this.displayMessage(message);
@@ -33,7 +39,7 @@ InteractionUI.prototype = {
     },
 
   stopMusic: function(){
-    music = document.getElementById("audio");
+    var music = document.getElementById("audio");
     music.pause();
     this.displayMessage("Who turned the music off?!");
 
@@ -122,7 +128,15 @@ InteractionUI.prototype = {
                 this.player.increaseDrunkLevel(itemOrdered);
                 this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this), this.barButtonDefaultSetup.bind(this));
                 this.statsUI = new StatsUI(this.player, this.bar);
-                this.displayMessage("You drank a drink!");
+
+                if(this.player.drunkLevel >= 100){
+                  this.game.renderWinScreen();
+                  this.winMusic();
+                  this.displayMessage("Chanter Wins!");
+                  this.winFlag = true;
+                } else {
+                  this.displayMessage("You drank a drink!");
+                }
 
                 setTimeout(function(){
                   this.displayMessage("");
