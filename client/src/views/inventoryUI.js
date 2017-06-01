@@ -10,14 +10,15 @@ var InventoryUI = function(player, bar){
 };
 
 InventoryUI.prototype = {
-  renderAll: function(onComplete){
+  renderAll: function(onCompletePlayer, onCompleteBar){
     this.modelsContainer.allPlayerItems(function(playerItems){
       this.renderPlayerItemsImages(playerItems);
-      onComplete();
+      onCompletePlayer();
     }.bind(this));
     
     this.modelsContainer.allBarItems(function(barItems){
       this.renderBarItemsImages(barItems);
+      onCompleteBar();
     }.bind(this)); 
   },
 
@@ -73,7 +74,7 @@ InventoryUI.prototype = {
       columnPositionCounter += 1;
       if (columnPositionCounter <= 3){
 
-      this.doBarItemImagesLoop(item, rowInUse);
+        this.doBarItemImagesLoop(item, rowInUse);
       
       } 
       else {
@@ -88,17 +89,12 @@ InventoryUI.prototype = {
   addOnClickBarButtonsTellGoToBar: function(callback){
     var barButtons = document.getElementsByClassName("bar-drink-button");
     var barButtonsArray = Array.from(barButtons);  
-    var myFunction = function(event){
-            callback("Please order a drink from the bar");
-    }
         
-console.log('addingOnClick to say GoToBar')
-console.log('barButtonsArray', barButtonsArray)
     barButtonsArray.forEach(function(button){
 console.log('in forEach')
-          button.onclick = myFunction;
-console.log('button click to say GoToBar', button.value)
-          
+          button.onclick = function(event){
+            callback("Don't shout, please go to the bar to order a drink!");
+          }
     });
   },
 

@@ -10,23 +10,33 @@ var InteractionUI = function (player, bar) {
 
   this.game = new Game(this.player, this.bar);
   this.inventoryUI = new InventoryUI(this.player, this.bar);
-  // this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
-  //   this.displayMessage(message);
-  // }.bind(this));
+  
+
+
   this.yesButton = document.createElement('button');
   this.yesButton.innerHTML = "Yes";
   this.noButton = document.createElement('button');
   this.noButton.innerHTML = "No";
 
-  this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this));
+  this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this), this.barButtonDefaultSetup.bind(this));
 };
 
 InteractionUI.prototype = {
+
 
   winMusic: function(){
     var music = document.getElementById("winAudio");
     music.play();
   }
+
+  barButtonDefaultSetup: function(){
+      this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
+        this.displayMessage(message);
+        setTimeout(function(){
+          this.displayMessage("");
+        }.bind(this), 2000);
+      }.bind(this));
+    },
 
   stopMusic: function(){
     var music = document.getElementById("audio");
@@ -35,9 +45,8 @@ InteractionUI.prototype = {
 
     setTimeout(function(){
       this.displayMessage("");
-        this.flag = false;
-      }.bind(this), 2000,);
-
+      this.flag = false;
+    }.bind(this), 2000);
   },
 
 //try to go behind bar   
@@ -64,20 +73,6 @@ InteractionUI.prototype = {
         this.flag = false;
       }.bind(this), 2000, this.noButton);
     },
-  // cantGoBehindBar:function(){
-  //   this.displayMessage("Hey! Customers can't come behind the bar. You better scram before I get the bouncer, punk. Do you REALLY want me to..?");
-  //   var interactionArea = document.getElementById('middle-interaction');
-
-  //   if(this.flag == false){
-  //     interactionArea.appendChild(this.noButton);
-  //     this.noButton.innerText = "NO!!!"
-  //     noClick = this.noButton.addEventListener('click', function(){
-  //       this.noBehindBar(this.noButton);
-  //     }.bind(this));
-
-  //     this.flag = true;
-  //   }
-  // },
 
 //interact at the piano
   askToPlayPiano: function(){
@@ -103,6 +98,7 @@ InteractionUI.prototype = {
     }
   },
   dontPlayTheMusic: function(yesButton, noButton){
+    this.game.renderWinScreen();
     this.displayMessage("*Silence...*");
     this.yesButton.remove();
     this.noButton.remove();
@@ -131,10 +127,13 @@ InteractionUI.prototype = {
       this.game.findPlayerDrinkById(id, function(itemOrdered){
         this.game.removeDrinkFromPlayer(itemOrdered, function(updatedPlayerInventory){
                 this.player.increaseDrunkLevel(itemOrdered);
-                this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this));
+                this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this), this.barButtonDefaultSetup.bind(this));
                 this.statsUI = new StatsUI(this.player, this.bar);
-
                 this.displayMessage("You drank a drink!");
+
+                setTimeout(function(){
+                  this.displayMessage("");
+                }.bind(this), 3000);
         }.bind(this))
 
       }.bind(this))
@@ -174,16 +173,13 @@ InteractionUI.prototype = {
       if(orderedDrinkId !== null){
         this.game.findBarDrinkById(orderedDrinkId, function(itemOrdered){
 //found drink item object from it          
-          this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
-console.log("added GTB, message: ", message)
-            this.displayMessage(message);
-          }.bind(this));
-//replaced onClick so that you can't double order
           this.game.addDrinkToPlayer(itemOrdered, function (errorMessage, updatedData) {
 console.log('Trying to add drink to player')
 //makes request to db to add drink to player
             if(errorMessage){
               this.displayMessage(errorMessage);
+              this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this), this.barButtonDefaultSetup.bind(this));
+
             }
             else {
               this.player.subtractItemValue(itemOrdered);
@@ -193,13 +189,14 @@ console.log('Trying to remove drink from bar');
 
                 this.bar.addItemValue(itemOrdered);
 //updates UIs
-                this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this));
+                this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this), this.barButtonDefaultSetup.bind(this));
                 this.statsUI = new StatsUI(this.player, this.bar);
 
                 this.displayMessage("You bought a drink!");
               }.bind(this))
 //removes buttons
             }
+
             this.yesButton.remove();
             this.noButton.remove();
             this.flag = false;
@@ -212,7 +209,7 @@ console.log('Trying to remove drink from bar');
     }.bind(this)); 
   },
   orderNotPlaced: function(yesButton, noButton) {
-    this.displayMessage("Alright, then go sit over there with Dominic...");
+    this.displayMessage("Alright then, go sit over there with Dominic...");
 
     this.yesButton.remove();
     this.noButton.remove();
@@ -229,7 +226,7 @@ console.log('Trying to remove drink from bar');
     this.noButton = document.createElement('button');
     this.noButton.innerHTML = "No";
 
-    this.displayMessage("Hello there, would you like some money?");
+    this.displayMessage("I'll give you some money if you choose correctly!");
     var interactionArea = document.getElementById('middle-interaction');
 
     if(this.flag == false){
@@ -274,13 +271,13 @@ console.log('Trying to remove drink from bar');
     var coinResult = this.coinFlip();
     console.log(coinResult);
     if (coinResult === "heads"){
-    this.player.acceptMoneyFromMan(20);
+      this.player.acceptMoneyFromMan(20);
 
-    this.displayMessage("Aha! Here's 20 big ones! Go forth and quench thy thirst.");
-    this.statsUI = new StatsUI(this.player, this.bar);
-  } else {
-    this.displayMessage("What an idiot...");
-  }
+      this.displayMessage("Aha! Here's 20 big ones! Go forth and quench thy thirst.");
+      this.statsUI = new StatsUI(this.player, this.bar);
+    } else {
+      this.displayMessage("What an idiot...");
+    }
 
     this.yesButton.remove();
     this.noButton.remove();
