@@ -1,8 +1,6 @@
 var BarInventoryChart = function (barInventory){
   var container = document.getElementById("bar-inv-chart");
 
-  var tempAmount = barInventory
-
   var chart = new Highcharts.Chart({
     chart: {
       type: "bar",
@@ -15,7 +13,7 @@ var BarInventoryChart = function (barInventory){
     series: [
     {
       name: "Bar Inventory",
-      data: [tempAmount],
+      data: [barInventory],
       color: "#6600cc"
     }
     ],
@@ -30,6 +28,7 @@ var BarInventoryChart = function (barInventory){
         }
       },
       min: 0,
+      max: 30,
       labels: {
           style:{
             color: "white"

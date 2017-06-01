@@ -31,5 +31,6 @@ var DrunkChart = function(drunkLevel){
         enabled: false
       }
     });
-}
-  module.exports = DrunkChart;
+};
+  
+module.exports = DrunkChart;

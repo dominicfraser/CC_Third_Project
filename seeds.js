@@ -111,17 +111,17 @@ db.bar_inventory.insert([
     alcoholLevel: -5
   },
   {
-    name: "Long Island Iced Tea",
+    name: "Daiquiri",
     value: 10,
     alcoholLevel:25
   },
   {
-    name: "Long Island Iced Tea",
+    name: "Daiquiri",
     value: 10,
     alcoholLevel:25
   },
   {
-    name: "Long Island Iced Tea",
+    name: "Daiquiri",
     value: 10,
     alcoholLevel:25
   },

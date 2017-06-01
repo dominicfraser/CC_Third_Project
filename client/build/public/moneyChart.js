@@ -1,5 +1,3 @@
-// var player = require('../src/models/player_model.js');
-
 var MoneyChart = function (playerWallet){
   var container = document.getElementById("money-chart");
 
@@ -36,6 +34,7 @@ var MoneyChart = function (playerWallet){
         }
       },
       min: 0,
+      max: 200,
       labels: {
           style:{
             color: "white"

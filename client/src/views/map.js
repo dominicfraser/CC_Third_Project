@@ -16,9 +16,9 @@ var Map = function () {
 
   this.homePagePassedFlag = false;
 
-console.log('inside main map', this)
+console.log('inside Map', this)
 
-  this.context = this.getPlayerCanvasContext();
+  this.playerContext = this.getPlayerCanvasContext();
   this.mainContext = this.getMainCanvasContext();
 //canvas image setup
   this.backdrop = document.createElement('img');
@@ -48,20 +48,26 @@ console.log('inside main map', this)
   this.sofaSetTop = document.createElement('img');
   this.sofaSetTop.src = "/public/img/edited_images/sofa_set.png";
 
+  this.guy = document.createElement('img');
+  this.guy.src = "/public/img/edited_images/f1guy.png";
+
+  this.bartender = document.createElement('img');
+  this.bartender.src = "/public/img/edited_images/f1bartender.png";
+//player
   this.player = document.createElement('img');
   this.player.src = "/public/img/edited_images/f1girl2.png";
 
   this.playerBegin = document.createElement('img');
-  this.playerBegin.src = "/public/img/edited_images/f1girl.png"
+  this.playerBegin.src = "/public/img/edited_images/f1girl.png";
 
   this.playerLeft = document.createElement('img');
-  this.playerLeft.src = "/public/img/edited_images/l1girl.png"
+  this.playerLeft.src = "/public/img/edited_images/l1girl.png";
 
   this.playerRight = document.createElement('img');
-  this.playerRight.src = "/public/img/edited_images/r1girl.png"
+  this.playerRight.src = "/public/img/edited_images/r1girl.png";
 
   this.playerUp = document.createElement('img');
-  this.playerUp.src = "/public/img/edited_images/b1girl.png"
+  this.playerUp.src = "/public/img/edited_images/b1girl.png";
 
   this.playerHeight = 500;
   this.playerWidth = 700;
@@ -70,11 +76,13 @@ console.log('inside main map', this)
 
   window.addEventListener('keydown', this.movePlayer.bind(this));
   window.addEventListener('keydown', this.interactionsFunctions.bind(this));
+  window.addEventListener('keydown', this.pauseMusic.bind(this));
+
 
   this.loadWelcomeScreen();
   window.addEventListener('keypress', this.loadCanvas.bind(this));
 
-  };                          //END MAIN MAP 
+};                          //END MAIN MAP 
 
 Map.prototype = {
 
@@ -117,25 +125,31 @@ Map.prototype = {
         {
           this.interactionUI.cantGoBehindBar();
         }
-      }
+    }
     else {return}
   },
 
+  pauseMusic: function(e){
+    if (e.key === "o"){
+      this.interactionUI.stopMusic();
+      }
+},
+
   drawUpperCanvas: function(){
-      context.drawImage(this.tableSet, -200, 180, 700, 500);
-      context.drawImage(this.guy, 100, -30, 700, 500);
-      context.drawImage(this.piano, 50, -160, 700, 500);
-      context.drawImage(this.stage, 254, -140, 700, 500);
-      context.drawImage(this.stageGuy, 230, -160, 700, 500);
-      context.drawImage(this.stageGirl, 270, -160, 700, 500);
-      context.drawImage(this.sofaSetTop, 300, 35, 700, 500);
-      context.drawImage(this.sofaSetBottom, 300, 170, 700, 500);
+      this.playerContext.drawImage(this.tableSet, -200, 180, 700, 500);
+      this.playerContext.drawImage(this.guy, 100, -30, 700, 500);
+      this.playerContext.drawImage(this.piano, 50, -160, 700, 500);
+      this.playerContext.drawImage(this.stage, 254, -140, 700, 500);
+      this.playerContext.drawImage(this.stageGuy, 230, -160, 700, 500);
+      this.playerContext.drawImage(this.stageGirl, 270, -160, 700, 500);
+      this.playerContext.drawImage(this.sofaSetTop, 300, 35, 700, 500);
+      this.playerContext.drawImage(this.sofaSetBottom, 300, 170, 700, 500);
   },
 
   moveSprite: function(playerDirectionImage, xInc, yInc){
     this.player.innerHTML = "";
-    context.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 44)
-    context.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
+    this.playerContext.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 44)
+    this.playerContext.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
     this.drawUpperCanvas();
 // console.log('current x', this.currentPosition[0])
 // console.log('current y', this.currentPosition[1])
@@ -174,13 +188,13 @@ Map.prototype = {
         return;
       }
       else {
-        this.moveSprite(this.playerRight, 5, 0)
-        this.currentPosition[0] = positionX+5
+        this.moveSprite(this.playerRight, 5, 0);
+        this.currentPosition[0] = positionX+5;
       }
     }
     
     else if(e.key === "ArrowLeft"){
-        var hitLeftBorder = ((positionX - 5) <= 5)
+        var hitLeftBorder = ((positionX - 5) <= 5);
         var hitRightSideOfBar = (positionY <= 275 && positionY >= 0) && (positionX <= 240 && positionX >= 240);
         var hitGuy = (positionY <= 260 && positionY >= 215) && (positionX === 475);
         var hitChairsTable = (positionY <= 495 && positionY >= 385) && (positionX === 185);
@@ -202,12 +216,12 @@ Map.prototype = {
           return;
         }
 
-        this.moveSprite(this.playerLeft, -5, 0)
-        this.currentPosition[0] = positionX-5
+        this.moveSprite(this.playerLeft, -5, 0);
+        this.currentPosition[0] = positionX-5;
       }
     
     else if(e.key === "ArrowUp"){
-        var hitTopBorder = ((positionY - 5) <= 0)
+        var hitTopBorder = ((positionY - 5) <= 0);
         var hitWallBorder = (positionX <= 700 && positionX >= 0) && (positionY <= 90 && positionY >= 90);
         var hitBottomOfBar = (positionX >= 0 && positionX <= 235) && (positionY <= 290 && positionY >= 235);
         var hitGuy = (positionY === 265) && (positionX <= 470 && positionX >= 430);
@@ -241,10 +255,10 @@ Map.prototype = {
     }
     
     else if(e.key === "ArrowDown"){
-        var hitBottomBorder = ((positionY + 5) >= 500)
+        var hitBottomBorder = ((positionY + 5) >= 500);
         var hitGuy = (positionY === 210) && (positionX <= 470 && positionX >= 430);
         var hitSofas = (positionY === 205) && (positionX <= 700 && positionX >= 605);
-        var hitBottomBorder = ((positionY + 5) >= 485)
+        var hitBottomBorder = ((positionY + 5) >= 485);
         var hitChairsTable = (positionY === 385) && (positionX <= 180 && positionX >=120);
         var hitSofas = (positionY === 230) && (positionX <= 700 && positionX >= 605);
 
@@ -261,8 +275,8 @@ Map.prototype = {
         return;
       }
 
-      this.moveSprite(this.playerBegin, 0, +5)
-      this.currentPosition[1] = positionY+5
+      this.moveSprite(this.playerBegin, 0, +5);
+      this.currentPosition[1] = positionY+5;
     }
      
     else { return; }
@@ -273,104 +287,39 @@ Map.prototype = {
 
       this.homePagePassedFlag = true;
       this.interactionUI.displayMessage("Welcome to Thursday nights at CodeClan!");
-
-      mainContext.clearRect(0, 0, 700, 500);
-
-      var backdrop = document.createElement('img');
-      backdrop.src = "/public/img/edited_images/backdrop_empty.png";
-
-      var tableSet = document.createElement('img');
-      tableSet.src = "/public/img/edited_images/table_set.png";
-
-      var sofaSetBottom = document.createElement('img');
-      sofaSetBottom.src = "/public/img/edited_images/sofa_set.png";
-
-      var sofaSetTop = document.createElement('img');
-      sofaSetTop.src = "/public/img/edited_images/sofa_set.png";
-
-      var bartender = document.createElement('img');
-      bartender.src = "/public/img/edited_images/f1bartender.png";
-
-      var stage = document.createElement('img');
-      stage.src = "/public/img/edited_images/stage.png";
-
-      var piano = document.createElement('img');
-      piano.src = "/public/img/edited_images/piano.png";
-
-      var guy = document.createElement('img');
-      guy.src = "/public/img/edited_images/f1guy.png";
-
-      var stageGuy = document.createElement('img');
-      stageGuy.src = "/public/img/edited_images/stage_guy.png";  
-
-      var stageGirl = document.createElement('img');
-      stageGirl.src = "/public/img/edited_images/stage_girl.png";  
+      this.mainContext.clearRect(0, 0, 700, 500);
 
       if (this.homePagePassedFlag = true){
         var player = document.createElement('img');
         player.src = "/public/img/edited_images/f1girl2.png";
       } 
 
-      context = this.getPlayerCanvasContext();
-      mainContext = this.getMainCanvasContext();
+      this.mainContext.drawImage(this.backdrop, 0, 0, 700, 500);
+      this.playerContext.drawImage(this.tableSet, -200, 180, 700, 500);
+      this.playerContext.drawImage(this.sofaSetTop, 300, 35, 700, 500);
+      this.playerContext.drawImage(this.sofaSetBottom, 300, 170, 700, 500);
+      this.playerContext.drawImage(this.bartender, -190, -40, 700, 500);
+      this.playerContext.drawImage(this.stage, 254, -140, 700, 500);
+      this.playerContext.drawImage(this.stageGuy, 230, -160, 700, 500);
+      this.playerContext.drawImage(this.stageGirl, 270, -160, 700, 500);
+      this.playerContext.drawImage(this.piano, 50, -160, 700, 500);
+      this.playerContext.drawImage(this.guy, 100, -30, 700, 500);
+      this.playerContext.drawImage(this.player, 0, 200, 700, 500);
 
-      backdrop.onload = function() {
-        mainContext.drawImage(this, 0, 0, 700, 500); 
-      };
-
-      tableSet.onload = function() {
-        context.drawImage(this, -200, 180, 700, 500);
-      };
-
-      sofaSetTop.onload = function() {
-        context.drawImage(this, 300, 35, 700, 500);
-      };
-
-      sofaSetBottom.onload = function() {
-        context.drawImage(this, 300, 170, 700, 500);
-      };
-
-      bartender.onload = function() {
-        context.drawImage(this, -190, -40, 700, 500);
-      };
-
-      stage.onload = function() {
-        context.drawImage(this, 254, -140, 700, 500);
-      };
-
-      stageGuy.onload = function() {
-        context.drawImage(this, 230, -160, 700, 500);
-      };
-
-      stageGirl.onload = function() {
-        context.drawImage(this, 270, -160, 700, 500);
-      };
-
-      piano.onload = function() {
-        context.drawImage(this, 50, -160, 700, 500);
-      };
-
-      guy.onload = function() {
-        context.drawImage(this, 100, -30, 700, 500);
-      };
-
-      player.onload = function() {
-        context.drawImage(this, 0, 200, 700, 500);
-      };
-    }
+      }
     else {return};
   },
 
   getMainCanvasContext: function(){
     var canvas = document.getElementById("main-canvas");
-    var context = canvas.getContext("2d");
-    return context;
+    var mainContext = canvas.getContext("2d");
+    return mainContext;
   },
 
   getPlayerCanvasContext: function(){
     var canvas = document.getElementById("player-canvas");
-    var context = canvas.getContext("2d");
-    return context;
+    var playerContext = canvas.getContext("2d");
+    return playerContext;
   },
 
 };

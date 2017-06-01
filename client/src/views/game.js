@@ -3,12 +3,10 @@ var ModelsContainer = require('../models/models_container');
 var Game = function (player, bar) {
   this.player = player;
   this.bar = bar;
-//DB Querys
   this.modelsContainer = new ModelsContainer;
 };
 
 Game.prototype = {
-
  addDrinkToPlayer: function(drink, callback){
    this.modelsContainer.allPlayerItems(function(playerItems){
       var handsFull = false;
@@ -27,8 +25,8 @@ Game.prototype = {
           callback("You don't have enough money to buy another drink, sort yourself out!");
         }
         else {
-        callback("Soz boo, your hands are full!");
-      }
+          callback("Soz boo, your hands are full!");
+        }
       }
     }.bind(this));    
   },
@@ -37,22 +35,24 @@ Game.prototype = {
     this.modelsContainer.playerDrinkDrink(id);
   },
   
- removeDrinkFromPlayer: function(drink, callback){
+  removeDrinkFromPlayer: function(drink, callback){
     this.modelsContainer.removePlayerItem(drink, callback);
   },
+  
   findPlayerDrinkById: function(id, callback){
-      this.modelsContainer.findSpecificPlayerItem(id, callback);
-   },
+    this.modelsContainer.findSpecificPlayerItem(id, callback);
+  },
 
- addDrinkToBar: function(drink, callback){
+  addDrinkToBar: function(drink, callback){
     this.modelsContainer.addBarItem(drink, callback);
   },
+  
   removeDrinkFromBar: function(drink, callback){
     this.modelsContainer.removeBarItem(drink, callback);
   },
 
- findBarDrinkById: function(id, callback){
-     this.modelsContainer.findSpecificBarItem(id, callback);
+  findBarDrinkById: function(id, callback){
+    this.modelsContainer.findSpecificBarItem(id, callback);
   },
 
 };
