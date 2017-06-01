@@ -260,13 +260,13 @@ console.log('Trying to remove drink from bar');
     var coinResult = this.coinFlip();
     console.log(coinResult);
     if (coinResult === "heads"){
-    this.player.acceptMoneyFromMan(20);
+      this.player.acceptMoneyFromMan(20);
 
-    this.displayMessage("Aha! Here's 20 big ones! Go forth and quench thy thirst.");
-    this.statsUI = new StatsUI(this.player, this.bar);
-  } else {
-    this.displayMessage("What an idiot...");
-  }
+      this.displayMessage("Aha! Here's 20 big ones! Go forth and quench thy thirst.");
+      this.statsUI = new StatsUI(this.player, this.bar);
+    } else {
+      this.displayMessage("What an idiot...");
+    }
 
     this.yesButton.remove();
     this.noButton.remove();

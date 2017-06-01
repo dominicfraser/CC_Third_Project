@@ -73,7 +73,7 @@ InventoryUI.prototype = {
       columnPositionCounter += 1;
       if (columnPositionCounter <= 3){
 
-      this.doBarItemImagesLoop(item, rowInUse);
+        this.doBarItemImagesLoop(item, rowInUse);
       
       } 
       else {

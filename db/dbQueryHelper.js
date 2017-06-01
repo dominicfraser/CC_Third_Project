@@ -2,7 +2,7 @@ var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require("mongodb").ObjectID;
 
 var DbQueryHelper = function(){
-  this.url = "mongodb://localhost:27017/codeclan_bar"
+  this.url = "mongodb://localhost:27017/codeclan_bar";
 };
 
 DbQueryHelper.prototype = {
