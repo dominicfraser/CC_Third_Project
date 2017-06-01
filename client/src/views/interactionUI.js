@@ -134,6 +134,7 @@ InteractionUI.prototype = {
                   this.winMusic();
                   this.displayMessage("Chanter Wins!");
                   this.winFlag = true;
+  console.log('win?', this.winFlag)
                 } else {
                   this.displayMessage("You drank a drink!");
                   setTimeout(function(){

@@ -102,7 +102,7 @@ Map.prototype = {
     var positionX = this.currentPosition[0];
     var positionY = this.currentPosition[1];
     document.activeElement.blur();
-    if (e.key === "Enter"){
+    if (e.key === "Enter" && this.interactionUI.winFlag === false){
       if(((positionX >= 370 && positionX <= 430) && (positionY === 140)))
       {
 
@@ -284,11 +284,19 @@ Map.prototype = {
   },
 
   loadCanvas: function(e) {
-    if (e.key === "Enter" && this.homePagePassedFlag === false){
+    if ((e.key === "Enter" && this.homePagePassedFlag === false) || (e.key === "Enter" && this.interactionUI.winFlag === true)){
 
+      if(this.interactionUI.winFlag === true){
+        this.interactionUI.displayMessage("Here we go again!");        
+      } else {
+        this.interactionUI.displayMessage("Welcome to Thursday nights at CodeClan!");        
+      }
+
+      this.interactionUI.winFlag = false
       this.homePagePassedFlag = true;
-      this.interactionUI.displayMessage("Welcome to Thursday nights at CodeClan!");
+
       this.mainContext.clearRect(0, 0, 700, 500);
+      this.playerContext.clearRect(0, 0, 700, 500);
 
       if (this.homePagePassedFlag = true){
         var player = document.createElement('img');

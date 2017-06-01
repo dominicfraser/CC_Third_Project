@@ -1,7 +1,7 @@
 var Player = function(options){
   this.name = options.name;
   this.wallet = options.wallet;
-  this.drunkLevel = 1;
+  this.drunkLevel = 99;
 }
 
 Player.prototype = {
