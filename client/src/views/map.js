@@ -76,6 +76,8 @@ console.log('inside Map', this)
 
   window.addEventListener('keydown', this.movePlayer.bind(this));
   window.addEventListener('keydown', this.interactionsFunctions.bind(this));
+  window.addEventListener('keydown', this.pauseMusic.bind(this));
+
 
   this.loadWelcomeScreen();
   window.addEventListener('keypress', this.loadCanvas.bind(this));
@@ -123,9 +125,15 @@ Map.prototype = {
         {
           this.interactionUI.cantGoBehindBar();
         }
-      }
+    }
     else {return}
   },
+
+  pauseMusic: function(e){
+    if (e.key === "o"){
+      this.interactionUI.stopMusic();
+      }
+},
 
   drawUpperCanvas: function(){
       this.playerContext.drawImage(this.tableSet, -200, 180, 700, 500);
