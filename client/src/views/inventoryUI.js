@@ -30,44 +30,27 @@ InventoryUI.prototype = {
     for (var item of playerItemsFiltered){
       if (item.name === "Beer"){
         var imageBeerButton = document.createElement('button');
-
-        var imageBeerP = document.createElement('p')
-        var imageBeerCount = document.createElement('p')
-        this.setupPlayerTableCellButton(imageBeerButton, imageBeerP, item.name, item.count, imageBeerCount, "<img src = /public/img/edited_images/beer.png>");
+        this.setupPlayerTableCellButton(imageBeerButton, item.name, item.count, "<img src = /public/img/edited_images/beer.png>");
       }
       else if (item.name === "Wine"){
         var imageWineButton = document.createElement('button');
-        var imageWineP = document.createElement('p')
-        var imageWineCount = document.createElement('p')
-        this.setupPlayerTableCellButton(imageWineButton, imageWineP, item.name, item.count, imageWineCount, "<img src = /public/img/edited_images/wine.png>");
+        this.setupPlayerTableCellButton(imageWineButton, item.name, item.count, "<img src = /public/img/edited_images/wine.png>");
       } 
       else if (item.name === "Coke"){
         var imageCokeButton = document.createElement('button');
-        var imageCokeP = document.createElement('p')
-        var imageCokeCount = document.createElement('p')
-
-        this.setupPlayerTableCellButton(imageCokeButton, imageCokeP, item.name, item.count, imageCokeCount, "<img src = /public/img/edited_images/coke.png>");
+        this.setupPlayerTableCellButton(imageCokeButton, item.name, item.count, "<img src = /public/img/edited_images/coke.png>");
       }  
       else if (item.name === "Apple Juice"){
         var imageAppleJuiceButton = document.createElement('button');
-        var imageAppleJuiceP = document.createElement('p')
-        var imageAppleJuiceCount = document.createElement('p')
-
-        this.setupPlayerTableCellButton(imageAppleJuiceButton, imageAppleJuiceP, item.name, item.count, imageAppleJuiceCount, "<img src = /public/img/edited_images/apple_juice.png>");
+        this.setupPlayerTableCellButton(imageAppleJuiceButton, item.name, item.count, "<img src = /public/img/edited_images/apple_juice.png>");
       } 
       else if (item.name === "Daiquiri"){
         var imageDaiquiriButton = document.createElement('button');
-        var imageDaiquiriP = document.createElement('p')
-        var imageDaiquiriCount = document.createElement('p')
-
-        this.setupPlayerTableCellButton(imageDaiquiriButton, imageDaiquiriP, item.name, item.count, imageDaiquiriCount,  "<img src = /public/img/edited_images/long_island.png>");
+        this.setupPlayerTableCellButton(imageDaiquiriButton, item.name, item.count,  "<img src = /public/img/edited_images/long_island.png>");
       }
       else if (item.name === "Pina Colada"){
         var imagePinaColadaButton = document.createElement('button');
-        var imagePinaColadaP = document.createElement('p')
-        var imagePinaColadaCount = document.createElement('p')
-
-        this.setupPlayerTableCellButton(imagePinaColadaButton, imagePinaColadaP, item.name, item.count, imagePinaColadaCount, "<img src = /public/img/edited_images/pina_colada.png>");
+        this.setupPlayerTableCellButton(imagePinaColadaButton, item.name, item.count, "<img src = /public/img/edited_images/pina_colada.png>");
 
       }
     }
@@ -253,7 +236,9 @@ console.log('onclick has been assigned to button')
     return filtered;
   },
 
-  setupPlayerTableCellButton: function(button, p, info, number, p2, src){
+  setupPlayerTableCellButton: function(button, info, number, src){
+    var p = document.createElement('p')
+    var p2 = document.createElement('p')
 
     var playerTablePicture = document.getElementById("player-inventory-picture");
     var td = document.createElement('td');
