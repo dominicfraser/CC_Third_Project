@@ -29,6 +29,11 @@ InteractionUI.prototype = {
     music.play();
   },
 
+  stopWinMusic: function(){
+    var music = document.getElementById("winAudio");
+    music.pause();
+  },
+
   barButtonDefaultSetup: function(){
       this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
         this.displayMessage(message);
@@ -134,7 +139,6 @@ InteractionUI.prototype = {
                   this.winMusic();
                   this.displayMessage("Chanter Wins!");
                   this.winFlag = true;
-  console.log('win?', this.winFlag)
                 } else {
                   this.displayMessage("You drank a drink!");
                   setTimeout(function(){

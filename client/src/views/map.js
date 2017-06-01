@@ -283,11 +283,13 @@ Map.prototype = {
     else { return; }
   },
 
+
   loadCanvas: function(e) {
     if ((e.key === "Enter" && this.homePagePassedFlag === false) || (e.key === "Enter" && this.interactionUI.winFlag === true)){
 
       if(this.interactionUI.winFlag === true){
-        this.interactionUI.displayMessage("Here we go again!");        
+        this.interactionUI.displayMessage("Here we go again!");
+        this.interactionUI.stopWinMusic();        
       } else {
         this.interactionUI.displayMessage("Welcome to Thursday nights at CodeClan!");        
       }
