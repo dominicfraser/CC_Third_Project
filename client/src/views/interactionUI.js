@@ -23,11 +23,10 @@ var InteractionUI = function (player, bar) {
 
 InteractionUI.prototype = {
 
-
   winMusic: function(){
     var music = document.getElementById("winAudio");
     music.play();
-  }
+  },
 
   barButtonDefaultSetup: function(){
       this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
@@ -98,7 +97,6 @@ InteractionUI.prototype = {
     }
   },
   dontPlayTheMusic: function(yesButton, noButton){
-    this.game.renderWinScreen();
     this.displayMessage("*Silence...*");
     this.yesButton.remove();
     this.noButton.remove();
@@ -129,7 +127,14 @@ InteractionUI.prototype = {
                 this.player.increaseDrunkLevel(itemOrdered);
                 this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this), this.barButtonDefaultSetup.bind(this));
                 this.statsUI = new StatsUI(this.player, this.bar);
-                this.displayMessage("You drank a drink!");
+
+                if(this.player.drunkLevel >= 100){
+                  this.game.renderWinScreen();
+                  this.winMusic();
+                  this.displayMessage("Chanter Wins!");
+                } else {
+                  this.displayMessage("You drank a drink!");
+                }
 
                 setTimeout(function(){
                   this.displayMessage("");
