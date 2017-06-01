@@ -10,14 +10,15 @@ var InventoryUI = function(player, bar){
 };
 
 InventoryUI.prototype = {
-  renderAll: function(onComplete){
+  renderAll: function(onCompletePlayer, onCompleteBar){
     this.modelsContainer.allPlayerItems(function(playerItems){
       this.renderPlayerItemsImages(playerItems);
-      onComplete();
+      onCompletePlayer();
     }.bind(this));
     
     this.modelsContainer.allBarItems(function(barItems){
       this.renderBarItemsImages(barItems);
+      onCompleteBar();
     }.bind(this)); 
   },
 
@@ -96,8 +97,10 @@ console.log('addingOnClick to say GoToBar')
 console.log('barButtonsArray', barButtonsArray)
     barButtonsArray.forEach(function(button){
 console.log('in forEach')
-          button.onclick = myFunction;
-console.log('button click to say GoToBar', button.value)
+          button.onclick = function(event){
+            callback("Please order a drink from the bar");
+          }
+// console.log('button click to say GoToBar', button.value)
           
     });
   },
