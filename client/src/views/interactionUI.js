@@ -116,8 +116,9 @@ InteractionUI.prototype = {
                 this.player.increaseDrunkLevel(itemOrdered);
                 this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this));
                 this.statsUI = new StatsUI(this.player, this.bar);
-
-                this.displayMessage("You drank a drink!");
+                setTimeout(function(){
+                  this.displayMessage("You drank a drink!");
+                }.bind(this), 3000);
         }.bind(this))
 
       }.bind(this))
