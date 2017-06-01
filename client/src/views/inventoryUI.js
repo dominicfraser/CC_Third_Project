@@ -85,26 +85,6 @@ InventoryUI.prototype = {
     }
   },
 
-  addOnClickBarButtonsToBuyDrink: function(callback){
-    var barTable = document.getElementById("bar-inventory-table");
-    var rowNumber = -1; 
-    var buttonNames = [];
-    for (var i = 0, row; row = barTable.rows[i]; i++) { 
-       for (var d = 0, td; td = row.cells[d]; d++) {
-        rowNumber += 1;
-        var cellIndex = rowNumber;
-        buttonNames.push(cellIndex)
-        buttonNames[cellIndex] = td.children[1]
-       }  
-    }
-console.log('buttonNames', buttonNames)    
-    buttonNames.forEach(function(button){
-      button.onclick = function(event){
-console.log('button click', button.value)
-        callback(button.value);
-      }
-    });
-  },
   addOnClickBarButtonsTellGoToBar: function(callback){
 console.log('in remove event listener')
     var barTable = document.getElementById("bar-inventory-table");
@@ -124,6 +104,16 @@ console.log('all buttons?',buttonNames)
 console.log('button click remove', button.value)
             callback("Please order a drink from the bar");
           }
+    });
+  },
+  addOnClickBarButtonsToBuyDrink: function(callback){
+    var barButtons = document.getElementsByClassName("bar-drink-button");
+    var barButtonsArray = Array.from(barButtons);  
+    barButtonsArray.forEach(function(button){
+      button.onclick = function(event){
+console.log('button click', button.value)
+        callback(button.value);
+      }
     });
   },
   addOnClickPlayerButtonsToDrink: function(callback){
@@ -186,6 +176,7 @@ console.log('onclick has been assigned to button')
     p.innerText = info;
     button.innerHTML = src;
     button.value = item.id;
+    button.className = "bar-drink-button";
     p2.innerText = "["+number+"]"
     td.className += ('bar-inventory-image');
     td.appendChild(p);
