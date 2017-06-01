@@ -13,7 +13,6 @@ var InteractionUI = function (player, bar) {
   // this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
   //   this.displayMessage(message);
   // }.bind(this));
-
   this.yesButton = document.createElement('button');
   this.yesButton.innerHTML = "Yes";
   this.noButton = document.createElement('button');
@@ -27,7 +26,7 @@ InteractionUI.prototype = {
 //try to go behind bar   
   cantGoBehindBar:function(){
     this.displayMessage("Hey! Customers can't come behind the bar. You better scram before I get the bouncer, punk. Do you REALLY want me to..?")
-    var interactionArea = document.getElementById('middle');
+    var interactionArea = document.getElementById('middle-interaction');
 
       if(this.flag == false){
         interactionArea.appendChild(this.noButton);
@@ -40,8 +39,7 @@ InteractionUI.prototype = {
       }
     },  
   noBehindBar: function(noButton){
-      messageDisplay = document.getElementById("interaction-message");
-      messageDisplay.innerHTML = "Last chance, punk...";
+      this.displayMessage("Last chance, punk...");
   
       setTimeout(function(){
         this.displayMessage("");
@@ -51,7 +49,7 @@ InteractionUI.prototype = {
     },
   cantGoBehindBar:function(){
     this.displayMessage("Hey! Customers can't come behind the bar. You better scram before I get the bouncer, punk. Do you REALLY want me to..?");
-    var interactionArea = document.getElementById('middle');
+    var interactionArea = document.getElementById('middle-interaction');
 
     if(this.flag == false){
       interactionArea.appendChild(this.noButton);
@@ -63,26 +61,17 @@ InteractionUI.prototype = {
       this.flag = true;
     }
   },
-  noBehindBar: function(noButton){
-    messageDisplay = document.getElementById("interaction-message");
-    messageDisplay.innerHTML = "Last chance, punk...";
-
-    setTimeout(function(){
-      this.displayMessage("");
-      this.noButton.remove();
-      this.flag = false;
-    }.bind(this), 2000, this.noButton);
-  },
 
 //interact at the piano
   askToPlayPiano: function(){
     this.yesButton = document.createElement('button');
     this.yesButton.innerHTML = "Yes";
+
     this.noButton = document.createElement('button');
     this.noButton.innerHTML = "No";
 
     this.displayMessage("Shall we turn up the funk in here?");
-    var interactionArea = document.getElementById('middle');
+    var interactionArea = document.getElementById('middle-interaction');
 
     if(this.flag == false){
       interactionArea.appendChild(this.yesButton);
@@ -97,28 +86,25 @@ InteractionUI.prototype = {
     }
   },
   dontPlayTheMusic: function(yesButton, noButton){
-    messageDisplay = document.getElementById("interaction-message");
-    messageDisplay.innerHTML = "*Silence...*";
+    this.displayMessage("*Silence...*");
+    this.yesButton.remove();
+    this.noButton.remove();
+    this.flag = false;
 
     setTimeout(function(){
       this.displayMessage("");
-      this.yesButton.remove();
-      this.noButton.remove();
-      this.flag = false;
-    }.bind(this), 2000, this.yesButton, this.noButton);
+    }.bind(this), 4000);
   },
   playTheMusic: function(){
-    messageDisplay = document.getElementById("interaction-message");
     this.displayMessage("Let's get it poppin'");
-
     document.getElementById("audio").play();
+    this.yesButton.remove();
+    this.noButton.remove();
+    this.flag = false;
 
     setTimeout(function(){
       this.displayMessage("");
-      this.yesButton.remove();
-      this.noButton.remove();
-      this.flag = false;
-    }.bind(this), 2000, this.yesButton, this.noButton);
+    }.bind(this), 5000);
 
   },
 
@@ -142,11 +128,12 @@ InteractionUI.prototype = {
   askForDrink: function(){
     this.yesButton = document.createElement('button');
     this.yesButton.innerHTML = "Yes";
+
     this.noButton = document.createElement('button');
     this.noButton.innerHTML = "No";
 
     this.displayMessage("Would you like a drink?");
-    var interactionArea = document.getElementById('middle');
+    var interactionArea = document.getElementById('middle-interaction');
 
     if(this.flag == false){
       interactionArea.appendChild(this.yesButton);
@@ -171,6 +158,7 @@ InteractionUI.prototype = {
         this.game.findBarDrinkById(orderedDrinkId, function(itemOrdered){
 //found drink item object from it          
           this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
+console.log("added GTB, message: ", message)
             this.displayMessage(message);
           }.bind(this));
 //replaced onClick so that you can't double order
@@ -195,27 +183,26 @@ console.log('Trying to remove drink from bar');
               }.bind(this))
 //removes buttons
             }
+            this.yesButton.remove();
+            this.noButton.remove();
+            this.flag = false;
             setTimeout(function(){
               this.displayMessage("");
-              this.yesButton.remove();
-              this.noButton.remove();
-              this.flag = false;
-            }.bind(this), 2000, this.yesButton, this.noButton);
+            }.bind(this), 4000);
           }.bind(this))
         }.bind(this))  
       }
     }.bind(this)); 
   },
   orderNotPlaced: function(yesButton, noButton) {
-    messageDisplay = document.getElementById("interaction-message");
-    messageDisplay.innerHTML = "Alright, then go sit over there with Dominic...";
+    this.displayMessage("Alright, then go sit over there with Dominic...");
 
+    this.yesButton.remove();
+    this.noButton.remove();
+    this.flag = false;
     setTimeout(function(){
       this.displayMessage("");
-      this.yesButton.remove();
-      this.noButton.remove();
-      this.flag = false;
-    }.bind(this), 2000, this.yesButton, this.noButton);
+    }.bind(this), 2000);
   },
 
 //interact with man
@@ -226,13 +213,16 @@ console.log('Trying to remove drink from bar');
     this.noButton.innerHTML = "No";
 
     this.displayMessage("Hello there, would you like some money?");
-    var interactionArea = document.getElementById('middle');
+    var interactionArea = document.getElementById('middle-interaction');
 
     if(this.flag == false){
       interactionArea.appendChild(this.yesButton);
       this.yesButton.innerText = "Heads";
+      this.yesButton.style.width = "100px"
       interactionArea.appendChild(this.noButton);
       this.noButton.innerText = "Tails";
+      this.noButton.style.width = "100px"
+
     }
 
     yesClick = this.yesButton.addEventListener('click', this.chooseHeads.bind(this));
@@ -249,19 +239,18 @@ console.log('Trying to remove drink from bar');
     var coinResult = this.coinFlip();
     console.log(coinResult);
     if (coinResult === "heads"){
-      messageDisplay = document.getElementById("interaction-message");
-      messageDisplay.innerHTML = "What an idiot...";
+      this.displayMessage("What an idiot...");
     } else {
       this.displayMessage("Aha! Here's 20 big ones! Go forth and quench thy thirst.");
       this.player.acceptMoneyFromMan(20);
     }
 
+    this.yesButton.remove();
+    this.noButton.remove();
+    this.flag = false;
     setTimeout(function(){
       this.displayMessage("");
-      this.yesButton.remove();
-      this.noButton.remove();
-      this.flag = false;
-    }.bind(this), 2000, this.yesButton, this.noButton);
+    }.bind(this), 4000);
   },
 
   chooseHeads: function(){
@@ -270,20 +259,18 @@ console.log('Trying to remove drink from bar');
     if (coinResult === "heads"){
     this.player.acceptMoneyFromMan(20);
 
-    messageDisplay = document.getElementById("interaction-message");
     this.displayMessage("Aha! Here's 20 big ones! Go forth and quench thy thirst.");
     this.statsUI = new StatsUI(this.player, this.bar);
   } else {
-    messageDisplay = document.getElementById("interaction-message");
-    messageDisplay.innerHTML = "What an idiot...";
+    this.displayMessage("What an idiot...");
   }
 
+    this.yesButton.remove();
+    this.noButton.remove();
+    this.flag = false;
     setTimeout(function(){
       this.displayMessage("");
-      this.yesButton.remove();
-      this.noButton.remove();
-      this.flag = false;
-    }.bind(this), 2000, this.yesButton, this.noButton);
+    }.bind(this), 4000);
   },
 
   displayMessage: function(message){

@@ -33,11 +33,15 @@ h4 {
 
 #middle button {
   background-color: white;
-  text-align: center;
+  margin: 10px;
   font-size: 20px;
   border-radius: 8px;
   font-family: 'Bungee Inline', serif;
   width: 60px;
+}
+
+#middle-interaction {
+  text-align: center;
 }
 
 #main-canvas {
