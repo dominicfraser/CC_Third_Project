@@ -296,6 +296,7 @@ Map.prototype = {
 
       this.interactionUI.winFlag = false
       this.homePagePassedFlag = true;
+      this.currentPosition = [350,450];
 
       this.mainContext.clearRect(0, 0, 700, 500);
       this.playerContext.clearRect(0, 0, 700, 500);
