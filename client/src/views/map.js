@@ -123,7 +123,10 @@ Map.prototype = {
         {
           this.interactionUI.cantGoBehindBar();
         }
+    else if (e.key === "o"){
+      this.interactionUI.stopMusic();
       }
+    }
     else {return}
   },
 
