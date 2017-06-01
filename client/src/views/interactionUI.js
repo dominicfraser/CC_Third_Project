@@ -23,8 +23,13 @@ var InteractionUI = function (player, bar) {
 
 InteractionUI.prototype = {
 
+  winMusic: function(){
+    var music = document.getElementById("winAudio");
+    music.play();
+  }
+
   stopMusic: function(){
-    music = document.getElementById("audio");
+    var music = document.getElementById("audio");
     music.pause();
     this.displayMessage("Who turned the music off?!");
 
