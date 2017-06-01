@@ -136,11 +136,11 @@ InteractionUI.prototype = {
                   this.winFlag = true;
                 } else {
                   this.displayMessage("You drank a drink!");
+                  setTimeout(function(){
+                    this.displayMessage("");
+                  }.bind(this), 3000);
                 }
 
-                setTimeout(function(){
-                  this.displayMessage("");
-                }.bind(this), 3000);
         }.bind(this))
 
       }.bind(this))
