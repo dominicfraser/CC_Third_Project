@@ -72,7 +72,6 @@ InventoryUI.prototype = {
     var columnPositionCounter = 0;
 
     for (var item of barItemsFiltered){
-console.log('column counter', columnPositionCounter)
       columnPositionCounter += 1;
       if (columnPositionCounter < 3){
 
@@ -93,7 +92,6 @@ console.log('column counter', columnPositionCounter)
     var barButtonsArray = Array.from(barButtons);  
         
     barButtonsArray.forEach(function(button){
-console.log('in forEach')
           button.onclick = function(event){
             callback("Don't shout, please go to the bar to order a drink!");
           }
