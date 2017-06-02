@@ -15,10 +15,9 @@ In browser:
 - to see our API: http://localhost:3000/api/bar_inventory or /api/player_inventory
 
 > Welcome Screen
-<<<<<<< HEAD
 
 ![WELCOME SCREEN IMAGE](https://raw.githubusercontent.com/dominicfraser/CC_Third_Project/master/client/build/public/img/WelcomeScreenScreenshot.png)
 
 > Main Screen
 
-![alt text](./client/build/public/img/MainScreenScreenShot.png)
+![alt text](https://raw.githubusercontent.com/dominicfraser/CC_Third_Project/master/client/build/public/img/MainScreenScreenshot.png)
