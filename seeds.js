@@ -2,7 +2,7 @@ use codeclan_bar;
 db.dropDatabase();
 
 db.player_inventory.insert([
-  
+
 ]);
 
 db.bar_inventory.insert([

@@ -19,6 +19,10 @@ var StatsUI = function(player, bar){
 };
 
 StatsUI.prototype = {
+
+  updateDrunkLevelChart: function(player){
+    var drunkLevelChart = new DrunkLevelChart(player.drunkLevel);
+  }
   
 };
 
