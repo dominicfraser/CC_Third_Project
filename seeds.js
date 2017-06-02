@@ -2,26 +2,7 @@ use codeclan_bar;
 db.dropDatabase();
 
 db.player_inventory.insert([
-  {
-    name: "Daiquiri",
-    value: 10,
-    alcoholLevel:25
-  },
-  {
-    name: "Daiquiri",
-    value: 10,
-    alcoholLevel:25
-  },
-  {
-    name: "Daiquiri",
-    value: 10,
-    alcoholLevel:25
-  },
-  {
-    name: "Daiquiri",
-    value: 10,
-    alcoholLevel:25
-  },
+
 ]);
 
 db.bar_inventory.insert([

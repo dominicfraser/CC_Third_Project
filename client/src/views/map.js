@@ -130,7 +130,7 @@ Map.prototype = {
 
   pauseMusic: function(e){
     if (e.key === "o"){
-      this.interactionUI.stopMusic();
+      this.interactionUI.stopPianoMusic();
     }
 },
 
