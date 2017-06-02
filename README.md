@@ -13,3 +13,8 @@ In top level folder:
 In browser:
 - to play: http://localhost:3000/
 - to see our API: http://localhost:3000/api/bar_inventory or /api/player_inventory
+
+> Welcome Screen
+![alt text](https://raw.githubusercontent.com/dominicfraser/CC_Third_Project/master/client/build/public/img/WelcomeScreenScreenShot.png)
+> Main Screen
+![alt text](https://raw.githubusercontent.com/dominicfraser/CC_Third_Project/master/client/build/public/img/MainScreenScreenShot.png)
