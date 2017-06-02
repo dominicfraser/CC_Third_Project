@@ -28,8 +28,9 @@ InventoryUI.prototype = {
 
     var playerItemsWithCount = this.addCounts(playerItems);
     var playerItemsFiltered = this.filterToUniqList(playerItemsWithCount);
+console.log('playeritemsfiltered',playerItemsFiltered)
     for (var item of playerItemsFiltered){
-
+console.log('item in there', item)
       if (item.name === "Beer"){
         var imageBeerButton = document.createElement('button');
         this.setupPlayerTableCellButton(imageBeerButton, item.name, item.count, "<img src = /public/img/edited_images/beer.png>", item);
@@ -56,7 +57,7 @@ InventoryUI.prototype = {
       }
       else {
       var imageDrinkButton = document.createElement('button');
-      this.setupBarTableCellButton(imageDrinkButton, item.name, item.count, "<img src = http://icons.iconarchive.com/icons/iconshock/brilliant-food/256/beer-icon.png>", item);
+      this.setupPlayerTableCellButton(imageDrinkButton, item.name, item.count, "<img src = http://icons.iconarchive.com/icons/iconshock/brilliant-food/256/beer-icon.png>", item);
       }
     }
   },
