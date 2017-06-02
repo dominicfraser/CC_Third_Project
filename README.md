@@ -16,7 +16,7 @@ In browser:
 
 > Welcome Screen
 
-![WELCOME SCREEN IMAGE](client/build/public/img/WelcomeScreenScreenShot.png)
+![WELCOME SCREEN IMAGE](https://raw.githubusercontent.com/dominicfraser/CC_Third_Project/master/client/build/public/img/WelcomeScreenScreenshot.png)
 
 > Main Screen
 
