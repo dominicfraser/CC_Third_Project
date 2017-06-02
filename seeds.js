@@ -31,7 +31,12 @@ db.player_inventory.insert([
 
 db.bar_inventory.insert([
   {
-    name: "Amstel",
+    name: "Test 2",
+    value: 3,
+    alcoholLevel: 5
+  },
+  {
+    name: "Test 1",
     value: 3,
     alcoholLevel: 5
   },

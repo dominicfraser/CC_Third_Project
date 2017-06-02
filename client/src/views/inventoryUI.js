@@ -72,8 +72,9 @@ InventoryUI.prototype = {
     var columnPositionCounter = 0;
 
     for (var item of barItemsFiltered){
+console.log('column counter', columnPositionCounter)
       columnPositionCounter += 1;
-      if (columnPositionCounter <= 3){
+      if (columnPositionCounter < 3){
 
         this.doBarItemImagesLoop(item, rowInUse);
       
