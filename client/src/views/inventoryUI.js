@@ -69,7 +69,7 @@ InventoryUI.prototype = {
     var barItems = this.addCounts(barItems);
     var barItemsFiltered = this.filterToUniqList(barItems);
 
-    var columnPositionCounter = 0;
+    var columnPositionCounter = -1;
 
     for (var item of barItemsFiltered){
       columnPositionCounter += 1;

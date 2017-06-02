@@ -48,10 +48,8 @@ InteractionUI.prototype = {
 
 //try to go behind bar   
   cantGoBehindBar:function(){
-console.log('trying to go behind bar, before flag:', this.inInteractionFlag)
     if (this.inInteractionFlag === false){
       this.inInteractionFlag = true;
-console.log('trying to go behind bar, in interaction now flag:', this.inInteractionFlag)
 
       this.displayMessage("Hey! Customers can't come behind the bar. You better scram before I get the bouncer, punk. Do you REALLY want me to..?")
       var interactionArea = document.getElementById('middle-interaction');
@@ -70,22 +68,18 @@ console.log('trying to go behind bar, in interaction now flag:', this.inInteract
   noBehindBar: function(noButton){
       this.displayMessage("Last chance, punk...");
       this.noButton.remove();
-console.log('display message after trying to go behind bar, before timeout flag:', this.inInteractionFlag)
       setTimeout(function(){
         this.displayMessage("");
         this.buttonsAppendedToInteractionFlag = false;
         this.inInteractionFlag = false;
-console.log('display message after trying to go behind bar, after timeout flag:', this.inInteractionFlag)
 
       }.bind(this), 2000, this.noButton);
     },
 
 //interact at the piano
   askToPlayPiano: function(){
-console.log('asking to play piano before flag:', this.inInteractionFlag)
     if (this.inInteractionFlag === false){
       this.inInteractionFlag = true;
-console.log('asking to play piano in interaction flag:', this.inInteractionFlag)
 
       this.displayMessage("Shall we turn up the funk in here?");
       var interactionArea = document.getElementById('middle-interaction');
@@ -109,11 +103,9 @@ console.log('asking to play piano in interaction flag:', this.inInteractionFlag)
     this.yesButton.remove();
     this.noButton.remove();
     this.buttonsAppendedToInteractionFlag = false;
-console.log('clicked no to piano, before timeout flag', this.inInteractionFlag)
     setTimeout(function(){
       this.displayMessage("");
       this.inInteractionFlag = false;
-console.log('clicked no to piano, after timeout flag', this.inInteractionFlag)
     }.bind(this), 4000);
   },
   playTheMusic: function(){
