@@ -3,28 +3,38 @@ db.dropDatabase();
 
 db.player_inventory.insert([
   {
-    name: "Daiquiri",
-    value: 10,
-    alcoholLevel:25
+    name: "Pina Colada",
+    value: 8,
+    alcoholLevel: 10
   },
   {
     name: "Daiquiri",
     value: 10,
     alcoholLevel:25
   },
-  {
-    name: "Daiquiri",
-    value: 10,
-    alcoholLevel:25
-  },
-  {
-    name: "Daiquiri",
-    value: 10,
-    alcoholLevel:25
-  },
+  // {
+  //   name: "Daiquiri",
+  //   value: 10,
+  //   alcoholLevel:25
+  // },
+  // {
+  //   name: "Daiquiri",
+  //   value: 10,
+  //   alcoholLevel:25
+  // },
+  // {
+  //   name: "Daiquiri",
+  //   value: 10,
+  //   alcoholLevel:25
+  // },
 ]);
 
 db.bar_inventory.insert([
+  {
+    name: "Amstel",
+    value: 3,
+    alcoholLevel: 5
+  },
   {
     name: "Pina Colada",
     value: 8,
