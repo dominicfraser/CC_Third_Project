@@ -39,7 +39,7 @@ InteractionUI.prototype = {
         this.displayMessage(message);
         setTimeout(function(){
           this.displayMessage("");
-        }.bind(this), 2000);
+        }.bind(this), 1000);
       }.bind(this));
     },
 
@@ -110,7 +110,7 @@ InteractionUI.prototype = {
 
     setTimeout(function(){
       this.displayMessage("");
-    }.bind(this), 4000);
+    }.bind(this), 3000);
   },
   playTheMusic: function(){
     this.displayMessage("Let's get it poppin'");
@@ -121,7 +121,7 @@ InteractionUI.prototype = {
 
     setTimeout(function(){
       this.displayMessage("");
-    }.bind(this), 5000);
+    }.bind(this), 3000);
 
   },
 
@@ -143,7 +143,7 @@ InteractionUI.prototype = {
                   this.displayMessage("You drank a drink!");
                   setTimeout(function(){
                     this.displayMessage("");
-                  }.bind(this), 3000);
+                  }.bind(this), 1000);
                 }
 
         }.bind(this))
@@ -214,7 +214,7 @@ console.log('Trying to remove drink from bar');
             this.flag = false;
             setTimeout(function(){
               this.displayMessage("");
-            }.bind(this), 4000);
+            }.bind(this), 2000);
           }.bind(this))
         }.bind(this))  
       }
@@ -276,7 +276,7 @@ console.log('Trying to remove drink from bar');
     this.flag = false;
     setTimeout(function(){
       this.displayMessage("");
-    }.bind(this), 4000);
+    }.bind(this), 3000);
   },
 
   chooseHeads: function(){
@@ -296,7 +296,7 @@ console.log('Trying to remove drink from bar');
     this.flag = false;
     setTimeout(function(){
       this.displayMessage("");
-    }.bind(this), 4000);
+    }.bind(this), 3000);
   },
 
   displayMessage: function(message){
