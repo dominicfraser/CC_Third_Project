@@ -35,6 +35,16 @@ InteractionUI.prototype = {
     music.pause();
   },
 
+
+  barButtonDefaultSetup: function(){
+      this.inventoryUI.addOnClickBarButtonsTellGoToBar(function(message){
+        this.displayMessage(message);
+        setTimeout(function(){
+          this.displayMessage("");
+        }.bind(this), 1000);
+      }.bind(this));
+    },
+
   stopPianoMusic: function(){
     var music = document.getElementById("audio");
     music.pause();
@@ -43,7 +53,7 @@ InteractionUI.prototype = {
     setTimeout(function(){
       this.displayMessage("");
       this.buttonsAppendedToInteractionFlag = false;
-    }.bind(this), 2000);
+    }.bind(this), 1500);
   },
 
 //try to go behind bar   
@@ -73,7 +83,7 @@ InteractionUI.prototype = {
         this.buttonsAppendedToInteractionFlag = false;
         this.inInteractionFlag = false;
 
-      }.bind(this), 2000, this.noButton);
+      }.bind(this), 1000, this.noButton);
     },
 
 //interact at the piano
@@ -106,7 +116,7 @@ InteractionUI.prototype = {
     setTimeout(function(){
       this.displayMessage("");
       this.inInteractionFlag = false;
-    }.bind(this), 4000);
+    }.bind(this), 2000);
   },
   playTheMusic: function(){
     this.displayMessage("Let's get it poppin'");
@@ -118,7 +128,7 @@ InteractionUI.prototype = {
     setTimeout(function(){
       this.displayMessage("");
       this.inInteractionFlag = false;
-    }.bind(this), 5000);
+    }.bind(this), 2000);
 
   },
 
@@ -140,7 +150,7 @@ InteractionUI.prototype = {
                   this.displayMessage("You drank a drink!");
                   setTimeout(function(){
                     this.displayMessage("");
-                  }.bind(this), 3000);
+                  }.bind(this), 1000);
                 }
 
         }.bind(this))
@@ -155,7 +165,7 @@ InteractionUI.prototype = {
       this.displayMessage(message);
       setTimeout(function(){
         this.displayMessage("");
-      }.bind(this), 2000);
+      }.bind(this), 1000);
     }.bind(this));
   },
 
@@ -221,7 +231,7 @@ console.log('Trying to remove drink from bar');
             setTimeout(function(){
               this.displayMessage("");
               this.inInteractionFlag = false;
-            }.bind(this), 4000);
+            }.bind(this), 1000);
           }.bind(this))
         }.bind(this))  
       }
@@ -283,7 +293,7 @@ console.log('Trying to remove drink from bar');
     setTimeout(function(){
       this.displayMessage("");
       this.inInteractionFlag = false;
-    }.bind(this), 4000);
+    }.bind(this), 2000);
   },
 
   chooseHeads: function(){
@@ -304,7 +314,7 @@ console.log('Trying to remove drink from bar');
     setTimeout(function(){
       this.displayMessage("");
       this.inInteractionFlag = false;
-    }.bind(this), 4000);
+    }.bind(this), 2000);
   },
 
   displayMessage: function(message){
