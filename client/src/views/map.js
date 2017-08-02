@@ -19,6 +19,7 @@ var Map = function () {
 console.log('inside Map', this)
 
   this.playerContext = this.getPlayerCanvasContext();
+  this.spriteContext = this.getSpriteCanvasContext();
   this.mainContext = this.getMainCanvasContext();
 //canvas image setup
   this.backdrop = document.createElement('img');
@@ -152,11 +153,10 @@ Map.prototype = {
   moveSprite: function(playerDirectionImage, xInc, yInc){
     if (this.interactionUI.winFlag === false){
       this.player.innerHTML = "";
-      this.playerContext.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-20, 30, 44)
-      this.playerContext.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
-      this.drawUpperCanvas();
-  console.log('current x', this.currentPosition[0])
-  console.log('current y', this.currentPosition[1])
+      this.spriteContext.clearRect(this.currentPosition[0]-10, this.currentPosition[1]-21, 30, 45)
+      this.spriteContext.drawImage(playerDirectionImage, this.currentPosition[0]-350+xInc, this.currentPosition[1]-250+yInc, this.playerWidth, this.playerHeight)
+  // console.log('current x', this.currentPosition[0])
+  // console.log('current y', this.currentPosition[1])
     }
   },
 
@@ -306,6 +306,7 @@ Map.prototype = {
 
       this.mainContext.clearRect(0, 0, 700, 500);
       this.playerContext.clearRect(0, 0, 700, 500);
+      this.spriteContext.clearRect(0, 0, 700, 500);
 
       if (this.homePagePassedFlag = true){
         var player = document.createElement('img');
@@ -322,8 +323,7 @@ Map.prototype = {
       this.playerContext.drawImage(this.stageGirl, 270, -160, 700, 500);
       this.playerContext.drawImage(this.piano, 50, -160, 700, 500);
       this.playerContext.drawImage(this.guy, 100, -30, 700, 500);
-      this.playerContext.drawImage(this.player, 0, 200, 700, 500);
-
+      this.spriteContext.drawImage(this.player, 0, 200, 700, 500);
       }
     else {return};
   },
@@ -338,6 +338,12 @@ Map.prototype = {
     var canvas = document.getElementById("player-canvas");
     var playerContext = canvas.getContext("2d");
     return playerContext;
+  },
+
+  getSpriteCanvasContext: function(){
+    var canvas = document.getElementById("sprite-canvas");
+    var spriteContext = canvas.getContext("2d");
+    return spriteContext;
   },
 
 };

@@ -32,6 +32,12 @@ InteractionUI.prototype = {
     return playerContext;
   },
 
+  getSpriteCanvasContext: function(){
+    var canvas = document.getElementById("sprite-canvas");
+    var spriteContext = canvas.getContext("2d");
+    return spriteContext;
+  },
+
   createNewYesNoButtons: function(){
     this.yesButton = document.createElement('button');
     this.yesButton.innerHTML = "Yes";
@@ -129,8 +135,12 @@ InteractionUI.prototype = {
 
     harrison.onload = function() {
       this.mainContext.clearRect(0, 0, 700, 500);
+      this.playerContext.clearRect(0, 0, 700, 500);
       this.mainContext.drawImage(harrison, 0, 0, 700, 500);
     }.bind(this);
+
+    this.yesButton.remove();
+    this.noButton.remove();
 
     this.displayMessage("Hi, I'm Harrison.");
   },
