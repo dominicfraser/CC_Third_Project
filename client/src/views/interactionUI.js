@@ -14,9 +14,23 @@ var InteractionUI = function (player, bar) {
   this.inventoryUI = new InventoryUI(this.player, this.bar);
   
   this.inventoryUI.renderAll(this.playerDrinkDrinkSetUp.bind(this), this.barButtonDefaultSetup.bind(this));
+
+  this.mainContext = this.getMainCanvasContext()
+  this.playerContext = this.getPlayerCanvasContext()
 };
 
 InteractionUI.prototype = {
+  getMainCanvasContext: function(){
+    var canvas = document.getElementById("main-canvas");
+    var mainContext = canvas.getContext("2d");
+    return mainContext;
+  },
+
+  getPlayerCanvasContext: function(){
+    var canvas = document.getElementById("player-canvas");
+    var playerContext = canvas.getContext("2d");
+    return playerContext;
+  },
 
   createNewYesNoButtons: function(){
     this.yesButton = document.createElement('button');
@@ -85,6 +99,52 @@ InteractionUI.prototype = {
 
       }.bind(this), 1000, this.noButton);
     },
+
+// Room change
+  askToChangeRoom: function(){
+    if (this.inInteractionFlag === false){
+      this.inInteractionFlag = true;
+
+      this.displayMessage("Do you want to go to the next room?");
+      var interactionArea = document.getElementById('middle-interaction');
+
+      if(this.buttonsAppendedToInteractionFlag === false){
+        this.createNewYesNoButtons();
+        interactionArea.appendChild(this.yesButton);
+        interactionArea.appendChild(this.noButton);
+
+        yesClick = this.yesButton.addEventListener('click', this.changeRoom.bind(this));
+        noClick = this.noButton.addEventListener('click', function(){
+        this.dontChangeRoom(this.yesButton, this.noButton);
+        }.bind(this));
+
+        this.buttonsAppendedToInteractionFlag = true;
+      }
+    }
+  },
+
+  changeRoom: function(){
+    var harrison = document.createElement('img');
+    harrison.src = "/public/img/edited_images/bathroom.jpg";
+
+    harrison.onload = function() {
+      this.mainContext.clearRect(0, 0, 700, 500);
+      this.mainContext.drawImage(harrison, 0, 0, 700, 500);
+    }.bind(this);
+
+    this.displayMessage("Hi, I'm Harrison.");
+  },
+
+  dontChangeRoom: function(yesButton, noButton){
+    this.displayMessage("I guess this room is ok...");
+    this.yesButton.remove();
+    this.noButton.remove();
+    this.buttonsAppendedToInteractionFlag = false;
+    setTimeout(function(){
+      this.displayMessage("");
+      this.inInteractionFlag = false;
+    }.bind(this), 2000);
+  },
 
 //interact at the piano
   askToPlayPiano: function(){
